@@ -1,0 +1,84 @@
+<div class="px-7 py-5">
+  <div class="fs-5 text-dark fw-bolder"></div>
+</div>
+
+<div class="separator border-gray-200"></div>
+
+<div class="px-7 py-5">
+
+  <form [formGroup]="quotefilterForm" novalidate="" class="form">
+
+
+  <div class="mb-10">
+    <label class="form-label fw-bold">Department</label>
+
+    <div>
+      <select formControlName="Department"
+        class="form-select form-select-solid"
+        data-kt-select2="true"
+        data-placeholder="Select option"
+        data-allow-clear="true"
+      >
+        <option selected value="%">All</option>
+        <option value="M">AM</option>
+        <option value="S">Sales</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-10">
+    <label class="form-label fw-bold">Account Manager</label>
+    <div>
+      <select formControlName="AccountManager"
+        class="form-select form-select-solid"
+        data-kt-select2="true"
+        data-placeholder="Select option"
+        data-allow-clear="true"
+      >
+      <option value="All">All</option>
+      <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
+        {{mgr.text}}
+      </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-10">
+    <label class="form-label fw-bold">Date Range</label>
+    <div>
+      <select formControlName="DateRange"
+        class="form-select form-select-solid"
+        data-kt-select2="true"
+        data-placeholder="Select option"
+        data-allow-clear="true"
+      >
+        <option></option>
+        <option selected value="W">Current Week</option>
+        <option value="M">Current Month</option>
+        <option value="Q">Current Quarter</option>
+        <option value="CY">Current Year</option>
+        <option value="PY">Previous Year</option>
+      </select>
+    </div>
+  </div>
+
+</form>
+
+  <div class="d-flex justify-content-end">
+    <!-- <button
+      type="reset"
+      class="btn btn-sm btn-light btn-active-light-primary me-2"
+      data-kt-menu-dismiss="true"
+    >
+      Reset
+    </button> -->
+
+    <button
+      type="submit"
+      class="btn btn-sm btn-primary"
+      data-kt-menu-dismiss="true"
+    >
+      Apply
+    </button>
+  </div>
+</div>

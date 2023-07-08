@@ -1,0 +1,484 @@
+<!-- begin::Header -->
+<div class="card-header border-0 pt-5">
+  <div class="row g-5 g-xxl-8">
+    <div class="col-xl-5">
+      <div class="row">
+        <form [formGroup]="quotefilterForm" novalidate="" class="form">
+          <div class="row">
+            <label class="col-lg-4 col-form-label fw-bold fs-6"> Department:</label>
+            <div class="col-lg-8 col-form-label">
+              <select name="ctl00$PlaceHolderMain$ddlDept" formControlName="Department"
+                id="PlaceHolderMain_ddlDept" style="font-size:10pt;width:150px;">
+                <option value="%">All</option>
+                <option value="M">AM</option>
+                <option value="S">Sales</option>
+      
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Account Manager:</label>
+            <div class="col-lg-8 col-form-label">
+              <select id="quoteAccMgrs" formControlName="AccountManager">
+                <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
+                  {{mgr.text}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Status:</label>
+            <div class="col-lg-8 col-form-label">
+      
+              <select name="ctl00$PlaceHolderMain$ddlStatus" id="PlaceHolderMain_ddlStatus" formControlName="QuoteStatus"
+                style="font-size:10pt;width:110px;">
+                <option value="All">All</option>
+      
+                <option *ngFor="let status of quoteStatus" [value]="status.statusCode">
+                  {{status.statusDesc}}
+                </option>
+      
+      
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Year:</label>
+            <div class="col-lg-8 col-form-label">
+              <select name="ctl00$PlaceHolderMain$ddlFiscYear" id="PlaceHolderMain_ddlFiscYear" style="width:75px;" formControlName="Year">
+                <option *ngFor="let year of fiscalYears" [value]="year">
+                  {{year}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Month:</label>
+            <div class="col-lg-8 col-form-label">
+              <select name="ctl00$PlaceHolderMain$ddlMonth" id="PlaceHolderMain_ddlMonth" style="width:100px;" formControlName="Month">
+                <option *ngFor = "let month of months" [value]="month.value">{{month.Text}}</option>      
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-lg-4 col-form-label fw-bold fs-6">Status Type:</label>
+            <div class="col-lg-8 col-form-label">
+              <select name="ctl00$PlaceHolderMain$ddlType" id="PlaceHolderMain_ddlType" formControlName="Statustype" style="font-size:10pt;width:100px;">
+                <option  value="0">Active</option>
+                <option value="1">Archive</option>
+      
+              </select>
+            </div>
+          </div>
+          <div class="card-footer d-flex justify-content-center py-6 px-9">
+            <button type="button" class="btn btn-primary" (click)="SearchQuotes()">
+                Search
+            </button>
+        </div>
+        </form>
+      
+      </div>
+    </div>
+    <div class="col-xl-3" *ngIf = "chartData && chartData.length > 0">
+      <app-charts-custom-widget [chartData] = "chartData"
+        class="card card-xxl-stretch mb-5 mb-xl-10"
+      ></app-charts-custom-widget>
+    </div>
+  
+  </div>
+
+  
+    <!-- <h3 class="card-title align-items-start flex-column">
+      <span class="card-label fw-bolder fs-3 mb-1">New Arrivals</span>
+      <span class="text-muted mt-1 fw-bold fs-7">Over 500 new products</span>
+    </h3> -->
+    <!-- <div class="card-toolbar">
+      <a href="#" class="btn btn-sm btn-light-primary">
+        <span
+          [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'"
+          class="svg-icon svg-icon-3"
+        ></span>
+        New Member
+      </a>
+    </div> -->
+  </div>
+  <!-- end::Header -->
+  <!-- begin::Body -->
+  <div class="card-body py-3">
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table class="table align-middle gs-0 gy-4" >
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="fw-bolder text-muted bg-light">
+            <th class="min-w-100px">Quote Id</th>
+            <th class="min-w-100px">Site ID</th>
+            <th class="min-w-125px">Site Name</th>
+            <th class="min-w-200px">Contact Name</th>
+            <th class="min-w-105px">Status</th>
+            <th class="min-w-150px">Description</th>
+            <th class="min-w-125px">Quote Priority</th>
+            <th class="min-w-150px">Quote Owner</th>
+            <th class="min-w-150px">Quoted On</th>
+            <th class="min-w-105px">Quote Amount</th>
+            <!-- <th class="min-w-125px">Email</th> -->
+            <th class="min-w-25px">Edit</th>
+            <th class="min-w-25px">Select</th>
+            <!-- <th class="min-w-200px text-end rounded-end"></th> -->
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody *ngIf = "quotesList && quotesList.length > 0">
+          <tr *ngFor = "let quotes of quotesList; let i = index;">
+           
+            <td>
+              <a href="#" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">
+               {{quotes.quoteID}}
+              </a>              
+            </td>
+            <td>
+              
+              <span class="text-muted fw-bold text-muted d-block fs-7"
+                > {{quotes.custNmbr}}</span
+              >
+            </td>
+            <td>
+           
+              <span class="text-muted fw-bold text-muted d-block fs-7"
+                >  {{quotes.custName}}</span
+              >
+            </td>
+            <td>
+              <span class="badge badge-light-primary fs-7 fw-bold">  {{quotes.custName}}</span>
+            </td>
+            <td class="">
+                 {{quotes.status}}
+            </td>
+             <td class="">
+                 {{quotes.notes}}
+            </td>
+             <td class="">
+                 {{quotes.quotePriority}}
+            </td>
+             <td class="">
+                 {{quotes.quoteOwner}}
+            </td>
+            <td class="">
+              {{quotes.quotedOn | date : 'dd-MMMM-yyyy'}}
+             </td>
+             <td class="">
+                {{quotes.quoteAmount | currency }}
+            </td>
+            <!-- <td>
+
+            </td> -->
+            <td>
+              <a [routerLink]="['../../', 'quotes','edit',quotes.quoteID] " class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 ">
+              <span
+                [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                class="svg-icon svg-icon-3"
+              ></span>
+            </a>
+            </td>
+            <td>
+              
+            </td>
+            
+          </tr>
+     
+           <!-- <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="symbol symbol-50px me-5">
+                  <img
+                    src="./assets/media/stock/600x400/img-9.jpg"
+                    class=""
+                    alt=""
+                  />
+                </div>
+                <div class="d-flex justify-content-start flex-column">
+                  <a
+                    href="#"
+                    class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                  >
+                    Payroll Application
+                  </a>
+                  <span class="text-muted fw-bold text-muted d-block fs-7">
+                    PHP, Laravel, VueJS
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                $4,390
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7">Paid</span>
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                $593
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7"
+                >Rejected</span
+              >
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                Zoey McGee
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7"
+                >Ruby Developer</span
+              >
+            </td>
+            <td>
+              <span class="badge badge-light-success fs-7 fw-bold">Success</span>
+            </td>
+            <td class="text-end">
+              <a
+                href="#"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  me-1
+                "
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/general/gen019.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+              <a
+                href="#"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  me-1
+                "
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+              <a
+                href="#"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/general/gen027.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="symbol symbol-50px me-5">
+                  <img
+                    src="./assets/media/stock/600x400/img-18.jpg"
+                    class=""
+                    alt=""
+                  />
+                </div>
+                <div class="d-flex justify-content-start flex-column">
+                  <a
+                    href="#"
+                    class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                  >
+                    HR Management System
+                  </a>
+                  <span class="text-muted fw-bold text-muted d-block fs-7">
+                    Python, PostgreSQL, ReactJS
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                $7,990
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7">Paid</span>
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                $980
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7"
+                >Rejected</span
+              >
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                Brandon Ingram
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7"
+                >Insurance</span
+              >
+            </td>
+            <td>
+              <span class="badge badge-light-info fs-7 fw-bold">Rejected</span>
+            </td>
+            <td class="text-end">
+              <a
+                href="#"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  me-1
+                "
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/general/gen019.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+              <a
+                href="#"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  me-1
+                "
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+              <a
+                href="#"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/general/gen027.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+            </td>
+          </tr>
+         <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="symbol symbol-50px me-5">
+                  <img
+                    src="./assets/media/stock/600x400/img-8.jpg"
+                    class=""
+                    alt=""
+                  />
+                </div>
+                <div class="d-flex justify-content-start flex-column">
+                  <a
+                    href="#"
+                    class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                  >
+                    Telegram Mobile
+                  </a>
+                  <span class="text-muted fw-bold text-muted d-block fs-7">
+                    HTML, JS, ReactJS
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                $5,790
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7">Paid</span>
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                $750
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7"
+                >Rejected</span
+              >
+            </td>
+            <td>
+              <a
+                href="#"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+              >
+                Natali Trump
+              </a>
+              <span class="text-muted fw-bold text-muted d-block fs-7"
+                >Insurance</span
+              >
+            </td>
+            <td>
+              <span class="badge badge-light-warning fs-7 fw-bold">Approved</span>
+            </td>
+            <td class="text-end">
+              <a
+                href="#"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  me-1
+                "
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/general/gen019.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+              <a
+                href="#"
+                class="
+                  btn btn-icon btn-bg-light btn-active-color-primary btn-sm
+                  me-1
+                "
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+              <a
+                href="#"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
+              >
+                <span
+                  [inlineSVG]="'./assets/media/icons/duotune/general/gen027.svg'"
+                  class="svg-icon svg-icon-3"
+                ></span>
+              </a>
+            </td>
+          </tr> -->
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+    </div>
+    <!-- end::Table container -->
+  </div>
+
+  <app-pagination *ngIf = "paginationObj" [pageNum] = "paginationObj.pageNumber" [pageSize] = "paginationObj.pageSize" 
+  [totalRecords] ="paginationObj.totalRecordsCount"  (updatePagination) = "updatePagination($event)">
+   
+  </app-pagination>
+  
+  <!-- begin::Body -->
+  

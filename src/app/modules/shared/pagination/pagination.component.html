@@ -1,0 +1,47 @@
+<div class="d-flex flex-stack flex-wrap pt-10">
+    <div class="fs-6 fw-bold text-gray-700">Showing 1 to 10 of {{totalRecords}} entries</div>
+    <div class="pagination">
+      <!-- <div class="fs-6 fw-bold text-gray-700">Page 1 of {{pageCount}}</div> -->
+      <!-- <div>Go To Page 
+        <input type="number" [max]="pageCount" min="0" />
+        <a class="page-link cursor-pointer">
+          <i class="next"></i> 
+       </a>
+      </div> -->
+
+    </div>
+  
+    <ul class="pagination">
+      <li class="page-item previous" *ngIf = "pageIndex > 0">
+        <a class="page-link cursor-pointer" (click)="goToIndex(-1)">
+           <i class="previous"></i> Prev
+        </a>
+      </li>
+
+      <li *ngFor = "let page of pageNumbers" class="page-item" [ngClass]="{'active' : page == currentPage}">
+        <a class="page-link cursor-pointer" (click) = "goToPage(page)"> {{page}} </a>
+      </li>
+      
+      <!-- <li class="page-item active">
+        <a class="page-link cursor-pointer"> 1 </a>
+      </li>
+      <li class="page-item" (click) = "goToPage(2)">
+        <a class="page-link cursor-pointer"> 2 </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link cursor-pointer"> 3 </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link cursor-pointer"> 4 </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link cursor-pointer"> 5 </a>
+      </li>
+   -->
+      <li class="page-item next" *ngIf = "pageNum != pageCount">
+        <a class="page-link cursor-pointer" (click)="goToIndex(1)">
+          Next <i class="next"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
