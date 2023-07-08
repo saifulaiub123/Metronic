@@ -12,8 +12,6 @@ export class FilterDropdownComponent implements OnInit {
   'menu menu-sub menu-sub-dropdown w-250px w-md-300px';
   @HostBinding('attr.data-kt-menu') dataKtMenu = 'true';
 
-
-
   accountManagers : any = [
     {
         "text": " DC Group as Subcntr",
@@ -30,7 +28,7 @@ export class FilterDropdownComponent implements OnInit {
   ]
 ;
   quotefilterForm = this.fb.group({
-    Department : ['%'],
+    Department : ['A'],
     AccountManager : ['All'],
     DateRange : ['CY']
   });
@@ -38,12 +36,25 @@ export class FilterDropdownComponent implements OnInit {
 
   ngOnInit() {
     this.LoadAccountManager();
+
+    this.quotefilterForm.valueChanges.subscribe(data => {
+      if (this.quotefilterForm.valid) {
+          this.OnFilterDataChange();
+      }
+  });
   }
 
   LoadAccountManager()
   {
-    this.dashboardService.getAccountManagers('A').subscribe(data  => {
+    let dept = this.quotefilterForm.value.AccountManager as string;
+
+    this.dashboardService.getAccountManagers(dept).subscribe(data  => {
       this.accountManagers = data;
       });
+  }
+
+  OnFilterDataChange()
+  {
+
   }
 }
