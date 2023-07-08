@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DashboardService } from 'src/app/core/services/dashboard.service';
+import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 
 @Component({
   selector: 'app-filter-dropdown',
@@ -32,7 +33,10 @@ export class FilterDropdownComponent implements OnInit {
     AccountManager : ['All'],
     DateRange : ['CY']
   });
-  constructor(private dashboardService: DashboardService, private fb: FormBuilder) { }
+  constructor(private dashboardService: DashboardService,
+    private fb: FormBuilder,
+    private filterSharedService: DashboardFilterSharedService
+    ) { }
 
   ngOnInit() {
     this.LoadAccountManager();
@@ -46,15 +50,22 @@ export class FilterDropdownComponent implements OnInit {
 
   LoadAccountManager()
   {
-    let dept = this.quotefilterForm.value.AccountManager as string;
+    let dept = this.quotefilterForm.value.Department as string;
 
     this.dashboardService.getAccountManagers(dept).subscribe(data  => {
       this.accountManagers = data;
       });
+      this.OnFilterDataChange();
   }
 
   OnFilterDataChange()
   {
-
+    var filters =
+    {
+      department : this.quotefilterForm.value.Department,
+      accountManager: this.quotefilterForm.value.AccountManager,
+      dateRange:  this.quotefilterForm.value.DateRange
+    }
+    this.filterSharedService.setDashboardFilter(filters)
   }
 }
