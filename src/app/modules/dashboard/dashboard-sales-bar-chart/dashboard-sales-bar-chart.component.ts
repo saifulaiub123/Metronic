@@ -13,6 +13,9 @@ export class DashboardSalesBarChartComponent implements OnInit {
 
   @Input() data: any[] = [];
   @Input() chartHeight: string;
+  @Input() chartColor: string = '';
+
+  totalBalance: number = 0;
 
   subscriptionDashboardData$: Subscription;
   public chartOptions: any = {};
@@ -35,6 +38,9 @@ export class DashboardSalesBarChartComponent implements OnInit {
       {
         this.data = data;
         this.chartOptions = this.getChartOptions(this.chartHeight);
+        this.totalBalance = this.data.reduce((accumulator, obj) => {
+          return accumulator + obj.quoteAmount;
+        }, 0);
         this.filterSharedService.resetDashboardData();
       }
      });

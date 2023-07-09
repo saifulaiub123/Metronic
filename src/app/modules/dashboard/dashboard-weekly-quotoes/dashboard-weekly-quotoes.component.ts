@@ -18,7 +18,6 @@ export class DashboardWeeklyQuotoesComponent implements OnInit {
   subscriptionDashboardData$: Subscription;
 
   public chartOptions: any = {};
-
   constructor(private filterSharedService: DashboardFilterSharedService) {}
 
   ngOnInit(): void {

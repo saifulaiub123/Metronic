@@ -10,19 +10,8 @@
   <!-- begin::Toolbar-->
   <div class="card-toolbar">
     <!-- begin::Menu-->
-    <button
-      type="button"
-      class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
-      data-kt-menu-trigger="click"
-      data-kt-menu-placement="bottom-end"
-      data-kt-menu-flip="top-end"
-    >
-      <span
-        [inlineSVG]="'./assets//media/icons/duotune/general/gen024.svg'"
-        class="svg-icon svg-icon-2"
-      ></span>
-    </button>
-    <app-dropdown-menu1></app-dropdown-menu1>
+    <div class="fw-bolder fs-3">${{totalBalance | number : '1.2-2'}}</div>
+
 
     <!-- end::Menu-->
   </div>

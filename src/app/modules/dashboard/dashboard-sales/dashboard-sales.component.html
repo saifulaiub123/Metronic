@@ -5,26 +5,6 @@
     <div class="d-flex flex-stack">
       <h3 class="m-0 text-white fw-bolder fs-3">Sales Summary</h3>
       <div class="ms-1">
-        <!-- begin::Menu -->
-        <!-- <button
-          type="button"
-          class="
-            btn btn-sm btn-icon btn-color-white btn-active-white
-            border-0
-            me-n3
-          "
-          [ngClass]="'btn-active-color-' + color"
-          data-kt-menu-trigger="click"
-          data-kt-menu-placement="bottom-end"
-          data-kt-menu-flip="top-end"
-        >
-          <span
-            [inlineSVG]="'./assets/media/icons/duotune/general/gen024.svg'"
-            class="svg-icon svg-icon-2"
-          ></span>
-        </button>
-        <app-dropdown-menu1></app-dropdown-menu1> -->
-        <!-- end::Menu -->
       </div>
     </div>
     <!-- end::Heading -->
@@ -50,7 +30,7 @@
         <div flex-grow-1 me-2>
           <a href="#" class="text-warning fw-bold fs-6">{{salesData[0].statusDesc}}</a>
           <br>
-          <span>{{salesData[0].countStatus}}</span>
+          <span fs-6 text-gray-800 text-hover-primary fw-bolder>{{salesData[0].countStatus}}</span>
         </div>
       </div>
       <!-- end::Col -->
@@ -62,9 +42,9 @@
         ></span>
         <a href="#" class="text-primary fw-bold fs-6">{{salesData[1].statusDesc}}</a>
         <br>
-        <span>{{salesData[1].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[1].countStatus}}</span>
         <br>
-        <span>{{salesData[1].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[1].quoteAmount}}</span>
       </div>
       <!-- end::Col -->
     </div>
@@ -74,27 +54,27 @@
       <!-- begin::Col -->
       <div class="col bg-light-danger px-6 py-8 rounded-2 me-7 mb-7">
         <span
-          [inlineSVG]="'../../../../assets/media/icons/duotune/general/abs027.svg'"
+          [inlineSVG]="'.../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-danger d-block my-2"
         ></span>
         <a href="#" class="text-danger fw-bold fs-6 mt-2">{{salesData[2].statusDesc}}</a>
         <br>
-        <span>{{salesData[2].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[2].countStatus}}</span>
         <br>
-        <span>{{salesData[2].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[2].quoteAmount}}</span>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
       <div class="col bg-light-success px-6 py-8 rounded-2 me-7 mb-7">
         <span
-          [inlineSVG]="'../../../../assets/media/icons/duotune/general/com010.svg'"
+          [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-success d-block my-2"
         ></span>
         <a href="#" class="text-success fw-bold fs-6 mt-2">{{salesData[3].statusDesc}}</a>
         <br>
-        <span>{{salesData[3].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[3].countStatus}}</span>
         <br>
-        <span>{{salesData[3].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[3].quoteAmount}}</span>
       </div>
       <!-- end::Col -->
     </div>
@@ -103,27 +83,27 @@
       <!-- begin::Col -->
       <div class="col bg-light-primary px-6 py-8 rounded-2 me-7 mb-7">
         <span
-          [inlineSVG]="'../../../../assets/media/icons/duotune/general/abs027.svg'"
-          class="svg-icon svg-icon-3x svg-icon-danger d-block my-2"
+          [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
+          class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
         ></span>
-        <a href="#" class="text-danger fw-bold fs-6 mt-2">{{salesData[4].statusDesc}}</a>
+        <a href="#" class="text-primary fw-bold fs-6 mt-2">{{salesData[4].statusDesc}}</a>
         <br>
-        <span>{{salesData[4].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[4].countStatus}}</span>
         <br>
-        <span>{{salesData[4].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[4].quoteAmount}}</span>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
-      <div class="col bg-light-waring px-6 py-8 rounded-2 me-7 mb-7">
+      <div class="col bg-light-info px-6 py-8 rounded-2 me-7 mb-7">
         <span
-          [inlineSVG]="'../../../../assets/media/icons/duotune/general/com010.svg'"
-          class="svg-icon svg-icon-3x svg-icon-success d-block my-2"
+          [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
+          class="svg-icon svg-icon-3x svg-icon-info d-block my-2"
         ></span>
-        <a href="#" class="text-success fw-bold fs-6 mt-2">{{salesData[5].statusDesc}}</a>
+        <a href="#" class="text-danger fw-bold fs-6 mt-2">{{salesData[5].statusDesc}}</a>
         <br>
-        <span>{{salesData[5].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[5].countStatus}}</span>
         <br>
-        <span>{{salesData[5].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[5].quoteAmount}}</span>
       </div>
       <!-- end::Col -->
     </div>
