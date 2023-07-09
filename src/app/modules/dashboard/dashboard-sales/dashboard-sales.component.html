@@ -30,8 +30,8 @@
     <!-- end::Heading -->
     <!-- begin::Balance -->
     <div class="d-flex text-center flex-column text-white pt-8">
-      <span class="fw-bold fs-7">You Balance</span>
-      <span class="fw-bolder fs-2x pt-1">$37,562.00</span>
+      <span class="fw-bold fs-7">Balance</span>
+      <span class="fw-bolder fs-2x pt-1">${{totalBalance | number : '1.2-2'}}</span>
     </div>
     <!-- end::Balance -->
   </div>
@@ -47,7 +47,11 @@
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-warning d-block my-2"
         ></span>
-        <a href="#" class="text-warning fw-bold fs-6"> Weekly Sales </a>
+        <div flex-grow-1 me-2>
+          <a href="#" class="text-warning fw-bold fs-6">{{salesData[0].statusDesc}}</a>
+          <br>
+          <span>{{salesData[0].countStatus}}</span>
+        </div>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
@@ -56,7 +60,11 @@
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/fin006.svg'"
           class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
         ></span>
-        <a href="#" class="text-primary fw-bold fs-6"> New Projects </a>
+        <a href="#" class="text-primary fw-bold fs-6">{{salesData[1].statusDesc}}</a>
+        <br>
+        <span>{{salesData[1].countStatus}}</span>
+        <br>
+        <span>{{salesData[1].quoteAmount}}</span>
       </div>
       <!-- end::Col -->
     </div>
@@ -64,28 +72,63 @@
     <!-- begin::Row -->
     <div class="row g-0">
       <!-- begin::Col -->
-      <div class="col bg-light-danger px-6 py-8 rounded-2 me-7">
+      <div class="col bg-light-danger px-6 py-8 rounded-2 me-7 mb-7">
         <span
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/abs027.svg'"
           class="svg-icon svg-icon-3x svg-icon-danger d-block my-2"
         ></span>
-        <a href="#" class="text-danger fw-bold fs-6 mt-2"> Item Orders </a>
+        <a href="#" class="text-danger fw-bold fs-6 mt-2">{{salesData[2].statusDesc}}</a>
+        <br>
+        <span>{{salesData[2].countStatus}}</span>
+        <br>
+        <span>{{salesData[2].quoteAmount}}</span>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
-      <div class="col bg-light-success px-6 py-8 rounded-2">
+      <div class="col bg-light-success px-6 py-8 rounded-2 me-7 mb-7">
         <span
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/com010.svg'"
           class="svg-icon svg-icon-3x svg-icon-success d-block my-2"
         ></span>
-        <a href="#" class="text-success fw-bold fs-6 mt-2"> Bug Reports </a>
+        <a href="#" class="text-success fw-bold fs-6 mt-2">{{salesData[3].statusDesc}}</a>
+        <br>
+        <span>{{salesData[3].countStatus}}</span>
+        <br>
+        <span>{{salesData[3].quoteAmount}}</span>
+      </div>
+      <!-- end::Col -->
+    </div>
+
+    <div class="row g-0">
+      <!-- begin::Col -->
+      <div class="col bg-light-primary px-6 py-8 rounded-2 me-7 mb-7">
+        <span
+          [inlineSVG]="'../../../../assets/media/icons/duotune/general/abs027.svg'"
+          class="svg-icon svg-icon-3x svg-icon-danger d-block my-2"
+        ></span>
+        <a href="#" class="text-danger fw-bold fs-6 mt-2">{{salesData[4].statusDesc}}</a>
+        <br>
+        <span>{{salesData[4].countStatus}}</span>
+        <br>
+        <span>{{salesData[4].quoteAmount}}</span>
+      </div>
+      <!-- end::Col -->
+      <!-- begin::Col -->
+      <div class="col bg-light-waring px-6 py-8 rounded-2 me-7 mb-7">
+        <span
+          [inlineSVG]="'../../../../assets/media/icons/duotune/general/com010.svg'"
+          class="svg-icon svg-icon-3x svg-icon-success d-block my-2"
+        ></span>
+        <a href="#" class="text-success fw-bold fs-6 mt-2">{{salesData[5].statusDesc}}</a>
+        <br>
+        <span>{{salesData[5].countStatus}}</span>
+        <br>
+        <span>{{salesData[5].quoteAmount}}</span>
       </div>
       <!-- end::Col -->
     </div>
     <!-- end::Row -->
   </div>
-
-
 
   <!-- end::Items -->
 </div>
