@@ -21,6 +21,10 @@ export class DashboardService {
   {
     return this.http.get(`${this.API}/quotes/GetQuoteDashboardToBeWrittenCount/${filtersObj.dateRange}/${filtersObj.department}/${filtersObj.accountManager}`,{ headers : this.headers });
   }
+  getWeeklyQuotes(filtersObj : any)
+  {
+    return this.http.get(`${this.API}/GetQuoteDashboardWeeklyCount/${filtersObj.department}/${filtersObj.accountManager}`,{ headers : this.headers });
+  }
   getAccountManagers(dept: string)
   {
     return this.http.get(`${this.API}/api/quotes/GetManagers/${dept}`,{ headers : this.headers });

@@ -54,7 +54,7 @@ const Routing: Routes = [
   },
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/dashboard-view',
     pathMatch: 'full',
   },
   {

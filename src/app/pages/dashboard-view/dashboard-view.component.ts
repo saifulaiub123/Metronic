@@ -87,13 +87,48 @@ export class DashboardViewComponent implements OnInit{
   ]
   toBeWritten : any;
 
+  weeklyQuotes : any =
+  [
+    {
+        "date": "2023-05-21T00:00:00",
+        "quotes": 0
+    },
+    {
+        "date": "2023-05-28T00:00:00",
+        "quotes": 0
+    },
+    {
+        "date": "2023-06-04T00:00:00",
+        "quotes": 0
+    },
+    {
+        "date": "2023-06-11T00:00:00",
+        "quotes": 0
+    },
+    {
+        "date": "2023-06-18T00:00:00",
+        "quotes": 0
+    },
+    {
+        "date": "2023-06-25T00:00:00",
+        "quotes": 19
+    },
+    {
+        "date": "2023-07-02T00:00:00",
+        "quotes": 0
+    }
+]
+
+
   constructor(private filterSharedService: DashboardFilterSharedService,
               private dashboardService: DashboardService
              ) {}
 
   ngOnInit(): void {
     this.subscribeSharedServiceData();
-    this.loadToBeWrittenData();
+    this.getToBeWrittenData();
+    this.getWeeklyQuotes();
+
   }
 
   async openModal() {
@@ -113,7 +148,7 @@ export class DashboardViewComponent implements OnInit{
      });
   }
 
-  loadToBeWrittenData()
+  getToBeWrittenData()
   {
     this.dashboardService.getToBeWrittenData(this.filters).subscribe(res => {
       this.toBeWritten = res;
@@ -121,10 +156,21 @@ export class DashboardViewComponent implements OnInit{
 
     this.toBeWritten = 15678;//Need to be removed
   }
+  getWeeklyQuotes()
+  {
+    this.dashboardService.getToBeWrittenData(this.filters).subscribe(res => {
+      this.weeklyQuotes = res
+      this.filterSharedService.setWeeklyQuotesData(this.weeklyQuotes);
+
+    })
+    this.filterSharedService.setWeeklyQuotesData(this.weeklyQuotes);//Need to be removed
+  }
   loadDashboardData()
   {
-    this.dashboardService.getDashboardData(this.filters).subscribe(res => {
+    this.dashboardService.getWeeklyQuotes(this.filters).subscribe(res => {
       this.dashboardData = res;
+      this.filterSharedService.setDashboardData(this.dashboardData);
     })
+    this.filterSharedService.setDashboardData(this.dashboardData);//should be removed
   }
 }
