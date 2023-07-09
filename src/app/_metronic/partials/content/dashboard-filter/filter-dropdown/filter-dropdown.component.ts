@@ -40,12 +40,7 @@ export class FilterDropdownComponent implements OnInit {
 
   ngOnInit() {
     this.LoadAccountManager();
-
-    this.quotefilterForm.valueChanges.subscribe(data => {
-      if (this.quotefilterForm.valid) {
-          this.OnFilterDataChange();
-      }
-  });
+    this.subscribeFilterDataChange();
   }
 
   LoadAccountManager()
@@ -54,8 +49,19 @@ export class FilterDropdownComponent implements OnInit {
 
     this.dashboardService.getAccountManagers(dept).subscribe(data  => {
       this.accountManagers = data;
-      });
       this.OnFilterDataChange();
+    });
+      this.OnFilterDataChange();//need to be removed before final push
+  }
+
+
+  subscribeFilterDataChange()
+  {
+    this.quotefilterForm.valueChanges.subscribe(data => {
+      if (this.quotefilterForm.valid) {
+          this.OnFilterDataChange();
+      }
+    });
   }
 
   OnFilterDataChange()

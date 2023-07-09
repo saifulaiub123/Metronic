@@ -11,14 +11,18 @@ export class DashboardService {
   private headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*'
   });
+  API : string = 'https://localhost:44387/api';
 
   getDashboardData(filtersObj : any)
   {
-    return this.http.post('https://localhost:44387/api/quotes/GetQuoteDashboardAllStatus/CY/ALL/1',filtersObj);
+    return this.http.get(`${this.API}/quotes/GetQuoteDashboardAllStatus/${filtersObj.dateRange}/${filtersObj.department}/${filtersObj.accountManager}`,{ headers : this.headers });
   }
-
+  getToBeWrittenData(filtersObj : any)
+  {
+    return this.http.get(`${this.API}/quotes/GetQuoteDashboardToBeWrittenCount/${filtersObj.dateRange}/${filtersObj.department}/${filtersObj.accountManager}`,{ headers : this.headers });
+  }
   getAccountManagers(dept: string)
   {
-    return this.http.get(`https://localhost:44387/api/quotes/GetManagers/${dept}`,{ headers : this.headers});
+    return this.http.get(`${this.API}/api/quotes/GetManagers/${dept}`,{ headers : this.headers });
   }
 }
