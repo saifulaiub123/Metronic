@@ -27,86 +27,22 @@
   </ng-container> -->
 
   <button
-    type="button"
-    class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
-    data-kt-menu-trigger="click"
-    data-kt-menu-placement="bottom-end"
-    data-kt-menu-flip="top-end"
-  >
-  <span
-    [inlineSVG]="'./assets/media/icons/duotune/general/gen024.svg'"
-    class="svg-icon svg-icon-2"
-  ></span>
-</button>
-
-<div class="px-7 py-5">
-  <div class="fs-5 text-dark fw-bolder"></div>
-</div>
-
-<div class="separator border-gray-200"></div>
-
-<!-- <div class="px-7 py-5">
-
-  <form [formGroup]="quotefilterForm" novalidate="" class="form">
-
-
-  <div class="mb-10">
-    <label class="form-label fw-bold">Department</label>
-
-    <div>
-      <select formControlName="Department"
-        class="form-select form-select-solid"
-        data-kt-select2="true"
-        data-placeholder="Select option"
-        data-allow-clear="true"
-      >
-        <option selected value="A">All</option>
-        <option value="M">AM</option>
-        <option value="S">Sales</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="mb-10">
-    <label class="form-label fw-bold">Account Manager</label>
-    <div>
-      <select formControlName="AccountManager"
-        class="form-select form-select-solid"
-        data-kt-select2="true"
-        data-placeholder="Select option"
-        data-allow-clear="true"
-      >
-      <option value="A">All</option>
-      <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
-        {{mgr.text}}
-      </option>
-      </select>
-    </div>
-  </div>
-
-  <div class="mb-10">
-    <label class="form-label fw-bold">Date Range</label>
-    <div>
-      <select formControlName="DateRange"
-        class="form-select form-select-solid"
-        data-kt-select2="true"
-        data-placeholder="Select option"
-        data-allow-clear="true"
-      >
-        <option selected value="W">Current Week</option>
-        <option value="M">Current Month</option>
-        <option value="Q">Current Quarter</option>
-        <option value="CY">Current Year</option>
-        <option value="PY">Previous Year</option>
-      </select>
-    </div>
-  </div>
-</form>
-</div> -->
-
-
-
-
+      type="button"
+      class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+      data-kt-menu-trigger="click"
+      data-kt-menu-placement="bottom-end"
+      data-kt-menu-flip="top-end"
+    >
+      <span
+        [inlineSVG]="'./assets/media/icons/duotune/general/gen024.svg'"
+        class="svg-icon svg-icon-2"
+      ></span>
+    </button>
+    <app-filter-dropdown
+      [showDepartments]="false"
+      [showManagers]="true"
+      [showDateRanges]="false"
+    ></app-filter-dropdown>
   </div>
 </div>
 <!-- end::Header -->

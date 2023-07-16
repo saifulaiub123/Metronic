@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DashboardService } from 'src/app/core/services/dashboard.service';
 import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
@@ -12,6 +12,11 @@ export class FilterDropdownComponent implements OnInit {
   @HostBinding('class') class =
   'menu menu-sub menu-sub-dropdown w-250px w-md-300px';
   @HostBinding('attr.data-kt-menu') dataKtMenu = 'true';
+
+
+  @Input() showDepartments : boolean = false;
+  @Input() showManagers : boolean = false;
+  @Input() showDateRanges : boolean = false;
 
   accountManagers : any = [
     {
@@ -30,7 +35,7 @@ export class FilterDropdownComponent implements OnInit {
 ;
   quotefilterForm = this.fb.group({
     Department : ['A'],
-    AccountManager : ['All'],
+    AccountManager : ['A'],
     DateRange : ['CY']
   });
   constructor(private dashboardService: DashboardService,

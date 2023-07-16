@@ -42,7 +42,11 @@
   <span>Filter</span>
 </button>
 <!-- <app-dropdown-menu1></app-dropdown-menu1> -->
-<app-filter-dropdown></app-filter-dropdown>
+<app-filter-dropdown
+  [showDepartments]="true"
+  [showManagers]="true"
+  [showDateRanges]="true"
+></app-filter-dropdown>
 <!--begin::Primary button-->
 <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal"
   data-bs-target="#kt_modal_create_app">Create</a>

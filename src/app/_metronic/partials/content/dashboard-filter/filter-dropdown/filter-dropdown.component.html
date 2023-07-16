@@ -9,7 +9,7 @@
   <form [formGroup]="quotefilterForm" novalidate="" class="form">
 
 
-  <div class="mb-10">
+  <div class="mb-10" *ngIf="showDepartments">
     <label class="form-label fw-bold">Department</label>
 
     <div>
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div class="mb-10">
+  <div class="mb-10" *ngIf="showManagers">
     <label class="form-label fw-bold">Account Manager</label>
     <div>
       <select formControlName="AccountManager"
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <div class="mb-10">
+  <div class="mb-10" *ngIf="showDateRanges">
     <label class="form-label fw-bold">Date Range</label>
     <div>
       <select formControlName="DateRange"
