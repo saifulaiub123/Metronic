@@ -7,6 +7,9 @@ import { DropdownMenusModule } from 'src/app/_metronic/partials';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardWeeklyQuotoesComponent } from './dashboard-weekly-quotoes/dashboard-weekly-quotoes.component';
+import { DashboardToBeWrittenTableComponent } from './dashboard-to-be-written-table/dashboard-to-be-written-table.component';
+import { DashboardToBeSentQuotesTableComponent } from './dashboard-to-be-sent-quotes-table/dashboard-to-be-sent-quotes-table.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -15,16 +18,22 @@ import { DashboardWeeklyQuotoesComponent } from './dashboard-weekly-quotoes/dash
     DropdownMenusModule,
     NgApexchartsModule,
     NgbDropdownModule,
+    ReactiveFormsModule
   ],
   exports:[
     DashboardSalesComponent,
     DashboardSalesBarChartComponent,
-    DashboardWeeklyQuotoesComponent
+    DashboardWeeklyQuotoesComponent,
+    DashboardToBeWrittenTableComponent,
+    DashboardToBeSentQuotesTableComponent
   ],
   declarations: [
     DashboardSalesComponent,
     DashboardSalesBarChartComponent,
-    DashboardWeeklyQuotoesComponent
+    DashboardWeeklyQuotoesComponent,
+    DashboardToBeWrittenTableComponent,
+    DashboardToBeSentQuotesTableComponent,
+    DashboardToBeSentQuotesTableComponent
   ]
 })
 export class DashboarComponentdModule { }
