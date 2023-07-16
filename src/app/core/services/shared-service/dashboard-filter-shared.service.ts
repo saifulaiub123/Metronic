@@ -19,6 +19,17 @@ export class DashboardFilterSharedService {
     this.dashboardFilter$.next({});
   }
 
+  private toBeWritten$ = new BehaviorSubject<number>(0);
+  selectedtoBeWritten$ = this.toBeWritten$.asObservable();
+  settoBeWrittenData(data: any) {
+    this.toBeWritten$.next(data);
+  }
+  resettoBeWrittenData()
+  {
+    this.toBeWritten$.next(0);
+  }
+
+  
   private dashboardData$ = new BehaviorSubject<any>([]);
   selectedDashboardData$ = this.dashboardData$.asObservable();
 

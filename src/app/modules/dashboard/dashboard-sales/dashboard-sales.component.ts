@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
+import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 @Component({
   selector: 'app-dashboard-sales',
   templateUrl: './dashboard-sales.component.html',
@@ -11,13 +13,36 @@ export class DashboardSalesComponent implements OnInit {
   @Input() data: any[] = [];
   @Input() toBeWritten: number = 0;
 
+  subscriptionDashboardFilter$: Subscription;
+
 
   salesData : any[] = [];
   totalBalance : number = 0;
-  constructor() { }
+  constructor(private filterSharedService: DashboardFilterSharedService) { }
 
   ngOnInit() {
     this.loadData();
+    this.subscribeSharedServiceData();
+  }
+
+  subscribeSharedServiceData()
+  {
+    this.subscriptionDashboardFilter$ = this.filterSharedService.selectedDashboardData$.subscribe((data : any) => {
+      if(!_.isEmpty(data))
+      {
+        this.data = data;
+        this.loadData();
+        this.filterSharedService.resetDashboardData();
+      }
+     });
+     this.filterSharedService.selectedtoBeWritten$.subscribe((data : any) => {
+      if(data !== 0)
+      {
+        this.toBeWritten = data;
+        this.loadData();
+        this.filterSharedService.resetDashboardData();
+      }
+     });
   }
 
   loadData()

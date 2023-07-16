@@ -23,10 +23,11 @@ export class DashboardService {
   }
   getWeeklyQuotes(filtersObj : any)
   {
-    return this.http.get(`${this.API}/GetQuoteDashboardWeeklyCount/${filtersObj.department}/${filtersObj.accountManager}`,{ headers : this.headers });
+    // return this.http.get(`${this.API}/quotes/GetQuoteDashboardWeeklyCount/ALL/'Alyssa Larson'`,{ headers : this.headers });
+    return this.http.get(`${this.API}/quotes/GetQuoteDashboardWeeklyCount/${filtersObj.department}/${filtersObj.accountManager}`,{ headers : this.headers });
   }
   getAccountManagers(dept: string)
   {
-    return this.http.get(`${this.API}/api/quotes/GetManagers/${dept}`,{ headers : this.headers });
+    return this.http.get(`${this.API}/quotes/GetManagers/${dept}`,{ headers : this.headers });
   }
 }

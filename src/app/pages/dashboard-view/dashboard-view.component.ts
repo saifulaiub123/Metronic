@@ -152,25 +152,34 @@ export class DashboardViewComponent implements OnInit{
   {
     this.dashboardService.getToBeWrittenData(this.filters).subscribe(res => {
       this.toBeWritten = res;
+      this.filterSharedService.settoBeWrittenData(res);
     })
-
-    this.toBeWritten = 15678;//Need to be removed
+    // this.toBeWritten = 15678;//Need to be removed
   }
   getWeeklyQuotes()
   {
-    this.dashboardService.getToBeWrittenData(this.filters).subscribe(res => {
+    this.dashboardService.getWeeklyQuotes(this.filters).subscribe(res => {
       this.weeklyQuotes = res
       this.filterSharedService.setWeeklyQuotesData(this.weeklyQuotes);
-
     })
-    this.filterSharedService.setWeeklyQuotesData(this.weeklyQuotes);//Need to be removed
+    // this.filterSharedService.setWeeklyQuotesData(this.weeklyQuotes);//Need to be removed
   }
-  loadDashboardData()
+  getSalesSummaryData()
   {
-    this.dashboardService.getWeeklyQuotes(this.filters).subscribe(res => {
+    this.dashboardService.getDashboardData(this.filters).subscribe(res => {
       this.dashboardData = res;
       this.filterSharedService.setDashboardData(this.dashboardData);
     })
-    this.filterSharedService.setDashboardData(this.dashboardData);//should be removed
+  }
+  loadDashboardData()
+  {
+    this.getSalesSummaryData();
+    this.getToBeWrittenData();
+    this.getWeeklyQuotes();
+    // this.dashboardService.getWeeklyQuotes(this.filters).subscribe(res => {
+    //   this.dashboardData = res;
+    //   this.filterSharedService.setDashboardData(this.dashboardData);
+    // })
+    // this.filterSharedService.setDashboardData(this.dashboardData);//should be removed
   }
 }
