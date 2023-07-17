@@ -171,14 +171,21 @@ export class DashboardViewComponent implements OnInit{
       this.filterSharedService.setDashboardData(this.dashboardData);
     })
   }
-
+  getToBeWrittenTableData()
+  {
+    this.filterSharedService.setToBeWrittenTableData(this.filters);
+  }
+  getToBeSentTableData()
+  {
+    this.filterSharedService.setToBeSentTableData(this.filters);
+  }
   loadDashboardData()
   {
     this.getSalesSummaryData();
     this.getToBeWrittenData();
     this.getWeeklyQuotes();
-    //this.getToBeWrittenTableData();
-    //this.getToBeSentQuotesTableData();
+    this.getToBeWrittenTableData();
+    this.getToBeSentTableData();
     // this.dashboardService.getWeeklyQuotes(this.filters).subscribe(res => {
     //   this.dashboardData = res;
     //   this.filterSharedService.setDashboardData(this.dashboardData);

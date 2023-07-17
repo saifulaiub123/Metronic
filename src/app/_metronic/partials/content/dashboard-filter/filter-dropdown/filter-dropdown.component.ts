@@ -44,6 +44,7 @@ export class FilterDropdownComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    localStorage.setItem("AccountManagers", JSON.stringify(this.accountManagers));
     this.LoadAccountManager();
     this.subscribeFilterDataChange();
   }
@@ -54,6 +55,7 @@ export class FilterDropdownComponent implements OnInit {
 
     this.dashboardService.getAccountManagers(dept).subscribe(data  => {
       this.accountManagers = data;
+      localStorage.setItem("AccountMangers", this.accountManagers);
       this.OnFilterDataChange();
     });
       //this.OnFilterDataChange();//need to be removed before final push

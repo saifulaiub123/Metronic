@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { DashboardService } from 'src/app/core/services/dashboard.service';
 import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 import * as _ from 'lodash'
+import { ToBeSentQuotes } from 'src/app/core/model/to-be-sent-quotes';
 @Component({
   selector: 'app-dashboard-to-be-sent-quotes-table',
   templateUrl: './dashboard-to-be-sent-quotes-table.component.html',
@@ -14,8 +15,8 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
   filter : any = {
     accountManager : 'A'
   }
-
-  toBeSentQuotes : any = [
+  accountManagers: any[] = [];
+  toBeSentQuotes : ToBeSentQuotes[] = [
     {
       "quoteID": 566886,
       "custnmbr": "CHMPCA01 ",
@@ -23,8 +24,8 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
       "quoteOwner": "Evan Cis",
       "quoteStatus": "In Discussion",
       "quoteAmount": 5139.68,
-      "quotedOn": "2021-04-19T11:36:33",
-      "dateStatusChanged": "2021-04-19T14:53:33",
+      "quotedOn": new Date("2021-04-19T11:36:33"),
+      "dateStatusChanged": new Date("2021-04-19T14:53:33"),
       "quoteReason": "Battery Installation - Full ",
       "quotePriority": "Critical",
       "contractType": "T&M ",
@@ -37,8 +38,8 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
       "quoteOwner": "Evan Cis",
       "quoteStatus": "In Discussion",
       "quoteAmount": 5139.68,
-      "quotedOn": "2021-04-19T11:39:47",
-      "dateStatusChanged": "2021-04-19T14:54:04",
+      "quotedOn": new Date("2021-04-19T11:39:47"),
+      "dateStatusChanged": new Date("2021-04-19T14:54:04"),
       "quoteReason": "Battery Installation - Full ",
       "quotePriority": "Critical",
       "contractType": "T&M ",
@@ -51,8 +52,8 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
         "quoteOwner": "Alaina Price",
         "quoteStatus": "Sent",
         "quoteAmount": 8727.5,
-        "quotedOn": "2021-04-20T14:35:14",
-        "dateStatusChanged": "2021-04-22T17:41:12",
+        "quotedOn": new Date("2021-04-20T14:35:14"),
+        "dateStatusChanged": new Date("2021-04-22T17:41:12"),
         "quoteReason": "Caps and Fan Installation",
         "quotePriority": "Critical",
         "contractType": "T&M ",
@@ -74,7 +75,9 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
     this.subscriptionToBeWrittenData$ = this.filterSharedService.selectedToBeSentTable$.subscribe((filter : any) => {
       if(!_.isEmpty(filter))
       {
-        this.filter = filter;
+        this.accountManagers = JSON.parse(localStorage.getItem("AccountManagers")!);
+        var item = this.accountManagers.find(x => x.value === filter.accountManager);
+        this.filter.accountManager = item.text;
         this.loadData();
         this.filterSharedService.resetToBeSentTableData();
       }
@@ -83,7 +86,14 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
   loadData()
   {
     this.dashboardService.getToBeSentQuotesData(this.filter).subscribe(res => {
-      this.toBeSentQuotes = res;
+      this.toBeSentQuotes.sort((a, b) => {
+        let da : any = new Date(a.quotedOn),
+            db : any = new Date(b.quotedOn);
+        return db - da;
+    });
+      this.toBeSentQuotes = _.take(this.toBeSentQuotes,10);
+
+      // this.toBeSentQuotes = _.take(_.sortBy(res,['quotedOn'], ['desc']),10);
     })
   }
 }

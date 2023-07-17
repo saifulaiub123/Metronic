@@ -11,7 +11,7 @@ import { DashboardToBeWrittenTableComponent } from './dashboard-to-be-written-ta
 import { DashboardToBeSentQuotesTableComponent } from './dashboard-to-be-sent-quotes-table/dashboard-to-be-sent-quotes-table.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilterDropdownComponent } from 'src/app/_metronic/partials/content/dashboard-filter/filter-dropdown/filter-dropdown.component';
-
+import { MatTableModule } from '@angular/material/table'
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +20,8 @@ import { FilterDropdownComponent } from 'src/app/_metronic/partials/content/dash
     NgApexchartsModule,
     NgbDropdownModule,
     ReactiveFormsModule,
-    DashboardFilterModule
+    DashboardFilterModule,
+    MatTableModule
   ],
   exports:[
     DashboardSalesComponent,

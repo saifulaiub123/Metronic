@@ -59,8 +59,8 @@ export class DashboardFilterSharedService {
   private toBeWrittenTable$ = new BehaviorSubject<any>([]);
   selectedToBeWrittenTable$ = this.toBeWrittenTable$.asObservable();
 
-  setToBeWrittenTableData(data: any) {
-    this.toBeWrittenTable$.next(data);
+  setToBeWrittenTableData(filters: any) {
+    this.toBeWrittenTable$.next(filters);
   }
   resetToBeWrittenTableData()
   {
@@ -71,8 +71,8 @@ export class DashboardFilterSharedService {
   private toBeSentTable$ = new BehaviorSubject<any>([]);
   selectedToBeSentTable$ = this.toBeSentTable$.asObservable();
 
-  setToBeSentTableData(data: any) {
-    this.toBeSentTable$.next(data);
+  setToBeSentTableData(filters: any) {
+    this.toBeSentTable$.next(filters);
   }
   resetToBeSentTableData()
   {

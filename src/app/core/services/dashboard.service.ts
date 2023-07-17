@@ -1,5 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ToBeWrittenQuotes } from '../model/to-be-written-quotes';
+import { ToBeSentQuotes } from '../model/to-be-sent-quotes';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +34,11 @@ export class DashboardService {
   }
   getToBeWrittenQuotesData(filtersObj : any)
   {
-    return this.http.get(`${this.API}/quotes/GetQuoteDashboardToBeWrittenQuotes/${filtersObj.accountManager}`,{ headers : this.headers });
+    return this.http.get<ToBeWrittenQuotes[]>(`${this.API}/quotes/GetQuoteDashboardToBeWrittenQuotes/${filtersObj.accountManager}`,{ headers : this.headers });
   }
 
   getToBeSentQuotesData(filtersObj : any)
   {
-    return this.http.get(`${this.API}/quotes/GetQuoteDashboardToBeSentQuotes/${filtersObj.accountManager}`,{ headers : this.headers });
+    return this.http.get<ToBeSentQuotes[]>(`${this.API}/quotes/GetQuoteDashboardToBeSentQuotes/${filtersObj.accountManager}`,{ headers : this.headers });
   }
 }

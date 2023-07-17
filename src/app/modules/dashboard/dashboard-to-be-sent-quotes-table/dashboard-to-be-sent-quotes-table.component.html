@@ -39,16 +39,16 @@
       <!-- begin::Table head -->
       <thead>
         <tr class="fw-bolder text-muted">
-          <th class="min-w-150px text-dark">QuoteID</th>
+          <th class="min-w-150px text-dark">QuoteId</th>
           <th class="min-w-140px text-dark">Account Manager</th>
-          <th class="min-w-120px text-dark">Customer</th>
-          <th class="min-w-120px text-dark">Amount</th>
+          <!-- <th class="min-w-120px text-dark">Customer</th>
+          <th class="min-w-120px text-dark">Amount</th> -->
           <th class="min-w-120px text-dark">Date of Quote</th>
-          <th class="min-w-120px text-dark">Date of Status Change</th>
+          <!-- <th class="min-w-120px text-dark">Date of Status Change</th>
           <th class="min-w-120px text-dark">Reason</th>
           <th class="min-w-120px text-dark">Priority</th>
           <th class="min-w-120px text-dark">Contract Type</th>
-          <th class="min-w-120px text-dark">Age</th>
+          <th class="min-w-120px text-dark">Age</th> -->
 
           <!-- <th class="min-w-100px text-end">Actions</th> -->
         </tr>
@@ -75,7 +75,7 @@
               </div>
             </div>
           </td>
-          <td>
+          <!-- <td>
             <span class="text-muted fw-bold text-muted d-block fs-7">
               {{data.custname}}
             </span>
@@ -89,12 +89,21 @@
                 </span>
               </div>
             </div>
-          </td>
+          </td> -->
           <td>
             <div class="d-flex align-items-center">
               <div class="d-flex justify-content-start flex-column">
                 <span class="text-muted fw-bold text-muted d-block fs-7">
-                  {{data.quotedOn}}
+                  {{data.quotedOn | date: 'yyyy-MM-dd hh:mm a'}}
+                </span>
+              </div>
+            </div>
+          </td>
+          <!-- <td>
+            <div class="d-flex align-items-center">
+              <div class="d-flex justify-content-start flex-column">
+                <span class="text-muted fw-bold text-muted d-block fs-7">
+                  {{data.dateStatusChanged}}
                 </span>
               </div>
             </div>
@@ -104,15 +113,6 @@
               <div class="d-flex justify-content-start flex-column">
                 <span class="text-muted fw-bold text-muted d-block fs-7">
                   {{data.quoteReason}}
-                </span>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <div class="d-flex justify-content-start flex-column">
-                <span class="text-muted fw-bold text-muted d-block fs-7">
-                  {{data.dateStatusChanged}}
                 </span>
               </div>
             </div>
@@ -143,7 +143,7 @@
                 </span>
               </div>
             </div>
-          </td>
+          </td> -->
         </tr>
 
       </tbody>
