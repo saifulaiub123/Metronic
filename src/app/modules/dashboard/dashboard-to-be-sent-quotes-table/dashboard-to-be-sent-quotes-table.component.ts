@@ -16,50 +16,50 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
     accountManager : 'A'
   }
   accountManagers: any[] = [];
-  toBeSentQuotes : ToBeSentQuotes[] = [
-    {
-      "quoteID": 566886,
-      "custnmbr": "CHMPCA01 ",
-      "custname": "Community Hospital Monterey Peninsula ",
-      "quoteOwner": "Evan Cis",
-      "quoteStatus": "In Discussion",
-      "quoteAmount": 5139.68,
-      "quotedOn": new Date("2021-04-19T11:36:33"),
-      "dateStatusChanged": new Date("2021-04-19T14:53:33"),
-      "quoteReason": "Battery Installation - Full ",
-      "quotePriority": "Critical",
-      "contractType": "T&M ",
-      "age": 817
-      },
-      {
-      "quoteID": 566887,
-      "custnmbr": "CHMPCA01 ",
-      "custname": "Community Hospital Monterey Peninsula ",
-      "quoteOwner": "Evan Cis",
-      "quoteStatus": "In Discussion",
-      "quoteAmount": 5139.68,
-      "quotedOn": new Date("2021-04-19T11:39:47"),
-      "dateStatusChanged": new Date("2021-04-19T14:54:04"),
-      "quoteReason": "Battery Installation - Full ",
-      "quotePriority": "Critical",
-      "contractType": "T&M ",
-      "age": 817
-      },
-      {
-        "quoteID": 567027,
-        "custnmbr": "OSFIL03",
-        "custname": "Ottawa Regional Hospital & Healthcare Center",
-        "quoteOwner": "Alaina Price",
-        "quoteStatus": "Sent",
-        "quoteAmount": 8727.5,
-        "quotedOn": new Date("2021-04-20T14:35:14"),
-        "dateStatusChanged": new Date("2021-04-22T17:41:12"),
-        "quoteReason": "Caps and Fan Installation",
-        "quotePriority": "Critical",
-        "contractType": "T&M ",
-        "age": 816
-        }
-  ];
+  toBeSentQuotes : ToBeSentQuotes[] = []
+  //   {
+  //     "quoteID": 566886,
+  //     "custnmbr": "CHMPCA01 ",
+  //     "custname": "Community Hospital Monterey Peninsula ",
+  //     "quoteOwner": "Evan Cis",
+  //     "quoteStatus": "In Discussion",
+  //     "quoteAmount": 5139.68,
+  //     "quotedOn": new Date("2021-04-19T11:36:33"),
+  //     "dateStatusChanged": new Date("2021-04-19T14:53:33"),
+  //     "quoteReason": "Battery Installation - Full ",
+  //     "quotePriority": "Critical",
+  //     "contractType": "T&M ",
+  //     "age": 817
+  //     },
+  //     {
+  //     "quoteID": 566887,
+  //     "custnmbr": "CHMPCA01 ",
+  //     "custname": "Community Hospital Monterey Peninsula ",
+  //     "quoteOwner": "Evan Cis",
+  //     "quoteStatus": "In Discussion",
+  //     "quoteAmount": 5139.68,
+  //     "quotedOn": new Date("2021-04-19T11:39:47"),
+  //     "dateStatusChanged": new Date("2021-04-19T14:54:04"),
+  //     "quoteReason": "Battery Installation - Full ",
+  //     "quotePriority": "Critical",
+  //     "contractType": "T&M ",
+  //     "age": 817
+  //     },
+  //     {
+  //       "quoteID": 567027,
+  //       "custnmbr": "OSFIL03",
+  //       "custname": "Ottawa Regional Hospital & Healthcare Center",
+  //       "quoteOwner": "Alaina Price",
+  //       "quoteStatus": "Sent",
+  //       "quoteAmount": 8727.5,
+  //       "quotedOn": new Date("2021-04-20T14:35:14"),
+  //       "dateStatusChanged": new Date("2021-04-22T17:41:12"),
+  //       "quoteReason": "Caps and Fan Installation",
+  //       "quotePriority": "Critical",
+  //       "contractType": "T&M ",
+  //       "age": 816
+  //       }
+  // ];
   constructor(
     private filterSharedService: DashboardFilterSharedService,
     private dashboardService: DashboardService
