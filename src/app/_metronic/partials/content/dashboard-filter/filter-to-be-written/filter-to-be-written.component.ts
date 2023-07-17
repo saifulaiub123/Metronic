@@ -4,11 +4,12 @@ import { DashboardService } from 'src/app/core/services/dashboard.service';
 import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 
 @Component({
-  selector: 'app-filter-dropdown',
-  templateUrl: './filter-dropdown.component.html',
-  styleUrls: ['./filter-dropdown.component.scss']
+  selector: 'app-filter-to-be-written',
+  templateUrl: './filter-to-be-written.component.html',
+  styleUrls: ['./filter-to-be-written.component.scss']
 })
-export class FilterDropdownComponent implements OnInit {
+export class FilterToBeWrittenComponent implements OnInit {
+
   @HostBinding('class') class =
   'menu menu-sub menu-sub-dropdown w-250px w-md-300px';
   @HostBinding('attr.data-kt-menu') dataKtMenu = 'true';
@@ -73,10 +74,8 @@ export class FilterDropdownComponent implements OnInit {
   {
     var filters =
     {
-      department : this.quotefilterForm.value.Department,
-      accountManager: this.quotefilterForm.value.AccountManager,
-      dateRange:  this.quotefilterForm.value.DateRange
+      accountManager: this.quotefilterForm.value.AccountManager
     }
-    this.filterSharedService.setDashboardFilter(filters)
+    this.filterSharedService.setToBeWrittenTableData(filters)
   }
 }
