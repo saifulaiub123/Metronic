@@ -9,8 +9,6 @@ export class DashboardFilterSharedService {
   private dashboardFilter$ = new BehaviorSubject<any>({});
   selectedDashboardFilter$ = this.dashboardFilter$.asObservable();
 
-
-
   setDashboardFilter(filters: any) {
     this.dashboardFilter$.next(filters);
   }
@@ -18,6 +16,8 @@ export class DashboardFilterSharedService {
   {
     this.dashboardFilter$.next({});
   }
+
+
 
   private toBeWritten$ = new BehaviorSubject<number>(0);
   selectedtoBeWritten$ = this.toBeWritten$.asObservable();
@@ -29,7 +29,7 @@ export class DashboardFilterSharedService {
     this.toBeWritten$.next(0);
   }
 
-  
+
   private dashboardData$ = new BehaviorSubject<any>([]);
   selectedDashboardData$ = this.dashboardData$.asObservable();
 
@@ -40,6 +40,8 @@ export class DashboardFilterSharedService {
   {
     this.dashboardData$.next([]);
   }
+
+
 
   private weeklyQuotes$ = new BehaviorSubject<any>([]);
   selectedWeeklyQuotes$ = this.weeklyQuotes$.asObservable();
@@ -52,4 +54,28 @@ export class DashboardFilterSharedService {
     this.weeklyQuotes$.next([]);
   }
 
+
+
+  private toBeWrittenTable$ = new BehaviorSubject<any>([]);
+  selectedToBeWrittenTable$ = this.toBeWrittenTable$.asObservable();
+
+  setToBeWrittenTableData(data: any) {
+    this.toBeWrittenTable$.next(data);
+  }
+  resetToBeWrittenTableData()
+  {
+    this.toBeWrittenTable$.next([]);
+  }
+
+
+  private toBeSentTable$ = new BehaviorSubject<any>([]);
+  selectedToBeSentTable$ = this.toBeSentTable$.asObservable();
+
+  setToBeSentTableData(data: any) {
+    this.toBeSentTable$.next(data);
+  }
+  resetToBeSentTableData()
+  {
+    this.toBeSentTable$.next([]);
+  }
 }

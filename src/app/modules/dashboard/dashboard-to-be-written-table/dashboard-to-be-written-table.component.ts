@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-
+import { Subscription } from 'rxjs';
+import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
+import * as _ from 'lodash';
+import { DashboardService } from 'src/app/core/services/dashboard.service';
 @Component({
   selector: 'app-dashboard-to-be-written-table',
   templateUrl: './dashboard-to-be-written-table.component.html',
@@ -8,7 +10,12 @@ import { FormBuilder } from '@angular/forms';
 })
 export class DashboardToBeWrittenTableComponent implements OnInit {
 
-  toBeWrittenQuotes : any[] = [
+  subscriptionToBeWrittenData$: Subscription;
+  filter : any = {
+    accountManager : 'A'
+  }
+
+  toBeWrittenQuotes : any = [
     {
       "quoteID": 571873,
       "custnmbr": "EQSITE33 ",
@@ -53,14 +60,34 @@ export class DashboardToBeWrittenTableComponent implements OnInit {
       }
   ];
 
-  quotefilterForm = this.fb.group({
-    Department : ['A'],
-    AccountManager : ['All'],
-    DateRange : ['CY']
-  });
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private filterSharedService: DashboardFilterSharedService,
+    private dashboardService: DashboardService
+    ) {
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.subscribeSharedServiceData();
+  }
+
+
+  subscribeSharedServiceData()
+  {
+    this.subscriptionToBeWrittenData$ = this.filterSharedService.selectedToBeWrittenTable$.subscribe((filter : any) => {
+      if(!_.isEmpty(filter))
+      {
+        this.filter = filter;
+        this.loadData();
+        this.filterSharedService.resetToBeWrittenTableData();
+      }
+     });
+  }
+
+  loadData()
+  {
+    this.dashboardService.getToBeWrittenQuotesData(this.filter).subscribe(res => {
+      this.toBeWrittenQuotes = res;
+    })
+  }
 }

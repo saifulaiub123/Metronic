@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Subscription } from 'rxjs';
+import { DashboardService } from 'src/app/core/services/dashboard.service';
+import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
+import * as _ from 'lodash'
 @Component({
   selector: 'app-dashboard-to-be-sent-quotes-table',
   templateUrl: './dashboard-to-be-sent-quotes-table.component.html',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardToBeSentQuotesTableComponent implements OnInit {
 
-  toBeSentQuotes : any[] = [
+  subscriptionToBeWrittenData$: Subscription;
+  filter : any = {
+    accountManager : 'A'
+  }
+
+  toBeSentQuotes : any = [
     {
       "quoteID": 566886,
       "custnmbr": "CHMPCA01 ",
@@ -51,9 +59,31 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
         "age": 816
         }
   ];
-  constructor() { }
+  constructor(
+    private filterSharedService: DashboardFilterSharedService,
+    private dashboardService: DashboardService
+    ) {
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.subscribeSharedServiceData();
+  }
+  subscribeSharedServiceData()
+  {
+    this.subscriptionToBeWrittenData$ = this.filterSharedService.selectedToBeSentTable$.subscribe((filter : any) => {
+      if(!_.isEmpty(filter))
+      {
+        this.filter = filter;
+        this.loadData();
+        this.filterSharedService.resetToBeSentTableData();
+      }
+     });
+  }
+  loadData()
+  {
+    this.dashboardService.getToBeSentQuotesData(this.filter).subscribe(res => {
+      this.toBeSentQuotes = res;
+    })
+  }
 }
