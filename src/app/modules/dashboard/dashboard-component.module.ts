@@ -11,7 +11,8 @@ import { DashboardToBeWrittenTableComponent } from './dashboard-to-be-written-ta
 import { DashboardToBeSentQuotesTableComponent } from './dashboard-to-be-sent-quotes-table/dashboard-to-be-sent-quotes-table.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilterDropdownComponent } from 'src/app/_metronic/partials/content/dashboard-filter/filter-dropdown/filter-dropdown.component';
-import { MatTableModule } from '@angular/material/table'
+import { MatTableModule } from '@angular/material/table';
+import { DashboardRecentActivitiesComponent } from './dashboard-recent-activities/dashboard-recent-activities.component'
 @NgModule({
   imports: [
     CommonModule,
@@ -28,7 +29,8 @@ import { MatTableModule } from '@angular/material/table'
     DashboardSalesBarChartComponent,
     DashboardWeeklyQuotoesComponent,
     DashboardToBeWrittenTableComponent,
-    DashboardToBeSentQuotesTableComponent
+    DashboardToBeSentQuotesTableComponent,
+    DashboardRecentActivitiesComponent
   ],
   declarations: [
     DashboardSalesComponent,
@@ -36,7 +38,9 @@ import { MatTableModule } from '@angular/material/table'
     DashboardWeeklyQuotoesComponent,
     DashboardToBeWrittenTableComponent,
     DashboardToBeSentQuotesTableComponent,
-    DashboardToBeSentQuotesTableComponent
+    DashboardToBeSentQuotesTableComponent,
+    DashboardRecentActivitiesComponent,
+    DashboardRecentActivitiesComponent
   ]
 })
 export class DashboarComponentdModule { }
