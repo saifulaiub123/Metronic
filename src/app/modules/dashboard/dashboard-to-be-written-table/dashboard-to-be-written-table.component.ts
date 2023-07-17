@@ -78,6 +78,7 @@ export class DashboardToBeWrittenTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData();
     this.subscribeSharedServiceData();
   }
 

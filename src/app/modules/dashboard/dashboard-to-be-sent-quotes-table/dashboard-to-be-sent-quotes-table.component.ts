@@ -68,6 +68,7 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData();
     this.subscribeSharedServiceData();
   }
   subscribeSharedServiceData()
