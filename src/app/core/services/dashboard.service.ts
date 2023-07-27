@@ -15,6 +15,7 @@ export class DashboardService {
     'Access-Control-Allow-Origin': '*'
   });
   API : string = 'https://localhost:44387/api';
+  // API : string = 'https://8e8f-2600-8800-180-6a4-107-d319-f971-125d.ngrok-free.app/api';
 
   getDashboardData(filtersObj : any)
   {

@@ -19,7 +19,10 @@ export class DashboardViewComponent implements OnInit{
     closeButtonLabel: 'Cancel'
   };
   subscriptionDashboardFilter$: Subscription;
-  filters: any;
+  filters : any = {
+    department : 'A',
+    accountManager : 'A'
+  }
   dashboardData : any = [
     {
         "countStatus": 6,
