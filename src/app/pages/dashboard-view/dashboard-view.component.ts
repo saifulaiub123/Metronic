@@ -146,7 +146,7 @@ export class DashboardViewComponent implements OnInit{
         this.filters = filters;
 
         this.loadDashboardData();
-        this.filterSharedService.resetDashboardFilters();
+        // this.filterSharedService.resetDashboardFilters();
       }
      });
   }

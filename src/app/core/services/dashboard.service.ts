@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ToBeWrittenQuotes } from '../model/to-be-written-quotes';
 import { ToBeSentQuotes } from '../model/to-be-sent-quotes';
+import { RecentActivities } from '../model/recent-activities';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,10 @@ export class DashboardService {
   getToBeWrittenQuotesData(filtersObj : any)
   {
     return this.http.get<ToBeWrittenQuotes[]>(`${this.API}/quotes/GetQuoteDashboardToBeWrittenQuotes/${filtersObj.accountManager}`,{ headers : this.headers });
+  }
+  getRecentActivitiesData(filtersObj : any)
+  {
+    return this.http.get<RecentActivities[]>(`${this.API}/quotes/GetQuoteDashBoardRecentActivityLog/${filtersObj.accountManager}`,{ headers : this.headers });
   }
 
   getToBeSentQuotesData(filtersObj : any)
