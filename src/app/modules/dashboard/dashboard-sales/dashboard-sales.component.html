@@ -3,7 +3,7 @@
   <div class="px-9 pt-7 card-rounded h-275px w-100" [ngClass]="'bg-' + color">
     <!-- begin::Heading -->
     <div class="d-flex flex-stack">
-      <h3 class="m-0 text-white fw-bolder fs-3">Sales Summary</h3>
+      <h3 class="m-0 text-white fw-bolder fs-3">Accepted Quotes Total</h3>
       <div class="ms-1">
       </div>
     </div>
@@ -11,7 +11,7 @@
     <!-- begin::Balance -->
     <div class="d-flex text-center flex-column text-white pt-8">
       <span class="fw-bold fs-7">Balance</span>
-      <span class="fw-bolder fs-2x pt-1">${{totalBalance | number : '1.2-2'}}</span>
+      <span class="fw-bolder fs-2x pt-1">${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
     </div>
     <!-- end::Balance -->
   </div>
@@ -44,7 +44,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[1].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[1].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[1].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
     </div>
@@ -61,7 +61,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[2].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[2].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[2].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
@@ -74,7 +74,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[3].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[3].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[3].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
     </div>
@@ -90,7 +90,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[4].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[4].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
@@ -103,7 +103,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[5].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[5].quoteAmount}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[5].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
     </div>
