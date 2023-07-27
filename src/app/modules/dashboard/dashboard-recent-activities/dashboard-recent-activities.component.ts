@@ -87,6 +87,17 @@ export class DashboardRecentActivitiesComponent implements OnInit {
         this.filterSharedService.resetDashboardFilters();
       }
      });
+
+     this.filterSharedService.selectedToBeSentTable$.subscribe((filter : any) => {
+      if(!_.isEmpty(filter))
+      {
+        this.accountManagers = JSON.parse(localStorage.getItem("AccountManagers")!);
+        var item = this.accountManagers.find(x => x.value === filter.accountManager);
+        this.filter.accountManager = item.text;
+        this.loadData();
+        this.filterSharedService.resetToBeSentTableData();
+      }
+     });
   }
 
   loadData()
