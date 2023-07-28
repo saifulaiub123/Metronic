@@ -81,7 +81,10 @@ export class DashboardRecentActivitiesComponent implements OnInit {
       {
         this.accountManagers = JSON.parse(localStorage.getItem("AccountManagers")!);
         var item = this.accountManagers.find(x => x.value === filters.accountManager);
-        this.filter.accountManager = item.text;
+        if(item !== undefined)
+        {
+          this.filter.accountManager = item.text;
+        }
 
         this.loadData();
         this.filterSharedService.resetDashboardFilters();
@@ -93,7 +96,11 @@ export class DashboardRecentActivitiesComponent implements OnInit {
       {
         this.accountManagers = JSON.parse(localStorage.getItem("AccountManagers")!);
         var item = this.accountManagers.find(x => x.value === filter.accountManager);
-        this.filter.accountManager = item.text;
+        if(item !== undefined)
+        {
+          this.filter.accountManager = item.text;
+        }
+
         this.loadData();
         this.filterSharedService.resetToBeSentTableData();
       }
@@ -103,7 +110,7 @@ export class DashboardRecentActivitiesComponent implements OnInit {
   loadData()
   {
     this.dashboardService.getRecentActivitiesData(this.filter).subscribe((res) => {
-      this.recentActivities.sort((a, b) => {
+      this.recentActivities = res.sort((a, b) => {
         let da : any = new Date(a.date),
             db : any = new Date(b.date);
         return db - da;
