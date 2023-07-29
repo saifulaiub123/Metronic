@@ -21,12 +21,16 @@ export class QuotesService {
 
   getQuotesDetails(quoteId: string)
   {
-    return this.http.get(`https://localhost:44387/quotes/Detail/${quoteId}`,{ headers : this.headers});
+    return this.http.get(`${this.API}/quotes/Detail/${quoteId}`,{ headers : this.headers});
   }
 
   getQuoteActivity(quoteId: string)
   {
     return this.http.get(`${this.API}/quotes/Detail/${quoteId}`,{ headers : this.headers});
+  }
+  getQuoteActivityDetails(quoteId: string)
+  {
+    return this.http.get(`${this.API}/quotes/GetQuoteActivity/${quoteId}`,{ headers : this.headers});
   }
 
   getQuoteAccountManagers(dept: string)

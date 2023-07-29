@@ -11,13 +11,15 @@ import { CoreModule } from 'src/app/core/core.module';
 import { EditQuoteComponent } from './edit-quote/edit-quote.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WidgetsModule } from 'src/app/_metronic/partials';
+import { QuoteDetailsComponent } from './modal/quote-details/quote-details.component';
 
 
 @NgModule({
   declarations: [
     QuotesListComponent,
     QuoteComponent,
-    EditQuoteComponent
+    EditQuoteComponent,
+    QuoteDetailsComponent
   ],
   imports: [
     CommonModule,

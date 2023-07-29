@@ -1,0 +1,39 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Activity log for Quote Id: {{quoteId}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+        <!-- begin::Item -->
+        <div class="d-flex align-items-center bg-light-info rounded p-5 mb-7"
+        *ngFor="let quote of quotes">
+          <!-- begin::Icon -->
+          <!-- <span class="svg-icon svg-icon-warning me-5">
+            <span
+              [inlineSVG]="'./assets/media/icons/duotune/abstract/abs027.svg'"
+              class="svg-icon svg-icon-1"
+            ></span>
+          </span> -->
+          <!-- end::Icon -->
+          <!-- begin::Title -->
+          <div class="flex-grow-1 me-2">
+            <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">
+              {{quote.status}}
+            </a>
+            <span class="text-muted fw-bold d-block">{{quote.comments}}</span>
+          </div>
+          <!-- end::Title -->
+          <!-- begin::Lable -->
+          <!-- <span class="fw-bolder text-warning py-1">+28%</span> -->
+          <!-- end::Lable -->
+        </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</div>
+

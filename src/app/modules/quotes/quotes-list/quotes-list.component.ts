@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { QuotesService } from 'src/app/core/services/quotes.service';
 import { QuoteChartDetails } from 'src/app/_metronic/partials/content/widgets/charts/charts-custom-widget/charts-custom-widget.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { QuoteDetailsComponent } from '../modal/quote-details/quote-details.component';
 
 @Component({
   selector: 'app-quotes-list',
@@ -43,14 +45,14 @@ export class QuotesListComponent implements OnInit {
     ,{Text : 'All',value:'All'}
   ];
 
-  constructor(private quotesService : QuotesService, private fb: FormBuilder) { }
+  constructor(private quotesService : QuotesService, private fb: FormBuilder, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.LoadQuotes();
     this.LoadFilters();
     this.LoadFiscalYears();
   }
- 
+
   public LoadQuotes()
   {
     var quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
@@ -64,12 +66,12 @@ export class QuotesListComponent implements OnInit {
       quotesRequestBody.PageNumber = this.paginationObj.pageNumber;
       quotesRequestBody.PageSize = this.paginationObj.pageSize;
     }
- 
+
     //quotesRequestBody.paginationObj = {PageNumber : 1, PageSize : 10};
     this.quotesService.getQuotes(quotesRequestBody).subscribe((data: any)  => {
       this.quotesList = data && data.results.length > 0 ? data.results : [];
       this.paginationObj = data.paginationObj;
-     
+
     })
   }
 
@@ -83,7 +85,7 @@ export class QuotesListComponent implements OnInit {
   {
     this.quotesService.getQuoteAccountManagers('A').subscribe(data  => {
     this.accountManagers = data;
-     
+
     });
 
     this.quotesService.getQuoteStatus().subscribe(data  => {
@@ -110,6 +112,11 @@ export class QuotesListComponent implements OnInit {
     this.paginationObj.pageNumber = event;
     //console.log(event);
     this.LoadQuotes();
+  }
+
+  openQuoteDetailsModal(quoteId: any) {
+    const modalRef = this.modalService.open(QuoteDetailsComponent,{ fullscreen : "sm" });
+    modalRef.componentInstance.quoteId = quoteId;
   }
 
 }
