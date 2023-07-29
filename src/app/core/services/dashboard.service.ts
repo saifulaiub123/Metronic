@@ -16,7 +16,7 @@ export class DashboardService {
     'Access-Control-Allow-Origin': '*'
   });
   // API : string = 'https://localhost:44387/api';
-  API : string = 'https://localhost:7217/api';
+  API : string = 'https://localhost:5001/api';
 
   getDashboardData(filtersObj : any)
   {

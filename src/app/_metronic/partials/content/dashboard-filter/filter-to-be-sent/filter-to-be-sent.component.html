@@ -16,7 +16,7 @@
           data-allow-clear="true"
         >
         <option value="A">All</option>
-        <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
+        <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
           {{mgr.text}}
         </option>
         </select>
