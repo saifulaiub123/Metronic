@@ -116,7 +116,7 @@ export class QuotesListComponent implements OnInit {
   }
 
   openQuoteDetailsModal(quoteId: any) {
-    const modalRef = this.modalService.open(QuoteDetailsComponent,{ fullscreen : "sm" });
+    const modalRef = this.modalService.open(QuoteDetailsComponent,{ fullscreen : "sm", centered: true});
     modalRef.componentInstance.quoteId = quoteId;
   }
 
