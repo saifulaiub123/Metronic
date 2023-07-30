@@ -18,6 +18,7 @@ export class QuotesListComponent implements OnInit {
   quoteStatus : any = [];
   chartData : QuoteChartDetails[];
   fiscalYears : Array<number> = [];
+  selectedQuotes: string[] = [];
   quotefilterForm = this.fb.group({
     Department : ['%'],
     AccountManager : ['All'],
@@ -119,4 +120,14 @@ export class QuotesListComponent implements OnInit {
     modalRef.componentInstance.quoteId = quoteId;
   }
 
+  rowSelect(quote: any)
+  {
+    if(this.selectedQuotes.includes(quote.quoteID))
+    {
+      this.selectedQuotes.splice(this.selectedQuotes.indexOf(quote.quoteID),1);
+    }
+    else{
+      this.selectedQuotes.push(quote.quoteID);
+    }
+  }
 }
