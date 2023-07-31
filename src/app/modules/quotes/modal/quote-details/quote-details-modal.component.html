@@ -20,9 +20,13 @@
           <!-- end::Icon -->
           <!-- begin::Title -->
           <div class="flex-grow-1 me-2">
-            <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">
-              {{quote.status}}
-            </a>
+            <span>
+              <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">
+                {{quote.status}}
+              </a>
+              <span style="text-align: right;"> ({{quote.changedBY}})</span>
+            </span>
+
             <span class="text-muted fw-bold d-block">{{quote.comments}}</span>
           </div>
           <!-- end::Title -->

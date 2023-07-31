@@ -12,12 +12,13 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 export class EditQuoteComponent implements OnInit {
 
   quoteId : string = "";
+  accountManagers: any;
 
   quoteForm = this.fb.group({
-    customerNumber : [''],
-    customerName : [''],
-    quoteReason: [''],
-    quoteAmount : [],
+    customerNumber : [{value: '', disabled: true}],
+    customerName : [{value: '', disabled: true}],
+    quoteReason: [{value: '', disabled: true}],
+    quoteAmount : [{value: '', disabled: true}],
     quoteDate : [''],
     quoteExpiryDate: [''],
     contactName : [''],
@@ -28,7 +29,7 @@ export class EditQuoteComponent implements OnInit {
     quoteStatus : [''],
     quotePriority : ['']
   });
-  constructor( private route : ActivatedRoute, private quoteService : QuotesService, private fb: FormBuilder) { 
+  constructor( private route : ActivatedRoute, private quoteService : QuotesService, private fb: FormBuilder) {
     this.route.params.subscribe(param => {
       if(param['quoteId'] != null)
       {
@@ -36,12 +37,19 @@ export class EditQuoteComponent implements OnInit {
       }
     });
   }
-  
+
 
   ngOnInit(): void {
     this.getQuoteDetail();
+    this.getManagers();
   }
 
+  getManagers()
+  {
+    this.quoteService.getQuoteAccountManagers('A').subscribe(res  => {
+      this.accountManagers = res;
+    });
+  }
   getQuoteDetail()
   {
     this.quoteService.getQuotesDetails(this.quoteId).subscribe((data : any) => {
@@ -64,7 +72,7 @@ export class EditQuoteComponent implements OnInit {
           quotePriority : data.quotePriority.trim()
         });
       }
-      
+
     })
   }
 

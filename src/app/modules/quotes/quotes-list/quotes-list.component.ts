@@ -21,18 +21,20 @@ export class QuotesListComponent implements OnInit {
   fiscalYears : Array<number> = [];
   selectedQuotes: string[] = [];
   quotefilterForm = this.fb.group({
-    Department : ['%'],
-    AccountManager : ['All'],
-    QuoteStatus : ['All'],
+    Department : ['A'],
+    AccountManager : ['A'],
+    QuoteStatus : ['A'],
     Year : [new Date().getFullYear()],
-    Month : ['All'],
+    Month : ['0'],
     Statustype : ['0'],
+    QuoteID: [null],
     InitialLoad : true
   });
   paginationObj  : any ;//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
   months : any[] = [
-    {Text : 'January',value:'1' }
+     {Text : 'All',value:'0'}
+    ,{Text : 'January',value:'1' }
     ,{Text : 'February',value:'2' }
     ,{Text : 'March',value:'3' }
     ,{Text : 'April',value:'4' }
@@ -44,18 +46,18 @@ export class QuotesListComponent implements OnInit {
     ,{Text : 'October',value:'10'}
     ,{Text : 'November',value:'11'}
     ,{Text : 'December',value:'12'}
-    ,{Text : 'All',value:'All'}
   ];
 
   constructor(private quotesService : QuotesService, private fb: FormBuilder, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.LoadQuotes();
+    this.LoadQuotes(true);
     this.LoadFilters();
     this.LoadFiscalYears();
+    this.onFilterChanges();
   }
 
-  public LoadQuotes()
+  public LoadQuotes(initialLoad: boolean = false)
   {
     var quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
     if (!this.paginationObj)
@@ -70,6 +72,7 @@ export class QuotesListComponent implements OnInit {
     }
 
     //quotesRequestBody.paginationObj = {PageNumber : 1, PageSize : 10};
+    quotesRequestBody['InitialLoad'] = initialLoad;
     this.quotesService.getQuotes(quotesRequestBody).subscribe((data: any)  => {
       this.quotesList = data && data.results.length > 0 ? data.results : [];
       this.paginationObj = data.paginationObj;
@@ -77,10 +80,16 @@ export class QuotesListComponent implements OnInit {
     })
   }
 
+  public onFilterChanges()
+  {
+    this.quotefilterForm.valueChanges.subscribe(res=> {
+      // this.quotefilterForm.patchValue({InitialLoad : false});
+      this.LoadQuotes(false);
+    })
+  }
   public SearchQuotes()
   {
-   this.quotefilterForm.patchValue({InitialLoad : false});
-   this.LoadQuotes();
+   this.LoadQuotes(false);
   }
 
   public LoadFilters()
@@ -113,7 +122,7 @@ export class QuotesListComponent implements OnInit {
   {
     this.paginationObj.pageNumber = event;
     //console.log(event);
-    this.LoadQuotes();
+    this.LoadQuotes(false);
   }
 
   openQuoteDetailsModal(quoteId: any) {
@@ -130,7 +139,7 @@ export class QuotesListComponent implements OnInit {
     modalRef.result.then(result=> {
       if(result)
       {
-        this.LoadQuotes();
+        this.LoadQuotes(false);
       }
     })
   }

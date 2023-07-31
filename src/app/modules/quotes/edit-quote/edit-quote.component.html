@@ -13,7 +13,7 @@
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label fw-bold fs-6">Customer Number:</label>
                     <div class="col-lg-8">
-                        <input type = "text" class="form-control form-control-lg form-control-solid" formControlName = "customerNumber" />
+                        <input type = "text" class="form-control form-control-lg form-control-solid" formControlName = "customerNumber"/>
                         <!-- <span class="form-control form-control-lg form-control-solid">{{quoteDetail.custNmbr}}</span> -->
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                     <div class="col-lg-8  fv-row">
                         <input type = "text" class="form-control form-control-lg form-control-solid" formControlName = "customerName" />
                         <!-- <span class="form-control form-control-lg form-control-solid">{{quoteDetail.custName}}</span> -->
-                        
+
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -30,7 +30,7 @@
                     <div class="col-lg-8 fv-row">
                         <input type = "text" class="form-control form-control-lg form-control-solid" formControlName = "quoteReason" />
                         <!-- <span class="form-control form-control-lg form-control-solid">{{quoteDetail.problemCode}}</span> -->
-                      
+
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -38,7 +38,7 @@
                     <div class="col-lg-8 fv-row">
                         <input type = "text" class="form-control form-control-lg form-control-solid" formControlName = "quoteAmount" />
                         <!-- <span class="form-control form-control-lg form-control-solid">{{quoteDetail.quoteAmount}}</span> -->
-                       
+
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -46,7 +46,7 @@
                     <div class="col-lg-8 fv-row">
                         <input type = "text" class="form-control form-control-lg form-control-solid" formControlName = "quoteDate" />
                         <!-- <span class="form-control form-control-lg form-control-solid">{{quoteDetail.quotedOn | date : 'shortDate'}}</span> -->
-                       
+
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -54,7 +54,7 @@
                     <div class="col-lg-8 fv-row">
                         <input type = "text" class="form-control form-control-lg form-control-solid" formControlName = "quoteExpiryDate" />
                         <!-- <span class="form-control form-control-lg form-control-solid">{{quoteDetail.quotedOn | date : 'shortDate'}}</span> -->
-                      
+
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -62,7 +62,7 @@
                     <div class="col-lg-8 fv-row">
                         <input type = "text" class="form-control form-control-lg form-control-solid" formControlName = "contactName" />
                         <!-- <input type="text" [value]="quoteDetail.contactName" class="form-control form-control-lg form-control-solid"> -->
-                       
+
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -76,25 +76,25 @@
                     <label class="col-lg-4 col-form-label  fw-bold fs-6">Quote Owner:		</label>
                     <div class="col-lg-8 fv-row">
                         <select formControlName="quoteOwner" class="form-select form-select-solid form-select-lg" name="quoteOwner">
-                            <option value="">Please Select Quote Owner</option>
-                            <option value="USD">USD - USA dollar</option>
-                        
+                          <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
+                            {{mgr.text}}
+                          </option>
+
                         </select>
-                       
+
                     </div>
                 </div>
                 <div class="row mb-6">
                     <label class="col-lg-4 col-form-label  fw-bold fs-6">Quote Status:		</label>
                     <div class="col-lg-8 fv-row">
                         <select formControlName="quoteStatus" class="form-select form-select-solid form-select-lg"  >
-                            <option value="">Please Select Status</option>
                             <option value="SE">Sent</option>
                             <option value="VI">Viewed</option>
                             <option value="ID">In Discussion</option>
                             <option value="AC">Accepted</option>
                             <option value="DE">Declined</option>
                             <option value="CN">Cancelled</option>
-                        
+
                         </select>
                     </div>
                 </div>
@@ -103,10 +103,9 @@
                     <div class="col-lg-8 fv-row">
                         <select formControlName="quotePriority" class="form-select form-select-solid form-select-lg"  name="quotePriority">
                             <!-- [value]="quoteDetail.quotePriority.trim()" -->
-                            <option value="">Please Select Quote Priority</option>
                             <option value="Critical">Critical</option>
                             <option value="Normal">Normal</option>
-                        
+
                         </select>
                     </div>
                 </div>

@@ -1,106 +1,112 @@
 <!-- begin::Header -->
-<div class="card-header border-0 pt-5">
+<div class="card">
+  <div class="card-header border-0 pt-5">
 
-  <div class="row g-5 g-xxl-12">
-    <div class="col-xl-12">
-      <div class="row">
-        <form [formGroup]="quotefilterForm" novalidate="" class="form">
-          <!-- <div class="mb-10">
-            <label class="form-label fw-bold">Department</label>
-              <select formControlName="Department"
-                class="form-select form-select-solid"
-                data-kt-select2="true"
-                data-placeholder="Select option"
-                data-allow-clear="true"
-                style="font-size:10pt;width:150px;padding:4px;"
-              >
-                <option selected value="A">All</option>
-                <option value="M">AM</option>
-                <option value="S">Sales</option>
-              </select>
-          </div> -->
-          <div class="row">
-            <div class="col-lg-12 col-form-label">
-              <label class="min-w-100px"> Department:</label>
-              <select name="ctl00$PlaceHolderMain$ddlDept" formControlName="Department" class="me-5"
-                id="PlaceHolderMain_ddlDept" style="font-size:10pt;width:150px;padding: 4px;">
-                <option value="%">All</option>
-                <option value="M">AM</option>
-                <option value="S">Sales</option>
-              </select>
+    <div class="row g-5 g-xxl-12">
+      <div class="col-xl-12">
+        <div class="row">
+          <form [formGroup]="quotefilterForm" novalidate="" class="form">
+            <!-- <div class="mb-10">
+              <label class="form-label fw-bold">Department</label>
+                <select formControlName="Department"
+                  class="form-select form-select-solid"
+                  data-kt-select2="true"
+                  data-placeholder="Select option"
+                  data-allow-clear="true"
+                  style="font-size:10pt;width:150px;padding:4px;"
+                >
+                  <option selected value="A">All</option>
+                  <option value="M">AM</option>
+                  <option value="S">Sales</option>
+                </select>
+            </div> -->
+            <div class="row">
+              <div class="col-lg-12 col-form-label">
+                <label class="min-w-100px"> Department:</label>
+                <select name="ctl00$PlaceHolderMain$ddlDept" formControlName="Department" class="me-5"
+                  id="PlaceHolderMain_ddlDept" style="font-size:10pt;width:150px;padding: 4px;">
+                  <option value="A">All</option>
+                  <option value="M">AM</option>
+                  <option value="S">Sales</option>
+                </select>
 
-              <label class="min-w-100px me-5">Account Manager:</label>
-              <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;" class="me-5">
-                <option value="A" selected>All</option>
-                <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
-                  {{mgr.text}}
-                </option>
-              </select>
+                <label class="min-w-100px me-5">Account Manager:</label>
+                <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;" class="me-5">
+                  <option value="A" selected>All</option>
+                  <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
+                    {{mgr.text}}
+                  </option>
+                </select>
 
 
-              <label class="min-w-100px">Status:</label>
-              <select name="ctl00$PlaceHolderMain$ddlStatus" id="PlaceHolderMain_ddlStatus" formControlName="QuoteStatus" class="me-5"
-              style="font-size:10pt;width:150px;padding: 4px;">
-                <option value="A">All</option>
-                <option *ngFor="let status of quoteStatus" [value]="status.statusCode">
-                  {{status.statusDesc}}
-                </option>
-              </select>
+                <label class="min-w-50px">Status:</label>
+                <select name="ctl00$PlaceHolderMain$ddlStatus" id="PlaceHolderMain_ddlStatus" formControlName="QuoteStatus" class="me-5"
+                style="font-size:10pt;width:150px;padding: 4px;">
+                  <option value="A">All</option>
+                  <option *ngFor="let status of quoteStatus" [value]="status.statusCode">
+                    {{status.statusDesc}}
+                  </option>
+                </select>
 
-              <label class="min-w-100px">Year:</label>
-              <select name="ctl00$PlaceHolderMain$ddlFiscYear" id="PlaceHolderMain_ddlFiscYear" style="font-size:10pt;width:150px;padding:4px;" formControlName="Year" class="me-5">
-                <option *ngFor="let year of fiscalYears" [value]="year">
-                  {{year}}
-                </option>
-              </select>
+                <label class="min-w-50px">Year:</label>
+                <select name="ctl00$PlaceHolderMain$ddlFiscYear" id="PlaceHolderMain_ddlFiscYear" style="font-size:10pt;width:100px;padding:4px;" formControlName="Year" class="me-5">
+                  <option *ngFor="let year of fiscalYears" [value]="year">
+                    {{year}}
+                  </option>
+                </select>
 
-              <label class="min-w-100px">Month:</label>
-              <select name="ctl00$PlaceHolderMain$ddlMonth" id="PlaceHolderMain_ddlMonth" style="font-size:10pt;width:150px;padding: 4px;" formControlName="Month" class="me-5">
-                <option *ngFor = "let month of months" [value]="month.value">{{month.Text}}</option>
-              </select>
+                <label class="min-w-50px">Month:</label>
+                <select name="ctl00$PlaceHolderMain$ddlMonth" id="PlaceHolderMain_ddlMonth" style="font-size:10pt;width:100px;padding: 4px;" formControlName="Month" class="me-5">
+                  <option *ngFor = "let month of months" [value]="month.value">{{month.Text}}</option>
+                </select>
 
-              <label class="min-w-100px">Status Type:</label>
+                <label class="min-w-80px">Status Type: </label>
 
-              <select name="ctl00$PlaceHolderMain$ddlType" id="PlaceHolderMain_ddlType" formControlName="Statustype" style="font-size:10pt;width:150px;padding: 4px;" class="me-5">
-                <option  value="0">Active</option>
-                <option value="1">Archive</option>
-              </select>
+                <select name="ctl00$PlaceHolderMain$ddlType" id="PlaceHolderMain_ddlType" formControlName="Statustype" style="font-size:10pt;width:100px;padding: 4px;" class="me-5">
+                  <option  value="0">Active</option>
+                  <option value="1">Archive</option>
+                </select>
 
-              <button type="button" class="btn btn-primary" (click)="SearchQuotes()">
-                Search
-              </button>
+                <label class="min-w-80px">Quote Id: </label>
+                <input type = "text" class="form-control form-control-sm form-control-solid me-5" formControlName="QuoteID" style="font-size:10pt;width:100px;padding:4px;display: initial" />
+
+                <!-- <button type="button" class="btn btn-primary" (click)="SearchQuotes()">
+                  Search
+                </button> -->
+              </div>
             </div>
+            <div class="card-footer d-flex justify-content-center py-6 px-9">
+
           </div>
-          <div class="card-footer d-flex justify-content-center py-6 px-9">
+          </form>
 
         </div>
-        </form>
-
       </div>
+      <!-- <div class="col-xl-3" *ngIf = "chartData && chartData.length > 0">
+        <app-charts-custom-widget [chartData] = "chartData"
+          class="card card-xxl-stretch mb-5 mb-xl-10"
+        ></app-charts-custom-widget>
+      </div> -->
+
     </div>
-    <!-- <div class="col-xl-3" *ngIf = "chartData && chartData.length > 0">
-      <app-charts-custom-widget [chartData] = "chartData"
-        class="card card-xxl-stretch mb-5 mb-xl-10"
-      ></app-charts-custom-widget>
-    </div> -->
-
-  </div>
 
 
-    <!-- <h3 class="card-title align-items-start flex-column">
-      <span class="card-label fw-bolder fs-3 mb-1">New Arrivals</span>
-      <span class="text-muted mt-1 fw-bold fs-7">Over 500 new products</span>
-    </h3> -->
-    <!-- <div class="card-toolbar">
-      <a href="#" class="btn btn-sm btn-light-primary">
-        <span
-          [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'"
-          class="svg-icon svg-icon-3"
-        ></span>
-        New Member
-      </a>
-    </div> -->
-  </div>
+      <!-- <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bolder fs-3 mb-1">New Arrivals</span>
+        <span class="text-muted mt-1 fw-bold fs-7">Over 500 new products</span>
+      </h3> -->
+      <!-- <div class="card-toolbar">
+        <a href="#" class="btn btn-sm btn-light-primary">
+          <span
+            [inlineSVG]="'./assets/media/icons/duotune/arrows/arr075.svg'"
+            class="svg-icon svg-icon-3"
+          ></span>
+          New Member
+        </a>
+      </div> -->
+    </div>
+</div>
+
 
 
 
@@ -349,7 +355,7 @@
         data-bs-trigger="hover"
         title="Click to add a user"
       >
-      <button type="button" class="btn btn-primary" (click)="openChangeStatusModal()">
+      <button type="button" class="btn btn-primary" (click)="openChangeStatusModal()" [disabled]="selectedQuotes.length <= 0">
         Change Status
       </button>
       </div>
