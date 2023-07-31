@@ -41,6 +41,7 @@ import { ClassicComponent } from './components/toolbar/classic/classic.component
 import { ExtendedComponent } from './components/toolbar/extended/extended.component';
 import { ReportsComponent } from './components/toolbar/reports/reports.component';
 import { SaasComponent } from './components/toolbar/saas/saas.component';
+import { JoinPipe } from './core/pipe/join.pipe';
 
 const routes: Routes = [
   {
@@ -74,6 +75,7 @@ const routes: Routes = [
     ExtendedComponent,
     ReportsComponent,
     SaasComponent,
+    JoinPipe,
   ],
   imports: [
     CommonModule,
@@ -116,6 +118,7 @@ const routes: Routes = [
     ExtendedComponent,
     ReportsComponent,
     SaasComponent,
+    JoinPipe
   ]
 
 })

@@ -3,7 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { QuotesService } from 'src/app/core/services/quotes.service';
 import { QuoteChartDetails } from 'src/app/_metronic/partials/content/widgets/charts/charts-custom-widget/charts-custom-widget.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { QuoteDetailsComponent } from '../modal/quote-details/quote-details.component';
+import { QuoteDetailsModalComponent } from '../modal/quote-details/quote-details.component';
+import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-status-modal.component';
 
 @Component({
   selector: 'app-quotes-list',
@@ -116,8 +117,22 @@ export class QuotesListComponent implements OnInit {
   }
 
   openQuoteDetailsModal(quoteId: any) {
-    const modalRef = this.modalService.open(QuoteDetailsComponent,{ fullscreen : "sm", centered: true});
+    const modalRef = this.modalService.open(QuoteDetailsModalComponent,{ fullscreen : "lg", centered: true});
     modalRef.componentInstance.quoteId = quoteId;
+
+
+  }
+  openChangeStatusModal(){
+    const modalRef = this.modalService.open(ChangeStatusModalComponent,{ fullscreen : "lg", centered: true});
+    modalRef.componentInstance.quoteId = this.selectedQuotes;
+    modalRef.componentInstance.selectedQuoteIds = this.selectedQuotes;
+
+    modalRef.result.then(result=> {
+      if(result)
+      {
+        this.LoadQuotes();
+      }
+    })
   }
 
   rowSelect(quote: any)
@@ -129,5 +144,9 @@ export class QuotesListComponent implements OnInit {
     else{
       this.selectedQuotes.push(quote.quoteID);
     }
+  }
+  changeStatus()
+  {
+
   }
 }

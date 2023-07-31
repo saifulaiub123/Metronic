@@ -103,42 +103,34 @@
   </div>
 
 
-  <!-- end::Header -->
-  <!-- begin::Body -->
-  <div class="card card-xxl-stretch">
+
+  <!-- <div class="card card-xxl-stretch">
+    <div class="card-header border-0 pt-5">
+      <div style="text-align: right;"
+        class="card-toolbar"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-trigger="hover"
+        title="Click to add a user"
+      >
+      <button type="button" class="btn btn-primary" (click)="openChangeStatusModal()">
+        Change Status
+      </button>
+      </div>
+    </div>
     <div class="card-body py-3">
-      <!-- begin::Table container -->
       <div class="table-responsive">
-        <!-- begin::Table -->
         <table
           class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
         >
-          <!-- begin::Table head -->
           <thead>
             <tr class="fw-bolder text-muted">
-              <th class="w-25px">
-                <div
-                  class="
-                    form-check form-check-sm form-check-custom form-check-solid
-                  "
-                >
-                  <!-- <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value="1"
-                    data-kt-check="true"
-                    data-kt-check-target=".widget-9-check"
-                  /> -->
-                </div>
-              </th>
               <th class="min-w-150px">Authors</th>
               <th class="min-w-140px">Company</th>
               <th class="min-w-120px">Progress</th>
               <th class="min-w-100px text-end">Actions</th>
             </tr>
           </thead>
-          <!-- end::Table head -->
-          <!-- begin::Table body -->
           <tbody>
             <tr>
               <td>
@@ -338,29 +330,38 @@
               </td>
             </tr>
           </tbody>
-          <!-- end::Table body -->
         </table>
-        <!-- end::Table -->
       </div>
-      <!-- end::Table container -->
     </div>
-  </div>
+  </div> -->
 
 
 
 
 
   <!-- table main -->
-
+  <div class="card card-xxl-stretch">
+    <div class="card-header border-0 pt-5">
+      <div style="text-align: right;"
+        class="card-toolbar"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-trigger="hover"
+        title="Click to add a user"
+      >
+      <button type="button" class="btn btn-primary" (click)="openChangeStatusModal()">
+        Change Status
+      </button>
+      </div>
+    </div>
   <div class="card-body py-3">
     <!-- begin::Table container -->
     <div class="table-responsive">
       <!-- begin::Table -->
-      <table class="table align-middle gs-0 gy-4" >
+      <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4" >
         <!-- begin::Table head -->
         <thead>
           <tr class="fw-bolder text-muted bg-light">
-            <th></th>
             <th class="min-w-100px">Quote Id</th>
             <th class="min-w-100px">Site ID</th>
             <th class="min-w-125px">Site Name</th>
@@ -382,15 +383,6 @@
         <tbody *ngIf = "quotesList && quotesList.length > 0">
 
           <tr *ngFor = "let quotes of quotesList; let i = index;">
-            <td>
-              <input
-                    class="form-check-input widget-9-check"
-                    type="checkbox"
-                    value="1"
-                    (click)="rowSelect(quotes)"
-                  />
-            </td>
-
             <td>
               <span (click)="openQuoteDetailsModal(quotes.quoteID)" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">
                {{quotes.quoteID}}
@@ -441,7 +433,12 @@
             </a>
             </td>
             <td>
-
+              <input
+                    class="form-check-input widget-9-check"
+                    type="checkbox"
+                    value="1"
+                    (click)="rowSelect(quotes)"
+                  />
             </td>
 
           </tr>
@@ -732,6 +729,8 @@
     </div>
     <!-- end::Table container -->
   </div>
+  </div>
+
 
   <app-pagination *ngIf = "paginationObj" [pageNum] = "paginationObj.pageNumber" [pageSize] = "paginationObj.pageSize"
   [totalRecords] ="paginationObj.totalRecordsCount"  (updatePagination) = "updatePagination($event)">

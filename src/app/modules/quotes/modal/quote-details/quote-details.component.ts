@@ -4,10 +4,10 @@ import { QuotesService } from 'src/app/core/services/quotes.service';
 
 @Component({
   selector: 'app-quote-details',
-  templateUrl: './quote-details.component.html',
+  templateUrl: './quote-details-modal.component.html',
   styleUrls: ['./quote-details.component.scss']
 })
-export class QuoteDetailsComponent implements OnInit {
+export class QuoteDetailsModalComponent implements OnInit {
   @Input() quoteId: any;
 
   quotes: any[];

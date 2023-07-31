@@ -9,9 +9,10 @@ import { LayoutModule } from 'src/app/_metronic/layout';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { CoreModule } from 'src/app/core/core.module';
 import { EditQuoteComponent } from './edit-quote/edit-quote.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WidgetsModule } from 'src/app/_metronic/partials';
-import { QuoteDetailsComponent } from './modal/quote-details/quote-details.component';
+import { QuoteDetailsModalComponent } from './modal/quote-details/quote-details.component';
+import { ChangeStatusModalComponent } from './modal/change-status-modal/change-status-modal.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { QuoteDetailsComponent } from './modal/quote-details/quote-details.compo
     QuotesListComponent,
     QuoteComponent,
     EditQuoteComponent,
-    QuoteDetailsComponent
+    QuoteDetailsModalComponent,
+    ChangeStatusModalComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { QuoteDetailsComponent } from './modal/quote-details/quote-details.compo
     SharedModule,
     LayoutModule,
     InlineSVGModule,
-    CoreModule
+    CoreModule,
+    FormsModule
   ]
 })
 export class QuotesModule { }

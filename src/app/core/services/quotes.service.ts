@@ -47,5 +47,9 @@ export class QuotesService {
   {
     return this.http.get<QuoteChartDetails[]>(`${this.API}/quotes/GetQuoteChartDetails`,{ headers : this.headers});
   }
+  updateQuoteStatus(quotes: string, status: string)
+  {
+    return this.http.put(`${this.API}/quotes/UpdateStatus/${quotes}/${status}/Admin`,{});
+  }
 
 }
