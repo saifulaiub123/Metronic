@@ -5,7 +5,8 @@ import { QuoteChartDetails } from 'src/app/_metronic/partials/content/widgets/ch
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuoteDetailsModalComponent } from '../modal/quote-details/quote-details.component';
 import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-status-modal.component';
-
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { filter, pairwise, startWith } from 'rxjs/operators'
 @Component({
   selector: 'app-quotes-list',
   templateUrl: './quotes-list.component.html',
@@ -20,6 +21,7 @@ export class QuotesListComponent implements OnInit {
   chartData : QuoteChartDetails[];
   fiscalYears : Array<number> = [];
   selectedQuotes: string[] = [];
+  fromEditPage: boolean = false;
   quotefilterForm = this.fb.group({
     Department : ['A'],
     AccountManager : ['A'],
@@ -30,7 +32,7 @@ export class QuotesListComponent implements OnInit {
     QuoteID: [null],
     InitialLoad : true
   });
-  paginationObj  : any ;//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
+  paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
   months : any[] = [
      {Text : 'All',value:'0'}
@@ -48,9 +50,40 @@ export class QuotesListComponent implements OnInit {
     ,{Text : 'December',value:'12'}
   ];
 
-  constructor(private quotesService : QuotesService, private fb: FormBuilder, private modalService: NgbModal) { }
+  constructor(
+    private quotesService : QuotesService,
+    private fb: FormBuilder,
+    private modalService: NgbModal,
+    private route: ActivatedRoute,
+    private router: Router
+    ) {
+
+      router.events.subscribe((event) => {
+        if (event instanceof NavigationStart) {
+          let browserRefresh = !router.navigated;
+        }
+      });
+    }
 
   ngOnInit(): void {
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        let pageReloading = !this.router.navigated;
+        console.log(pageReloading)
+      }
+  });
+    this.route.queryParamMap.subscribe((params) => {
+      if(params.has('isCancel'))
+      {
+        if(params.get('isCancel') === 'true')
+        {
+          this.fromEditPage = true;
+        }
+      }
+    }
+  );
+
     this.LoadQuotes(true);
     this.LoadFilters();
     this.LoadFiscalYears();
@@ -59,16 +92,34 @@ export class QuotesListComponent implements OnInit {
 
   public LoadQuotes(initialLoad: boolean = false)
   {
-    var quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
-    if (!this.paginationObj)
+    var quotesRequestBody;
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        let previousUrl = 10;
+      };
+    });
+    if(this.fromEditPage)
     {
-      quotesRequestBody.PageNumber = 1;
-      quotesRequestBody.PageSize = 10;
+      quotesRequestBody = JSON.parse(localStorage.getItem('QuoteListFilter')!)
+      this.quotefilterForm.patchValue(quotesRequestBody);
     }
     else
     {
-      quotesRequestBody.PageNumber = this.paginationObj.pageNumber;
-      quotesRequestBody.PageSize = this.paginationObj.pageSize;
+      quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
+    }
+
+    localStorage.setItem('QuoteListFilter',JSON.stringify(quotesRequestBody))
+    // var quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
+    if (!this.paginationObj)
+    {
+      quotesRequestBody['PageNumber'] = 1;
+      quotesRequestBody['PageSize'] = 10;
+    }
+    else
+    {
+      quotesRequestBody.PageNumber = this.paginationObj['PageNumber'];
+      quotesRequestBody.PageSize = this.paginationObj['PageSize'];
     }
 
     //quotesRequestBody.paginationObj = {PageNumber : 1, PageSize : 10};
@@ -82,10 +133,18 @@ export class QuotesListComponent implements OnInit {
 
   public onFilterChanges()
   {
-    this.quotefilterForm.valueChanges.subscribe(res=> {
-      // this.quotefilterForm.patchValue({InitialLoad : false});
-      this.LoadQuotes(false);
+  this.quotefilterForm.controls.QuoteID.enable({onlySelf: true,emitEvent:false});
+    this.quotefilterForm.valueChanges.pipe(startWith(undefined), pairwise())
+    .subscribe(valuesArray => {
+         const oldVal = valuesArray[0];
+         const newVal = valuesArray[1];
+         if ((oldVal !== undefined && oldVal['QuoteID'] === newVal?.QuoteID)) {
+          this.paginationObj['PageNumber'] = 1;
+          this.LoadQuotes(false);
+         }
     })
+
+
   }
   public SearchQuotes()
   {
@@ -120,7 +179,7 @@ export class QuotesListComponent implements OnInit {
 
   updatePagination(event: number)
   {
-    this.paginationObj.pageNumber = event;
+    this.paginationObj['PageNumber'] = event;
     //console.log(event);
     this.LoadQuotes(false);
   }

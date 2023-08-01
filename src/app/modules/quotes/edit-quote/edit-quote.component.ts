@@ -29,7 +29,11 @@ export class EditQuoteComponent implements OnInit {
     quoteStatus : [''],
     quotePriority : ['']
   });
-  constructor( private route : ActivatedRoute, private quoteService : QuotesService, private fb: FormBuilder) {
+  constructor( private route : ActivatedRoute,
+    private quoteService : QuotesService,
+    private fb: FormBuilder,
+    private router: Router
+    ) {
     this.route.params.subscribe(param => {
       if(param['quoteId'] != null)
       {
@@ -74,6 +78,12 @@ export class EditQuoteComponent implements OnInit {
       }
 
     })
+  }
+  cancel()
+  {
+    this.router.navigate(['/list'], {
+      queryParams: { isCancel : true},
+    });
   }
 
 }
