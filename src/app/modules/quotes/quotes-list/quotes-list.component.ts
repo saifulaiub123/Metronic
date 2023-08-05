@@ -7,6 +7,7 @@ import { QuoteDetailsModalComponent } from '../modal/quote-details/quote-details
 import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-status-modal.component';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-quotes-list',
   templateUrl: './quotes-list.component.html',
@@ -50,6 +51,8 @@ export class QuotesListComponent implements OnInit {
     ,{Text : 'December',value:'12'}
   ];
 
+  subscription: Subscription;
+  browserRefresh: boolean = false;
   constructor(
     private quotesService : QuotesService,
     private fb: FormBuilder,
@@ -60,7 +63,7 @@ export class QuotesListComponent implements OnInit {
 
       router.events.subscribe((event) => {
         if (event instanceof NavigationStart) {
-          let browserRefresh = !router.navigated;
+          this.browserRefresh = !router.navigated;
         }
       });
     }
@@ -92,12 +95,6 @@ export class QuotesListComponent implements OnInit {
   public LoadQuotes(initialLoad: boolean = false)
   {
     var quotesRequestBody;
-
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        let previousUrl = 10;
-      };
-    });
     if(this.fromEditPage)
     {
       quotesRequestBody = JSON.parse(localStorage.getItem('QuoteListFilter')!)

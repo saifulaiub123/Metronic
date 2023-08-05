@@ -6,36 +6,49 @@
       <table>
         <tr>
           <td>
-            <label class="min-w-100px"> Department:</label>
+            <label class="min-w-100px form-label"> Department:</label>
           </td>
           <td>
-            <label class="min-w-100px me-5">Account Manager:</label>
+            <label class="min-w-100px me-5 form-label">Account Manager:</label>
           </td>
           <td>
-            <label class="min-w-100px">Status:</label>
+            <label class="min-w-100px form-label">Status:</label>
           </td>
           <td>
-            <label class="min-w-100px">Year:</label>
+            <label class="min-w-100px form-label">Year:</label>
           </td>
           <td>
-            <label class="min-w-100px">Month:</label>
+            <label class="min-w-100px form-label">Month:</label>
           </td>
           <td>
-            <label class="min-w-100px">Status Type: </label>
+            <label class="min-w-100px form-label">Status Type: </label>
           </td>
           <td></td>
         </tr>
         <tr>
           <td>
-            <select name="ctl00$PlaceHolderMain$ddlDept" formControlName="Department" class="me-5"
-                  id="PlaceHolderMain_ddlDept" style="font-size:10pt;width:150px;padding: 4px;">
+            <select
+              class="form-select form-select-solid me-5"
+              data-kt-select2="true"
+              data-placeholder="Select option"
+              data-allow-clear="true"
+              formControlName="Department"
+              style="font-size:10pt;width:150px;padding: 4px;"
+              >
                   <option value="A">All</option>
                   <option value="M">AM</option>
                   <option value="S">Sales</option>
-                </select>
+            </select>
           </td>
           <td>
-            <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;" class="me-5">
+            <select
+              class="form-select form-select-solid me-5"
+              data-kt-select2="true"
+              data-placeholder="Select option"
+              data-allow-clear="true"
+              formControlName="AccountManager"
+              style="font-size:10pt;width:150px;padding:4px;"
+            >
               <option value="A" selected>All</option>
               <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
                 {{mgr.text}}
@@ -43,27 +56,54 @@
             </select>
           </td>
           <td>
-            <select name="ctl00$PlaceHolderMain$ddlStatus" id="PlaceHolderMain_ddlStatus" formControlName="QuoteStatus" class="me-5"
-            style="font-size:10pt;width:150px;padding: 4px;">
+            <select
+              class="form-select form-select-solid me-5"
+              data-kt-select2="true"
+              data-placeholder="Select option"
+              data-allow-clear="true"
+              formControlName="QuoteStatus"
+              style="font-size:10pt;width:150px;padding: 4px;"
+            >
             <option value="A">All</option>
             <option *ngFor="let status of quoteStatus" [value]="status.statusCode">{{status.statusDesc}}</option>
           </select>
           </td>
           <td>
-            <select name="ctl00$PlaceHolderMain$ddlFiscYear" id="PlaceHolderMain_ddlFiscYear" style="font-size:10pt;width:150px;padding:4px;" formControlName="Year" class="me-5">
+            <select
+              class="form-select form-select-solid me-5"
+              data-kt-select2="true"
+              data-placeholder="Select option"
+              data-allow-clear="true"
+              style="font-size:10pt;width:150px;padding:4px;"
+              formControlName="Year"
+             >
               <option *ngFor="let year of fiscalYears" [value]="year">
                 {{year}}
               </option>
             </select>
           </td>
           <td>
-            <select name="ctl00$PlaceHolderMain$ddlMonth" id="PlaceHolderMain_ddlMonth" style="font-size:10pt;width:150px;padding: 4px;" formControlName="Month" class="me-5">
+            <select
+              class="form-select form-select-solid me-5"
+              data-kt-select2="true"
+              data-placeholder="Select option"
+              data-allow-clear="true"
+              style="font-size:10pt;width:150px;padding: 4px;"
+              formControlName="Month"
+             >
               <option *ngFor = "let month of months" [value]="month.value">{{month.Text}}</option>
             </select>
           </td>
           <td>
             <div class="col-lg-12">
-              <select name="ctl00$PlaceHolderMain$ddlType" id="PlaceHolderMain_ddlType" formControlName="Statustype" style="font-size:10pt;width:150px;padding: 4px;" class="me-5">
+              <select
+                class="form-select form-select-solid me-5"
+                data-kt-select2="true"
+                data-placeholder="Select option"
+                data-allow-clear="true"
+                formControlName="Statustype"
+                style="font-size:10pt;width:150px;padding: 4px;"
+                >
                 <option  value="0">Active</option>
                 <option value="1">Archive</option>
               </select>
@@ -71,9 +111,9 @@
           </td>
           <td>
             <div class="input-group">
-              <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Search quote" formControlName = "QuoteID">
+              <input type="text" class="form-control form-control-sm form-control-solid" placeholder="Search quote" formControlName = "QuoteID">
               <div class="input-group-append ">
-                <button class="btn btn-secondary" type="button" (click)="SearchQuotes()">
+                <button class="btn btn-secondary btn-sm" type="button" (click)="SearchQuotes()">
                   <i class="fa fa-search"></i>
                 </button>
               </div>
