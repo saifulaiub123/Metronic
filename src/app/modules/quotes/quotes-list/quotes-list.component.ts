@@ -66,7 +66,6 @@ export class QuotesListComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         let pageReloading = !this.router.navigated;
@@ -133,18 +132,18 @@ export class QuotesListComponent implements OnInit {
 
   public onFilterChanges()
   {
-  this.quotefilterForm.controls.QuoteID.enable({onlySelf: true,emitEvent:false});
     this.quotefilterForm.valueChanges.pipe(startWith(undefined), pairwise())
     .subscribe(valuesArray => {
          const oldVal = valuesArray[0];
          const newVal = valuesArray[1];
-         if ((oldVal !== undefined && oldVal['QuoteID'] === newVal?.QuoteID)) {
+
+         const oldQuoteId = oldVal === undefined ? null : oldVal['QuoteID'];
+         if(oldQuoteId === newVal?.QuoteID)
+         {
           this.paginationObj['PageNumber'] = 1;
           this.LoadQuotes(false);
          }
     })
-
-
   }
   public SearchQuotes()
   {
