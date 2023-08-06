@@ -14,7 +14,7 @@
 
 <div class="menu-item menu-lg-down-accordion me-lg-1 menu-dropdown"
   data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start">
-  <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/system')">
+  <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/application-sent')"> 
     <span class="menu-title">System</span>
     <span class="menu-arrow d-lg-none"></span>
   </span>
@@ -22,13 +22,12 @@
       menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0
       py-lg-4
       w-lg-225px
-    " data-kt-menu-dismiss="true" data-popper-placement="bottom-start">
-    <div class="menu-item menu-lg-down-accordion me-lg-1" 
-      data-kt-menu-placement="right-start">
-      <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')"><span class="menu-icon"><i
-            class="bi fs-3 bi-layers"></i></span><span class="menu-title"
-          data-link="/crafted/widgets">Application To Be Sent</span></span>
-    </div>
+    " data-kt-menu-dismiss="true" data-popper-placement="bottom-start" >
+    <a class="menu-item menu-lg-down-accordion me-lg-1 menu-link" 
+      data-kt-menu-placement="right-start" routerLinkActive="active"  routerLink="/application-sent" >
+      <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/application-sent')" ><span class="menu-icon"><i
+            class="bi fs-3 bi-layers"></i></span><span class="menu-title">Application To Be Sent</span></span>
+      </a>
   </div>
 </div>
 
@@ -112,8 +111,23 @@
 </div>
 
 
-<div class="menu-item me-lg-1">
-  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/error"><span class="menu-title">Administration</span></a>
+<div class="menu-item menu-lg-down-accordion me-lg-1 menu-dropdown"
+  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start">
+  <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/site-maintenance')">
+    <span class="menu-title">Administration</span>
+    <span class="menu-arrow d-lg-none"></span>
+  </span>
+  <div class="
+      menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0
+      py-lg-4
+      w-lg-225px
+    " data-kt-menu-dismiss="true" data-popper-placement="bottom-start" >
+    <a class="menu-item menu-lg-down-accordion me-lg-1 menu-link" 
+      data-kt-menu-placement="right-start" routerLinkActive="active"  routerLink="/site-maintenance" >
+      <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/site-maintenance')" ><span class="menu-icon"><i
+            class="bi fs-3 bi-layers"></i></span><span class="menu-title">Site Maintenance</span></span>
+      </a>
+  </div>
 </div>
 
 <!-- Layout Builder -->

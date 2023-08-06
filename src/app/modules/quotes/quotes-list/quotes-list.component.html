@@ -576,20 +576,20 @@
             </td>
             <td>
 
-              <span class="text-muted fw-bold text-muted d-block fs-7"
+              <span class="badge badge-light-primary fs-7 fw-bold"
                 >  {{quotes.custName}}</span
               >
             </td>
             <td>
-              <span class="badge badge-light-primary fs-7 fw-bold">  {{quotes.custName}}</span>
+              <span class="text-muted fw-bold text-muted d-block fs-7">  {{quotes.contactName}}</span>
             </td>
-            <td class="">
+            <td class=""[style.backgroundColor]="getColorByStatus(quotes.status)"[style.color]="'white'">
                  {{quotes.status}}
             </td>
              <td class="">
                  {{quotes.notes}}
             </td>
-             <td class="">
+             <td class=""[style.backgroundColor]="getColorByPriority(quotes.status)">
                  {{quotes.quotePriority}}
             </td>
              <td class="">

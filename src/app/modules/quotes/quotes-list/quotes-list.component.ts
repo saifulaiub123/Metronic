@@ -7,7 +7,7 @@ import { QuoteDetailsModalComponent } from '../modal/quote-details/quote-details
 import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-status-modal.component';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
-import { Subscription } from 'rxjs';
+import { QuoteSharedService } from '../quote-shared.service';
 @Component({
   selector: 'app-quotes-list',
   templateUrl: './quotes-list.component.html',
@@ -30,8 +30,8 @@ export class QuotesListComponent implements OnInit {
     Year : [new Date().getFullYear()],
     Month : ['0'],
     Statustype : ['0'],
-    QuoteID: [null],
-    InitialLoad : true
+    QuoteID: null,
+    InitialLoad : false
   });
   paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
@@ -51,24 +51,24 @@ export class QuotesListComponent implements OnInit {
     ,{Text : 'December',value:'12'}
   ];
 
-  subscription: Subscription;
-  browserRefresh: boolean = false;
   constructor(
     private quotesService : QuotesService,
     private fb: FormBuilder,
     private modalService: NgbModal,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private quoteSharedService: QuoteSharedService
     ) {
 
       router.events.subscribe((event) => {
         if (event instanceof NavigationStart) {
-          this.browserRefresh = !router.navigated;
+          let browserRefresh = !router.navigated;
         }
       });
     }
 
   ngOnInit(): void {
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         let pageReloading = !this.router.navigated;
@@ -84,21 +84,42 @@ export class QuotesListComponent implements OnInit {
         }
       }
     }
-  );
 
+  );
+    this.subscribeSharedServiceData();
     this.LoadQuotes(true);
     this.LoadFilters();
     this.LoadFiscalYears();
     this.onFilterChanges();
   }
 
+  subscribeSharedServiceData()
+  {
+    this.quoteSharedService.setIsFromEdit$.subscribe((isFromEdit : boolean) => {
+      if(isFromEdit)
+      {
+        // let quotesRequestBody = JSON.parse(localStorage.getItem('QuoteListFilter')!)
+        // this.quotefilterForm.patchValue(quotesRequestBody);
+        this.fromEditPage = true;
+      }
+     });
+  }
+
+
   public LoadQuotes(initialLoad: boolean = false)
   {
     var quotesRequestBody;
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        let previousUrl = 10;
+      };
+    });
     if(this.fromEditPage)
     {
       quotesRequestBody = JSON.parse(localStorage.getItem('QuoteListFilter')!)
       this.quotefilterForm.patchValue(quotesRequestBody);
+      this.quoteSharedService.resetIsFromEdit();
     }
     else
     {
@@ -118,9 +139,19 @@ export class QuotesListComponent implements OnInit {
       quotesRequestBody.PageSize = this.paginationObj['PageSize'];
     }
 
+
+    //Needs to be Modified
+    if(quotesRequestBody.QuoteID == ''){
+      quotesRequestBody.QuoteID = null;
+    }
+    //Needs to be Modified
+    if(quotesRequestBody.PageNumber == undefined){
+      quotesRequestBody.PageNumber = 1;
+    }
+
     //quotesRequestBody.paginationObj = {PageNumber : 1, PageSize : 10};
     quotesRequestBody['InitialLoad'] = initialLoad;
-    this.quotesService.getQuotes(quotesRequestBody).subscribe((data: any)  => {
+    this.quotesService.getGrid(quotesRequestBody).subscribe((data: any)  => {
       this.quotesList = data && data.results.length > 0 ? data.results : [];
       this.paginationObj = data.paginationObj;
 
@@ -129,11 +160,11 @@ export class QuotesListComponent implements OnInit {
 
   public onFilterChanges()
   {
+  this.quotefilterForm.controls.QuoteID.enable({onlySelf: true,emitEvent:false});
     this.quotefilterForm.valueChanges.pipe(startWith(undefined), pairwise())
     .subscribe(valuesArray => {
          const oldVal = valuesArray[0];
          const newVal = valuesArray[1];
-
          const oldQuoteId = oldVal === undefined ? null : oldVal['QuoteID'];
          if(oldQuoteId === newVal?.QuoteID)
          {
@@ -141,6 +172,8 @@ export class QuotesListComponent implements OnInit {
           this.LoadQuotes(false);
          }
     })
+
+
   }
   public SearchQuotes()
   {
@@ -191,12 +224,7 @@ export class QuotesListComponent implements OnInit {
     modalRef.componentInstance.quoteId = this.selectedQuotes;
     modalRef.componentInstance.selectedQuoteIds = this.selectedQuotes;
 
-    modalRef.result.then(result=> {
-      if(result)
-      {
-        this.LoadQuotes(false);
-      }
-    })
+
   }
 
   rowSelect(quote: any)
@@ -212,5 +240,36 @@ export class QuotesListComponent implements OnInit {
   changeStatus()
   {
 
+  }
+
+  getColorByStatus(status: string): string {
+    switch (status) {
+      case 'Sent':
+        return '#E8A90E';
+      case 'Viewed':
+        return '#008ed6';
+      case 'In Discussion':
+        return '#cc00cc';
+      case 'Accepted':
+        return '#00b300';
+      case 'Declined':
+        return '#e60000';
+      case 'To Be Sent':
+          return '#958C02';
+      case 'Cancelled':
+            return '#730202';
+
+      // Add more cases for other status if needed
+      default:
+        return 'white'; // Default color when the status doesn't match any case
+    }
+  }
+  getColorByPriority(status: string): string {
+    switch (status) {
+      case 'Critical':
+            return 'light red';
+      default:
+        return 'white';
+    }
   }
 }

@@ -43,9 +43,9 @@ export class DashboardToBeWrittenTableComponent implements OnInit {
     this.subscriptionToBeWrittenData$ = this.filterSharedService.selectedToBeWrittenTable$.subscribe((filter : any) => {
       if(!_.isEmpty(filter))
       {
-        this.accountManagers = JSON.parse(localStorage.getItem("AccountManagers")!);
-        var item = this.accountManagers.find(x => x.value === filter.accountManager);
-        this.filter.accountManager = item.text;
+        // this.accountManagers = JSON.parse(localStorage.getItem("AccountManagers")!);
+        // var item = this.accountManagers.find(x => x.value === filter.accountManager);
+        this.filter.accountManager = filter.accountManager; 
         this.loadData();
         this.filterSharedService.resetToBeWrittenTableData();
       }
@@ -55,14 +55,7 @@ export class DashboardToBeWrittenTableComponent implements OnInit {
   loadData()
   {
     this.dashboardService.getToBeWrittenQuotesData(this.filter).subscribe((res) => {
-      this.toBeWrittenQuotes.sort((a, b) => {
-        let da : any = new Date(a.quotedOn),
-            db : any = new Date(b.quotedOn);
-        return db - da;
-    });
-    this.toBeWrittenQuotes = _.take(this.toBeWrittenQuotes,10);
-
-      // this.toBeWrittenQuotes = _.take(_.sortBy(res,['quotedOn'], ['desc']),10);
+      this.toBeWrittenQuotes = res;
     })
   }
 }

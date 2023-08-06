@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { QuotesService } from 'src/app/core/services/quotes.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { QuoteSharedService } from '../quote-shared.service';
 
 @Component({
   selector: 'app-edit-quote',
@@ -19,8 +20,8 @@ export class EditQuoteComponent implements OnInit {
     customerName : [{value: '', disabled: true}],
     quoteReason: [{value: '', disabled: true}],
     quoteAmount : [{value: '', disabled: true}],
-    quoteDate : [''],
-    quoteExpiryDate: [''],
+    quoteDate : new FormControl({ value: '', disabled: true }),
+    quoteExpiryDate: new FormControl({ value: '', disabled: true }),
     contactName : [''],
     contactEmail : [''],
     purchaseReq : [false],
@@ -32,7 +33,8 @@ export class EditQuoteComponent implements OnInit {
   constructor( private route : ActivatedRoute,
     private quoteService : QuotesService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private quoteSharedService: QuoteSharedService
     ) {
     this.route.params.subscribe(param => {
       if(param['quoteId'] != null)
@@ -71,7 +73,7 @@ export class EditQuoteComponent implements OnInit {
           contactEmail : data.contactEmail,
           purchaseReq : false,
           Notes : data.notes,
-          quoteOwner : data.quoteOwner,
+          quoteOwner : data.quoteOwner.trim(),
           quoteStatus : data.status,
           quotePriority : data.quotePriority.trim()
         });
@@ -81,9 +83,15 @@ export class EditQuoteComponent implements OnInit {
   }
   cancel()
   {
-    this.router.navigate(['/list'], {
-      queryParams: { isCancel : true},
-    });
+    this.quoteSharedService.setIsFromEdit(true);
+    this.router.navigate(['quotes/list']);
+  }
+  update()
+  {
+    let quote = this.quoteForm.value;
+    this.quoteService.updateQuote(this.quoteId,quote).subscribe(res=> {
+
+    })
   }
 
 }

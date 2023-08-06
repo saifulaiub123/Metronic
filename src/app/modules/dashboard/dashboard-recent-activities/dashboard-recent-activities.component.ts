@@ -94,11 +94,10 @@ export class DashboardRecentActivitiesComponent implements OnInit {
      this.filterSharedService.selectedToBeSentTable$.subscribe((filter : any) => {
       if(!_.isEmpty(filter))
       {
-        this.accountManagers = JSON.parse(localStorage.getItem("AccountManagers")!);
-        var item = this.accountManagers.find(x => x.value === filter.accountManager);
+        var item = filter.accountManager;
         if(item !== undefined)
         {
-          this.filter.accountManager = item.text;
+          this.filter.accountManager = item;
         }
 
         this.loadData();
@@ -109,6 +108,7 @@ export class DashboardRecentActivitiesComponent implements OnInit {
 
   loadData()
   {
+    console.log(this.filter)
     this.dashboardService.getRecentActivitiesData(this.filter).subscribe((res) => {
       this.recentActivities = res.sort((a, b) => {
         let da : any = new Date(a.date),

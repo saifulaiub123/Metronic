@@ -1,0 +1,128 @@
+<!-- begin::Header -->
+<div class="card" style="min-width: 90vw;">
+  <div class="card-body border-0 pt-5">
+
+    <form novalidate="" class="form">
+      <table>
+        <tr>
+          <td>
+            <label class="min-w-100px me-5">Account Manager:</label>
+          </td>
+          <td>
+            <label class="min-w-100px">Type:</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;"
+              class="me-5">
+              <option value="A" selected>All</option>
+              <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
+                {{mgr.text}}
+              </option>
+            </select>
+          </td>
+          <td>
+            <select name="ctl00$PlaceHolderMain$ddlStatus" id="PlaceHolderMain_ddlStatus" formControlName="Type"
+              class="me-5" style="font-size:10pt;width:150px;padding: 4px;">
+              <option value="A">All</option>
+              <option *ngFor="let status of quoteStatus" [value]="Type.statusCode">{{status.statusDesc}}</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+<!-- table main -->
+<div class="card card-xxl-stretch">
+  <div class="card-header border-0 pt-5">
+    <div style="text-align: right;margin-left: auto;" class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top"
+      data-bs-trigger="hover" title="Click to add a user">
+      <button type="button" class="btn btn-primary" (click)="openChangeStatusModal()"
+        [disabled]="selectedQuotes.length <= 0">
+        Ready to sent
+      </button>
+    </div>
+  </div>
+  <div class="card-body py-3">
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+        <!-- begin::Table head -->
+        <thead>
+
+          <tr class="fw-bolder text-muted bg-light">
+            <th class="min-w-100px">Site ID</th>
+            <th class="min-w-125px">Site Name</th>
+            <th class="min-w-200px">Days</th>
+            <th class="min-w-105px">Type</th>
+            <th class="min-w-150px">Modified By</th>
+            <th class="min-w-150px">Modified On</th>
+            <th class="min-w-25px">Select</th>
+            <!-- <th class="min-w-200px text-end rounded-end"></th> -->
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody *ngIf="Type && Type.length > 0">
+
+          <tr *ngFor="let quotes of quotesList; let i = index;">
+            <td>
+              <span (click)="openQuoteDetailsModal(quotes.quoteID)"
+                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">
+                {{quotes.custNmbr}}
+              </span>
+            </td>
+            <td>
+
+              <span class="text-muted fw-bold text-muted d-block fs-7"> {{quotes.custName}}</span>
+            </td>
+            <td>
+
+              <span class="badge badge-light-primary fs-7 fw-bold"> {{quotes.stopDaysCount}}</span>
+            </td>
+            
+            <td class="">
+              {{quotes.reminderType}}
+            </td>
+            <td class="">
+              {{quotes.modifiedBy}}
+            </td>
+            
+            <td class="">
+              {{quotes.modifiedDate }}
+            </td>
+            
+            <!-- <td>
+
+            </td> -->
+            <td>
+              <input class="form-check-input widget-9-check" type="checkbox" value="1" (click)="rowSelect(quotes)" />
+            </td>
+
+          </tr>
+
+
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+    </div>
+    <!-- end::Table container -->
+  </div>
+</div>
+
+
+<!-- <app-pagination *ngIf = "paginationObj" [pageNum] = "paginationObj.pageNumber" [pageSize] = "paginationObj.pageSize"
+  [totalRecords] ="paginationObj.totalRecordsCount"  (updatePagination) = "updatePagination($event)">
+
+  </app-pagination> -->
+
+<!-- begin::Body -->

@@ -6,6 +6,14 @@ const Routing: Routes = [
     loadChildren : () => import('../modules/quotes/quotes.module').then(m => m.QuotesModule),
   },
   {
+    path: 'application-sent',
+    loadChildren : () => import('../modules/application-to-be-sent/application-to-be-sent.module').then(m => m.ApplicationToBeSentModule),
+  },
+  {
+    path: 'site-maintenance',
+    loadChildren : () => import('../modules/site-maintenance/site-maintenance-routing.module').then(m => m.ApplicationToBeSentRoutingModule),
+  },
+  {
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
@@ -15,6 +23,8 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./dashboard-view/dashboard-view.module').then((m) => m.DashboardViewModule),
   },
+  
+
   {
     path: 'builder',
     loadChildren: () =>
