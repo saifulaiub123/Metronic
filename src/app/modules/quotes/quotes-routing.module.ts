@@ -12,6 +12,9 @@ const routes: Routes = [
         path : 'list', component: QuotesListComponent
       },
       {
+        path : 'list/:status', component: QuotesListComponent
+      },
+      {
         path : 'edit/:quoteId' , component : EditQuoteComponent
       }
     ]

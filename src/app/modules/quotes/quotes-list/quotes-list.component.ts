@@ -76,12 +76,9 @@ export class QuotesListComponent implements OnInit {
       }
   });
     this.route.queryParamMap.subscribe((params) => {
-      if(params.has('isCancel'))
+      if(params.has('status'))
       {
-        if(params.get('isCancel') === 'true')
-        {
-          this.fromEditPage = true;
-        }
+        this.quotefilterForm.controls['QuoteStatus'].setValue(params.get('status'));
       }
     }
 
