@@ -7,11 +7,11 @@ const Routing: Routes = [
   },
   {
     path: 'application-sent',
-    loadChildren : () => import('../modules/application-to-be-sent/application-to-be-sent.module').then(m => m.ApplicationToBeSentModule),
+    loadChildren : () => import('../modules/application-to-be-sent/application-to-be-sent.module').then(m => m.SiteMaintenanceModule),
   },
   {
     path: 'site-maintenance',
-    loadChildren : () => import('../modules/site-maintenance/site-maintenance-routing.module').then(m => m.ApplicationToBeSentRoutingModule),
+    loadChildren : () => import('../modules/site-maintenance/site-maintenance.module').then(m => m.SiteMaintenanceModule),
   },
   {
     path: 'dashboard',
@@ -23,7 +23,7 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./dashboard-view/dashboard-view.module').then((m) => m.DashboardViewModule),
   },
-  
+
 
   {
     path: 'builder',

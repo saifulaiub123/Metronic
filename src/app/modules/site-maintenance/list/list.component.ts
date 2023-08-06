@@ -8,7 +8,7 @@ import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
 @Component({
-  selector: 'app-list',
+  selector: 'app-site-maintenance-list',
   templateUrl: './list.component.html',
   styleUrls: []
 })
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
   });
   paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
-  
+
   constructor(
     private quotesService : QuotesService,
     private fb: FormBuilder,
@@ -99,7 +99,7 @@ export class ListComponent implements OnInit {
     {
       quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
     }
- 
+
     this.quotesService.GetSiteDetails(quotesRequestBody).subscribe((data: any)  => {
       this.quotesList = data && data.length > 0 ? data.slice(0,10) : [];
       // this.paginationObj = data.paginationObj;
@@ -114,7 +114,7 @@ export class ListComponent implements OnInit {
     .subscribe(valuesArray => {
          this.LoadData()
          this.selectedQuotes = [];
-      
+
         //  if ((oldVal !== undefined && oldVal['QuoteID'] === newVal?.QuoteID)) {
         //   this.paginationObj['PageNumber'] = 1;
         //   this.LoadData(false);
@@ -136,9 +136,9 @@ export class ListComponent implements OnInit {
     return str.split(';');
   }
 
-  
+
   openQuoteDetailsModal(quoteId: any) {
-  
+
 
   }
   openChangeStatusModal(){
@@ -171,7 +171,7 @@ export class ListComponent implements OnInit {
         return 'black'; // Default color when the status doesn't match any case
     }
   }
- 
+
 
   getColorByPriority(status: string): string {
     switch (status) {

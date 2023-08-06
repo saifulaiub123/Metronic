@@ -31,7 +31,7 @@ import { ChangeStatusModalComponent } from './modal/change-status-modal/change-s
     InlineSVGModule,
     CoreModule,
     FormsModule
-    
+
   ]
 })
-export class ApplicationToBeSentModule { }
+export class SiteMaintenanceModule { }

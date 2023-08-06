@@ -8,7 +8,7 @@ const routes: Routes = [
       {
         path : 'list', component: ListComponent
       }
-     
+
     ]
   }
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ApplicationToBeSentRoutingModule { }
+export class SiteMaintenanceRoutingModule { }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ApplicationToBeSentRoutingModule } from './site-maintenance-routing.module';
+import { SiteMaintenanceRoutingModule } from './site-maintenance-routing.module';
 import { ListComponent } from './list/list.component';
 
 
@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WidgetsModule } from 'src/app/_metronic/partials';
 // import { QuoteDetailsModalComponent } from './modal/quote-details/quote-details.component';
 import { ChangeStatusModalComponent } from './modal/change-status-modal/change-status-modal.component';
-import { JoinPipe } from 'src/app/_metronic/layout/core/pipe/join.pipe';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -23,17 +23,15 @@ import { JoinPipe } from 'src/app/_metronic/layout/core/pipe/join.pipe';
     ChangeStatusModalComponent
   ],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
-    ApplicationToBeSentRoutingModule,
+    SiteMaintenanceRoutingModule,
     WidgetsModule,
     SharedModule,
     LayoutModule,
     InlineSVGModule,
     CoreModule,
     FormsModule,
-    JoinPipe
-    
+    CommonModule,
   ]
 })
-export class ApplicationToBeSentModule { }
+export class SiteMaintenanceModule { }

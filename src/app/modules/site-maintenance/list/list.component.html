@@ -2,7 +2,7 @@
 <div class="card" style="min-width: 90vw;">
   <div class="card-body border-0 pt-5">
 
-    <form novalidate="" class="form">
+    <form [formGroup]="quotefilterForm" novalidate="" class="form">
       <table>
         <tr>
           <td>
@@ -26,7 +26,7 @@
             <select name="ctl00$PlaceHolderMain$ddlStatus" id="PlaceHolderMain_ddlStatus" formControlName="Type"
               class="me-5" style="font-size:10pt;width:150px;padding: 4px;">
               <option value="A">All</option>
-              <option *ngFor="let status of quoteStatus" [value]="Type.statusCode">{{status.statusDesc}}</option>
+              <!-- <option *ngFor="let status of quoteStatus" [value]="Type.statusCode">{{status.statusDesc}}</option> -->
             </select>
           </td>
         </tr>
@@ -54,7 +54,7 @@
     <!-- begin::Table container -->
     <div class="table-responsive">
       <!-- begin::Table -->
-      <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+      <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4" *ngIf="Type && Type.length > 0">
         <!-- begin::Table head -->
         <thead>
 
@@ -71,7 +71,7 @@
         </thead>
         <!-- end::Table head -->
         <!-- begin::Table body -->
-        <tbody *ngIf="Type && Type.length > 0">
+        <tbody>
 
           <tr *ngFor="let quotes of quotesList; let i = index;">
             <td>
@@ -88,18 +88,18 @@
 
               <span class="badge badge-light-primary fs-7 fw-bold"> {{quotes.stopDaysCount}}</span>
             </td>
-            
+
             <td class="">
               {{quotes.reminderType}}
             </td>
             <td class="">
               {{quotes.modifiedBy}}
             </td>
-            
+
             <td class="">
               {{quotes.modifiedDate }}
             </td>
-            
+
             <!-- <td>
 
             </td> -->
