@@ -8,12 +8,51 @@
   <div class="modal-body">
     <div class="card">
       <div class="row mb-6">
-        <label class="col-lg-4 col-form-label fw-bold fs-6">Quote[s] : </label>
+        <!-- <label class="col-lg-4 col-form-label fw-bold fs-6">Site Ids[s] : </label>
         <div class="col-lg-8">
           <span>{{selectedQuoteIds}}</span>
-        </div>
+        </div> -->
+        <form [formGroup]="changeStatusForm" novalidate="" class="form">
+          <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+            <!-- begin::Table head -->
+            <tbody>
+
+              <tr class="fw-bolder text-muted bg-light">
+                <td>Site Ids[s] : </td>
+                <td><span>{{selectedQuoteIds}}</span></td>
+              </tr>
+              <tr>
+                <td>Type</td>
+                <td>
+                  <select id="type" formControlName="Type" style="font-size:10pt;width:150px;padding:4px;">
+                    <option value="0" selected>0</option>
+                    <option value="1">1</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Remind Type</td>
+                <td>
+                  <select id="remind-type" formControlName="RemindType" style="font-size:10pt;width:150px;padding:4px;"
+                    class="me-5">
+                  <option value="V" selected>Voice</option>
+                  <option value="E">Email</option>
+                  <option value="B">Email & Voice</option>
+                  <option value="N">None</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Stop days count</td>
+                <td>
+                  <input type="number" class="form-control form-control-sm form-control-solid" style="width: 50%;" formControlName = "StopDaysCount">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
       </div>
-      
+
     </div>
   </div>
   <div class="modal-footer">
