@@ -73,5 +73,10 @@ export class QuotesService {
     return this.http.put(`${this.API}/quotes/UpdateToBeSentStatus/${quotes}/Admin`,{});
   }
 
+  updateStopQuoteReminders(quotes: string)
+  {
+    return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/1/57/V/Teja`,{});
+  }
+
 }
 

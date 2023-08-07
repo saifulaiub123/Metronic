@@ -17,24 +17,24 @@ export class ListComponent implements OnInit {
   accountManagers : any = [];
   Type : any = [
     {
-      statusDesc:"In Progress",
-      statusCode:"IP"
+      statusDesc:"Temporarily Stopped",
+      statusCode:"TS"
     },
     {
-      statusDesc:"Sent",
-      statusCode:"SE"
+      statusDesc:"Permanently Stopped",
+      statusCode:"PS"
     },
     {
-      statusDesc:"Cancelled",
-      statusCode:"CN"
+      statusDesc:"Emails Stopped",
+      statusCode:"ES"
     },
     {
-      statusDesc:"Email Missing",
-      statusCode:"EM"
+      statusDesc:"Voice Calls Stopped",
+      statusCode:"VS"
     },
     {
-      statusDesc:"Ready to Send",
-      statusCode:"DR"
+      statusDesc:"Open Sites",
+      statusCode:"OS"
     },
   ];
   fiscalYears : Array<number> = [];

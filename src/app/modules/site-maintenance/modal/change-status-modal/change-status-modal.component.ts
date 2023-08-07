@@ -22,7 +22,7 @@ export class ChangeStatusModalComponent implements OnInit {
   updateStatus()
   {
     try {
-      this.quoteService.updateAppToBeSentStatus(this.selectedQuoteIds.join(',')).subscribe(res=> {
+      this.quoteService.updateStopQuoteReminders(this.selectedQuoteIds.join(',')).subscribe(res=> {
         
       })
       this.activeModal.close(true);
