@@ -73,9 +73,13 @@ export class QuotesService {
     return this.http.put(`${this.API}/quotes/UpdateToBeSentStatus/${quotes}/Admin`,{});
   }
 
-  updateStopQuoteReminders(quotes: string)
+  // updateStopQuoteReminders(quotes: string, type?: string, remindType?: string, stopDaysCount? : number)
+  // {
+  //   return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/${type}/${stopDaysCount}/${remindType}/Admin`,{});
+  // }
+  updateStopQuoteReminders(quotes: string, data: any)
   {
-    return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/1/57/V/Teja`,{});
+    return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/${data.Type}/${data.StopDaysCount}/${data.RemindType}/Admin`,{});
   }
 
 }

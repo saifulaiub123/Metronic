@@ -31,7 +31,8 @@ export class ChangeStatusModalComponent implements OnInit {
   updateStatus()
   {
     try {
-      this.quoteService.updateStopQuoteReminders(this.selectedQuoteIds.join(',')).subscribe(res=> {
+      let data = this.changeStatusForm.value;
+      this.quoteService.updateStopQuoteReminders(this.selectedQuoteIds.join(','),data).subscribe(res=> {
 
       })
       this.activeModal.close(true);

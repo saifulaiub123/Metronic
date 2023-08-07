@@ -149,12 +149,12 @@ export class ListComponent implements OnInit {
 
   rowSelect(quote: any)
   {
-    if(this.selectedQuotes.includes(quote.custNmbr))
+    if(this.selectedQuotes.includes(quote.custNmbr.trim()))
     {
-      this.selectedQuotes.splice(this.selectedQuotes.indexOf(quote.custNmbr),1);
+      this.selectedQuotes.splice(this.selectedQuotes.indexOf(quote.custNmbr.trim()),1);
     }
     else{
-      this.selectedQuotes.push(quote.custNmbr);
+      this.selectedQuotes.push(quote.custNmbr.trim());
     }
   }
   changeStatus()
