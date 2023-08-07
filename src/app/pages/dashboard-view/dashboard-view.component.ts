@@ -173,6 +173,8 @@ export class DashboardViewComponent implements OnInit{
       this.dashboardData = res;
       this.filterSharedService.setDashboardData(this.dashboardData);
     })
+    this.filterSharedService.setDashboardData(this.dashboardData);
+
   }
   getToBeWrittenTableData()
   {

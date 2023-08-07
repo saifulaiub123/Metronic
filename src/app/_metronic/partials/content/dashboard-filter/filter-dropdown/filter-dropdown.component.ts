@@ -68,7 +68,8 @@ export class FilterDropdownComponent implements OnInit {
   {
     this.quotefilterForm.valueChanges.subscribe(data => {
       if (this.quotefilterForm.valid) {
-          this.publishFilterData();
+        this.LoadAccountManager();
+        //this.publishFilterData();
       }
     });
   }

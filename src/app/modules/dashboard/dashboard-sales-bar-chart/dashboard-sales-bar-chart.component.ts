@@ -27,9 +27,6 @@ export class DashboardSalesBarChartComponent implements OnInit {
     this.subscribeSharedServiceData();
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   console.log(changes)
-  // }
 
   subscribeSharedServiceData()
   {
@@ -38,9 +35,11 @@ export class DashboardSalesBarChartComponent implements OnInit {
       {
         this.data = data;
         this.chartOptions = this.getChartOptions(this.chartHeight);
-        this.totalBalance = this.data.reduce((accumulator, obj) => {
-          return accumulator + obj.quoteAmount;
-        }, 0);
+
+        let obj = this.data.find(obj => {
+          return obj.statusDesc === 'Accepted'
+        })
+        this.totalBalance = obj.quoteAmount;
         this.filterSharedService.resetDashboardData();
       }
      });

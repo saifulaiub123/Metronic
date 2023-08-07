@@ -46,6 +46,7 @@ export class FilterToBeSentComponent implements OnInit {
 
   ngOnInit() {
     this.LoadAccountManager();
+    this.subscribeSharedService();
     this.subscribeFilterDataChange();
   }
 
@@ -53,14 +54,21 @@ export class FilterToBeSentComponent implements OnInit {
   {
     let dept = this.quotefilterForm.value.Department as string;
 
-    this.dashboardService.getAccountManagers(dept).subscribe(data  => {
-      this.accountManagers = data;
-      this.OnFilterDataChange();
-    });
+    this.accountManagers = localStorage.getItem("AccountMangers");
+
+    // this.dashboardService.getAccountManagers(dept).subscribe(data  => {
+    //   // this.accountManagers = data;
+    //   this.OnFilterDataChange();
+    // });
       //this.OnFilterDataChange();//need to be removed before final push
   }
 
-
+  subscribeSharedService()
+  {
+    this.filterSharedService.selectedDashboardFilter$.subscribe(res=> {
+      this.accountManagers = localStorage.getItem("AccountMangers");
+    });
+  }
   subscribeFilterDataChange()
   {
     this.quotefilterForm.valueChanges.subscribe(data => {
