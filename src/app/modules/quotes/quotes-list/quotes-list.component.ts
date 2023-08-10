@@ -30,7 +30,7 @@ export class QuotesListComponent implements OnInit {
     Year : [new Date().getFullYear()],
     Month : ['0'],
     Statustype : ['0'],
-    QuoteID: null,
+    QuoteID: [{value: null, disabled: true}],
     InitialLoad : false
   });
   paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
