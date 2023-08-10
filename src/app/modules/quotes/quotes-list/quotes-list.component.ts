@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { QuotesService } from 'src/app/core/services/quotes.service';
 import { QuoteChartDetails } from 'src/app/_metronic/partials/content/widgets/charts/charts-custom-widget/charts-custom-widget.component';
@@ -8,6 +8,22 @@ import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
 import { QuoteSharedService } from '../quote-shared.service';
+
+interface Quote {
+  [key:string]: string;
+  quoteID: string;
+  siteID: string;
+  custName : string;
+  contactName : string;
+  status : string;
+  notes : string;
+  quotePriority : string;
+  quoteOwner : string;
+  quoteOn : string;
+  quoteAmount : string;
+  // ... Add other properties ...
+}
+
 @Component({
   selector: 'app-quotes-list',
   templateUrl: './quotes-list.component.html',
@@ -16,7 +32,7 @@ import { QuoteSharedService } from '../quote-shared.service';
 })
 export class QuotesListComponent implements OnInit {
 
-  quotesList : any = [] ;
+  quotesList : Quote[] = [] ;
   accountManagers : any = [];
   quoteStatus : any = [];
   chartData : QuoteChartDetails[];
@@ -50,6 +66,67 @@ export class QuotesListComponent implements OnInit {
     ,{Text : 'November',value:'11'}
     ,{Text : 'December',value:'12'}
   ];
+
+  sortedColumn: string = '';
+  sortDirection: number = 1;
+
+  sortTable(column: string): void {
+    if (this.sortedColumn === column) {
+      this.sortDirection = -this.sortDirection;
+    } else {
+      this.sortedColumn = column;
+      this.sortDirection = 1;
+    }
+
+    this.quotesList.sort((a, b) => {
+      const aValue = a[column];
+      const bValue = b[column];
+
+      console.log(aValue[0]);
+
+
+      if (aValue < bValue) {
+        //console.log("b greater");
+        return -1 * this.sortDirection;
+      } else if (aValue > bValue) {
+        //console.log("a greater");
+        return 1 * this.sortDirection;
+      } else {
+        return 0;
+      }
+
+  // Handle other cases here, if needed
+  
+    });
+  }
+
+  sortIcon(column: string): string {
+    if (this.sortedColumn === column) {
+      return this.sortDirection === 1 ? 'fa-sort-up' : 'fa-sort-down';
+    }
+    return 'fa-sort';
+  }
+
+  selectAllRows(event: any): void {
+    if (event.target.checked) {
+      // Select all quotes
+      this.selectedQuotes = this.quotesList.map(quote => quote.quoteID);
+    } else {
+      // Deselect all quotes
+      this.selectedQuotes = [];
+    }
+  }
+
+  isQuoteSelected(quote: Quote): boolean {
+    return this.selectedQuotes.includes(quote.quoteID);
+  }
+
+  // ... Other component code ...
+
+
+
+
+
 
   constructor(
     private quotesService : QuotesService,
@@ -264,9 +341,9 @@ export class QuotesListComponent implements OnInit {
   getColorByPriority(status: string): string {
     switch (status) {
       case 'Critical':
-            return 'light red';
+            return 'red';
       default:
-        return 'white';
+        return 'black';
     }
   }
 }

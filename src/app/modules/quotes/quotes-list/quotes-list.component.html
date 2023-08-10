@@ -50,7 +50,7 @@
               style="font-size:10pt;width:150px;padding:4px;"
             >
               <option value="A" selected>All</option>
-              <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
+              <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
                 {{mgr.text}}
               </option>
             </select>
@@ -148,7 +148,7 @@
               <div class="col-lg-12">
                 <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;" class="me-5">
                   <option value="A" selected>All</option>
-                  <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
+                  <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
                     {{mgr.text}}
                   </option>
                 </select>
@@ -227,7 +227,7 @@
                   <label class="min-w-100px me-5">Account Manager:</label>
                   <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;" class="me-5">
                     <option value="A" selected>All</option>
-                    <option *ngFor="let mgr of accountManagers" [value]="mgr.value">
+                    <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
                       {{mgr.text}}
                     </option>
                   </select>
@@ -542,19 +542,28 @@
         <!-- begin::Table head -->
         <thead>
           <tr class="fw-bolder text-muted bg-light">
-            <th class="min-w-100px">Quote Id</th>
-            <th class="min-w-100px">Site ID</th>
-            <th class="min-w-125px">Site Name</th>
-            <th class="min-w-200px">Contact Name</th>
-            <th class="min-w-105px">Status</th>
-            <th class="min-w-150px">Description</th>
-            <th class="min-w-125px">Quote Priority</th>
-            <th class="min-w-150px">Quote Owner</th>
-            <th class="min-w-150px">Quoted On</th>
-            <th class="min-w-105px">Quote Amount</th>
+            <th class="min-w-100px"(click)="sortTable('quoteID')"style="cursor: pointer;">Quote Id <i class="fa" [ngClass]="sortIcon('quoteID')"></i></th>
+            <th class="min-w-80px"(click)="sortTable('custNmbr')"style="cursor: pointer;">Site Id <i class="fa" [ngClass]="sortIcon('custNmbr')"></i></th>
+            <th class="min-w-115px"(click)="sortTable('custName')"style="cursor: pointer;">Site Name <i class="fa" [ngClass]="sortIcon('custName')"></i></th>
+            <th class="min-w-150px"(click)="sortTable('contactName')"style="cursor: pointer;">Contact Name <i class="fa" [ngClass]="sortIcon('contactName')"></i></th>
+            <th class="min-w-105px"(click)="sortTable('status')"style="cursor: pointer;">Status <i class="fa" [ngClass]="sortIcon('status')"></i></th>
+            <th class="min-w-150px"(click)="sortTable('notes')"style="cursor: pointer;">Description <i class="fa" [ngClass]="sortIcon('notes')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quotePriority')"style="cursor: pointer;">Quote Priority <i class="fa" [ngClass]="sortIcon('quotePriority')"></i></th>
+            <th class="min-w-150px"(click)="sortTable('quoteOwner')"style="cursor: pointer;">Quote Owner <i class="fa" [ngClass]="sortIcon('quoteOwner')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quotedOn')"style="cursor: pointer;">Quote On <i class="fa" [ngClass]="sortIcon('quotedOn')"></i></th>
+            <th class="min-w-105px"(click)="sortTable('quoteAmount')"style="cursor: pointer;">Quote Amount <i class="fa" [ngClass]="sortIcon('quoteAmount')"></i></th>
             <!-- <th class="min-w-125px">Email</th> -->
             <th class="min-w-25px">Edit</th>
-            <th class="min-w-25px">Select</th>
+            <th class="min-w-20px">
+              Select
+              <input
+              class="form-check-input widget-9-check"
+              style="cursor: pointer;"
+              type="checkbox"
+              [checked]="selectedQuotes.length === quotesList.length"
+              (click)="selectAllRows($event)"
+              />
+            </th>
             <!-- <th class="min-w-200px text-end rounded-end"></th> -->
           </tr>
         </thead>
@@ -562,26 +571,28 @@
         <!-- begin::Table body -->
         <tbody *ngIf = "quotesList && quotesList.length > 0">
 
-          <tr *ngFor = "let quotes of quotesList; let i = index;">
+          <tr *ngFor = "let quotes of quotesList; let i = index;" [ngStyle]="{ 'background-color': isQuoteSelected(quotes) ? 'lightyellow' : 'inherit' }">
             <td>
-              <span (click)="openQuoteDetailsModal(quotes.quoteID)" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">
+              <span (click)="openQuoteDetailsModal(quotes.quoteID)" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" style="cursor: pointer;">
                {{quotes.quoteID}}
               </span>
             </td>
             <td>
 
-              <span class="text-muted fw-bold text-muted d-block fs-7"
-                > {{quotes.custNmbr}}</span
-              >
+              <span class="text-muted fw-bold text-muted d-block fs-7"> 
+                {{quotes.custNmbr}}
+              </span>
             </td>
             <td>
 
-              <span class="badge badge-light-primary fs-7 fw-bold"
-                >  {{quotes.custName}}</span
-              >
+              <span class="badge badge-light-primary fs-7 fw-bold">  
+                {{quotes.custName}}
+              </span>
             </td>
             <td>
-              <span class="text-muted fw-bold text-muted d-block fs-7">  {{quotes.contactName}}</span>
+              <span class="text-muted fw-bold text-muted d-block fs-7">
+                {{quotes.contactName}}
+              </span>
             </td>
             <td class=""[style.backgroundColor]="getColorByStatus(quotes.status)"[style.color]="'white'">
                  {{quotes.status}}
@@ -589,7 +600,7 @@
              <td class="">
                  {{quotes.notes}}
             </td>
-             <td class=""[style.backgroundColor]="getColorByPriority(quotes.status)">
+             <td class=""[style.color]="getColorByPriority(quotes.quotePriority)">
                  {{quotes.quotePriority}}
             </td>
              <td class="">
@@ -614,10 +625,11 @@
             </td>
             <td>
               <input
-                    class="form-check-input widget-9-check"
-                    type="checkbox"
-                    value="1"
-                    (click)="rowSelect(quotes)"
+              class="form-check-input widget-9-check"
+              style="border:solid; border-color: lightblue; cursor: pointer;"
+              type="checkbox"
+              [checked]="selectedQuotes.includes(quotes.quoteID)"
+              (click)="rowSelect(quotes)"
                   />
             </td>
 
