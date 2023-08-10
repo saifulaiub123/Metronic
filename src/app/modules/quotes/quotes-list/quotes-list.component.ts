@@ -12,7 +12,6 @@ import { QuoteSharedService } from '../quote-shared.service';
 interface Quote {
   [key:string]: string;
   quoteID: string;
-  siteID: string;
   custName : string;
   contactName : string;
   status : string;

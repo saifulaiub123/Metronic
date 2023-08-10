@@ -72,17 +72,27 @@
         <thead>
 
           <tr class="fw-bolder text-muted bg-light">
-            <th class="min-w-100px">Quote Id</th>
-            <th class="min-w-100px">Site ID</th>
-            <th class="min-w-125px">Name</th>
-            <th class="min-w-200px">Email</th>
-            <th class="min-w-105px">Status</th>
-            <th class="min-w-150px">Quote Owner</th>
-            <th class="min-w-125px">Service Type</th>
-            <th class="min-w-150px">Quoted On</th>
-            <th class="min-w-100px">Quote Amount</th>
-            <th class="min-w-150px">Age</th>
-            <th class="min-w-25px">Select</th>
+            <th class="min-w-100px"(click)="sortTable('quoteID')"style="cursor: pointer;">Quote Id <i class="fa" [ngClass]="sortIcon('quoteID')"></i></th>
+            <th class="min-w-80px"(click)="sortTable('custNmbr')"style="cursor: pointer;">Site Id <i class="fa" [ngClass]="sortIcon('custNmbr')"></i></th>
+            <th class="min-w-115px"(click)="sortTable('name')"style="cursor: pointer;">Name <i class="fa" [ngClass]="sortIcon('name')"></i></th>
+            <th class="min-w-150px"> Email </th>
+            <th class="min-w-105px"(click)="sortTable('quoteStatus')"style="cursor: pointer;">Status <i class="fa" [ngClass]="sortIcon('quoteStatus')"></i></th>
+            <th class="min-w-150px"(click)="sortTable('owner')"style="cursor: pointer;">Quote Owner <i class="fa" [ngClass]="sortIcon('owner')"></i></th>
+            <th class="min-w-150px"(click)="sortTable('problemCode')"style="cursor: pointer;"> Service Type <i class="fa" [ngClass]="sortIcon('problemCode')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quotedOn')"style="cursor: pointer;">Quote On <i class="fa" [ngClass]="sortIcon('quotedOn')"></i></th>
+            <th class="min-w-105px">Quote Amount </th>
+            <th class="min-w-105px"(click)="sortTable('age')"style="cursor: pointer;">Age <i class="fa" [ngClass]="sortIcon('age')"></i></th>
+            <th class="min-w-20px">
+              Select
+              <input
+              class="form-check-input widget-9-check"
+              style="cursor: pointer; border:solid; border-color: lightblue;"
+              type="checkbox"
+              [checked]="selectedQuotes.length === quotesList.length"
+              (click)="selectAllRows($event)"
+              />
+            </th>
+
             <!-- <th class="min-w-200px text-end rounded-end"></th> -->
           </tr>
         </thead>
@@ -90,7 +100,7 @@
         <!-- begin::Table body -->
         <tbody *ngIf="quotesList && quotesList.length > 0">
 
-          <tr *ngFor="let quotes of quotesList; let i = index;">
+          <tr *ngFor="let quotes of quotesList; let i = index;" [ngStyle]="{ 'background-color': isQuoteSelected(quotes) ? 'lightyellow' : 'inherit' }">
             <td>
               <span (click)="openQuoteDetailsModal(quotes.quoteID)"
                 class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">
@@ -111,13 +121,13 @@
               </div>
               
             </td>
-            <td class="" [style.color]="getColorByStatus(quotes.status)">
+            <td class="" [style.backgroundColor]="getColorByStatus(quotes.quoteStatus)"[style.color]="'white'">
               {{quotes.quoteStatus}}
             </td>
             <td class="">
               {{quotes.owner}}
             </td>
-            <td class="" [style.backgroundColor]="getColorByPriority(quotes.status)">
+            <td class="">
               {{quotes.problemCode}}
             </td>
 
@@ -134,7 +144,12 @@
 
             </td> -->
             <td>
-              <input class="form-check-input widget-9-check" type="checkbox" value="1" (click)="rowSelect(quotes)" />
+              <input
+              class="form-check-input widget-9-check"
+              style="border:solid; border-color: lightblue; cursor: pointer;"
+              type="checkbox"
+              [checked]="selectedQuotes.includes(quotes.quoteID)"
+              (click)="rowSelect(quotes)"/>
             </td>
 
           </tr>

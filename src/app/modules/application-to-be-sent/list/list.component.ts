@@ -7,13 +7,28 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-status-modal.component';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
+
+interface Quote {
+  [key: string]: string;
+  quoteID: string;
+  custNmbr: string;
+  name: string;
+  quoteStatus: string;
+  owner: string;
+  problemCode: string;
+  quotedOn: string;
+  quoteAmount: string;
+  age : string;
+  // ... Add other properties ...
+}
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: []
 })
 export class ListComponent implements OnInit {
-  quotesList : any = [] ;
+  quotesList : Quote[] = [] ;
   accountManagers : any = [];
   quoteStatus : any = [
     {
@@ -46,6 +61,60 @@ export class ListComponent implements OnInit {
     Statustype : ['0'],
   });
   paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
+
+  sortedColumn: string = '';
+  sortDirection: number = 1;
+
+  sortTable(column: string): void {
+    if (this.sortedColumn === column) {
+      this.sortDirection = -this.sortDirection;
+    } else {
+      this.sortedColumn = column;
+      this.sortDirection = 1;
+    }
+
+    this.quotesList.sort((a, b) => {
+      const aValue = a[column];
+      const bValue = b[column];
+
+      console.log(aValue[0]);
+
+
+      if (aValue < bValue) {
+        //console.log("b greater");
+        return -1 * this.sortDirection;
+      } else if (aValue > bValue) {
+        //console.log("a greater");
+        return 1 * this.sortDirection;
+      } else {
+        return 0;
+      }
+
+  // Handle other cases here, if needed
+  
+    });
+  }
+
+  sortIcon(column: string): string {
+    if (this.sortedColumn === column) {
+      return this.sortDirection === 1 ? 'fa-sort-up' : 'fa-sort-down';
+    }
+    return 'fa-sort';
+  }
+
+  selectAllRows(event: any): void {
+    if (event.target.checked) {
+      // Select all quotes
+      this.selectedQuotes = this.quotesList.map(quote => quote.quoteID);
+    } else {
+      // Deselect all quotes
+      this.selectedQuotes = [];
+    }
+  }
+
+  isQuoteSelected(quote: Quote): boolean {
+    return this.selectedQuotes.includes(quote.quoteID);
+  }  
 
   
   constructor(
@@ -166,7 +235,15 @@ export class ListComponent implements OnInit {
   getColorByStatus(status: string): string {
     switch (status) {
       case 'Email Missing':
-        return '#f1416c';
+        return '#730202';
+      case 'In Progress':
+        return '#008ed6';
+      case 'Ready to Send':
+        return '#00b300';
+      case 'Sent':
+        return '#E8A90E';
+      case 'Cancelled':
+        return 'red';
       // Add more cases for other status if needed
       default:
         return 'black'; // Default color when the status doesn't match any case
@@ -174,12 +251,5 @@ export class ListComponent implements OnInit {
   }
  
 
-  getColorByPriority(status: string): string {
-    switch (status) {
-      case 'Critical':
-            return 'light red';
-      default:
-        return 'white';
-    }
-  }
+  
 }
