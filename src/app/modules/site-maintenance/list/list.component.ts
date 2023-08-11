@@ -43,6 +43,7 @@ export class ListComponent implements OnInit {
   quotefilterForm = this.fb.group({
     AccountManager : ['A'],
     Type : ['A'],
+    SearchText : null
   });
   paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
@@ -180,5 +181,11 @@ export class ListComponent implements OnInit {
       default:
         return 'white';
     }
+  }
+  search()
+  {
+    this.quotesService.GetSearchedSiteDetails(this.quotefilterForm.value.SearchText).subscribe((data: any)  => {
+      this.quotesList = data && data.length > 0 ? data.slice(0,10) : [];
+    })
   }
 }

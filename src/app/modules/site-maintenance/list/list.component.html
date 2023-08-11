@@ -29,6 +29,16 @@
               <option *ngFor="let status of Type" [value]="status.statusCode">{{status.statusDesc}}</option>
             </select>
           </td>
+          <td>
+            <div class="input-group">
+              <input type="text" class="form-control form-control-sm form-control-solid" formControlName="SearchText">
+              <div class="input-group-append ">
+                <button class="btn btn-secondary btn-sm" type="button" (click)="search()">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </td>
         </tr>
       </table>
     </form>

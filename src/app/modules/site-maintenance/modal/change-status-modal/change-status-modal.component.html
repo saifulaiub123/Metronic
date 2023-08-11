@@ -45,7 +45,17 @@
               <tr>
                 <td>Stop days count</td>
                 <td>
-                  <input type="number" class="form-control form-control-sm form-control-solid" style="width: 50%;" formControlName = "StopDaysCount">
+                  <select id="remind-type" formControlName="StopDaysCount" style="font-size:10pt;width:150px;padding:4px;"
+                    class="me-5">
+                  <option value="-1" selected>Select</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                  <option value="365000">Permanent Stop</option>
+                  <option value="0">Permanent Allow</option>
+                  </select>
                 </td>
               </tr>
             </tbody>

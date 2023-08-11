@@ -17,7 +17,7 @@ export class ChangeStatusModalComponent implements OnInit {
   changeStatusForm = this.fb.group({
     Type : ['0'],
     RemindType : ['V'],
-    StopDaysCount : [0]
+    StopDaysCount : ['-1']
   });
 
   constructor(public activeModal: NgbActiveModal,

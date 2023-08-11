@@ -48,6 +48,9 @@ export class QuotesService {
   GetSiteDetails(filtersObj:any){
     return this.http.get(`${this.API}/quotes/GetSiteDetails/${filtersObj.AccountManager}/${filtersObj.Type}`,{ headers : this.headers });
   }
+  GetSearchedSiteDetails(text: any){
+    return this.http.get(`${this.API}/quotes/GetSearchedSiteDetails/${text}`,{ headers : this.headers });
+  }
 
 
   getQuoteStatus()
