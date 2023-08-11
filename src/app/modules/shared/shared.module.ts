@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -17,7 +18,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     PaginationComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgbModule
   ],
   exports : [
     HeaderComponent,
