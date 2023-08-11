@@ -7,13 +7,25 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-status-modal.component';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
+
+interface Quote {
+  [key: string]: string;
+  custNmbr: string;
+  custName: string;
+  stopDaysCount: string;
+  reminderType: string;
+  modifiedBy: string;
+  modifiedDate: string;
+  // ... Add other properties ...
+}
+
 @Component({
   selector: 'app-site-maintenance-list',
   templateUrl: './list.component.html',
   styleUrls: []
 })
 export class ListComponent implements OnInit {
-  quotesList : any = [] ;
+  quotesList : Quote[] = [] ;
   accountManagers : any = [];
   Type : any = [
     {
@@ -46,6 +58,59 @@ export class ListComponent implements OnInit {
   });
   paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
+  sortedColumn: string = '';
+  sortDirection: number = 1;
+
+  sortTable(column: string): void {
+    if (this.sortedColumn === column) {
+      this.sortDirection = -this.sortDirection;
+    } else {
+      this.sortedColumn = column;
+      this.sortDirection = 1;
+    }
+
+    this.quotesList.sort((a, b) => {
+      const aValue = a[column];
+      const bValue = b[column];
+
+      
+
+
+      if (aValue < bValue) {
+        //console.log("b greater");
+        return -1 * this.sortDirection;
+      } else if (aValue > bValue) {
+        //console.log("a greater");
+        return 1 * this.sortDirection;
+      } else {
+        return 0;
+      }
+
+  // Handle other cases here, if needed
+  
+    });
+  }
+
+  sortIcon(column: string): string {
+    if (this.sortedColumn === column) {
+      return this.sortDirection === 1 ? 'fa-sort-up' : 'fa-sort-down';
+    }
+    return 'fa-sort';
+  }
+
+  selectAllRows(event: any): void {
+    if (event.target.checked) {
+      // Select all quotes
+      this.selectedQuotes = this.quotesList.map(quote => quote.quoteID);
+    } else {
+      // Deselect all quotes
+      this.selectedQuotes = [];
+    }
+  }
+
+  isQuoteSelected(quote: Quote): boolean {
+    return this.selectedQuotes.includes(quote.custNmbr);
+  } 
 
   constructor(
     private quotesService : QuotesService,
