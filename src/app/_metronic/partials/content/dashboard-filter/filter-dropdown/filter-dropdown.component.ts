@@ -46,7 +46,7 @@ export class FilterDropdownComponent implements OnInit {
   ngOnInit() {
     localStorage.setItem("AccountManagers", JSON.stringify(this.accountManagers));
     this.LoadAccountManager();
-    this.subscribeFilterDataChange();
+    // this.subscribeFilterDataChange();
     this.publishFilterData();
 
   }
@@ -73,7 +73,18 @@ export class FilterDropdownComponent implements OnInit {
       }
     });
   }
-
+  changeDepartment()
+  {
+    this.LoadAccountManager();
+  }
+  changeAccountManager()
+  {
+    this.publishFilterData();
+  }
+  changeDateRange()
+  {
+    this.publishFilterData();
+  }
   publishFilterData()
   {
     var filters =
