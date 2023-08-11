@@ -69,13 +69,21 @@
         <thead>
 
           <tr class="fw-bolder text-muted bg-light">
-            <th class="min-w-100px">Site ID</th>
-            <th class="min-w-125px">Site Name</th>
-            <th class="min-w-200px">Days</th>
-            <th class="min-w-105px">Type</th>
-            <th class="min-w-150px">Modified By</th>
-            <th class="min-w-150px">Modified On</th>
-            <th class="min-w-25px">Select</th>
+            <th class="min-w-100px"(click)="sortTable('custNmbr')"style="cursor: pointer;">Site Id <i class="fa" [ngClass]="sortIcon('custNmbr')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('custName')"style="cursor: pointer;">Site Name <i class="fa" [ngClass]="sortIcon('custName')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('stopDaysCount')"style="cursor: pointer;">Days <i class="fa" [ngClass]="sortIcon('stopDaysCount')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('reminderType')"style="cursor: pointer;">Type <i class="fa" [ngClass]="sortIcon('reminderType')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('modifiedBy')"style="cursor: pointer;">Modified By <i class="fa" [ngClass]="sortIcon('modifiedBy')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('modifiedDate')"style="cursor: pointer;">Modified On <i class="fa" [ngClass]="sortIcon('modifiedDate')"></i></th>
+            <th class="min-w-20px">
+              Select
+              <input
+              class="form-check-input widget-9-check"
+              style="cursor: pointer; border:solid; border-color: lightblue;"
+              type="checkbox"
+              [checked]="selectedQuotes.length === quotesList.length"
+              (click)="selectAllRows($event)" />
+            </th>
             <!-- <th class="min-w-200px text-end rounded-end"></th> -->
           </tr>
         </thead>
@@ -83,7 +91,7 @@
         <!-- begin::Table body -->
         <tbody>
 
-          <tr *ngFor="let quotes of quotesList; let i = index;">
+          <tr *ngFor="let quotes of quotesList; let i = index;" [ngStyle]="{ 'background-color': isQuoteSelected(quotes) ? 'lightyellow' : 'inherit' }">
             <td>
               <span (click)="openQuoteDetailsModal(quotes.quoteID)"
                 class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">
@@ -114,7 +122,12 @@
 
             </td> -->
             <td>
-              <input class="form-check-input widget-9-check" type="checkbox" (click)="rowSelect(quotes)" />
+              <input
+              class="form-check-input widget-9-check"
+              style="border:solid; border-color: lightblue; cursor: pointer;"
+              type="checkbox"
+              [checked]="selectedQuotes.includes(quotes.quoteID)"
+              (click)="rowSelect(quotes)"/>
             </td>
 
           </tr>
