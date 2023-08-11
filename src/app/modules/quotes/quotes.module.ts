@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WidgetsModule } from 'src/app/_metronic/partials';
 import { QuoteDetailsModalComponent } from './modal/quote-details/quote-details.component';
 import { ChangeStatusModalComponent } from './modal/change-status-modal/change-status-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ChangeStatusModalComponent } from './modal/change-status-modal/change-s
     LayoutModule,
     InlineSVGModule,
     CoreModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ]
 })
 export class QuotesModule { }
