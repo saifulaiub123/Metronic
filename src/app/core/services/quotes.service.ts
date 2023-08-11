@@ -72,7 +72,10 @@ export class QuotesService {
   {
     return this.http.put(`${this.API}/quotes/UpdateToBeSentStatus/${quotes}/Admin`,{});
   }
-
+  searchedQuoteGrid(text: string | undefined, pageNumber: number)
+  {
+    return this.http.get<QuoteChartDetails[]>(`${this.API}/quotes/searchedgrid/${text}/${pageNumber}`,{ headers : this.headers});
+  }
   // updateStopQuoteReminders(quotes: string, type?: string, remindType?: string, stopDaysCount? : number)
   // {
   //   return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/${type}/${stopDaysCount}/${remindType}/Admin`,{});

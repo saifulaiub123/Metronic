@@ -45,10 +45,10 @@ export class QuotesListComponent implements OnInit {
     Year : [new Date().getFullYear()],
     Month : ['0'],
     Statustype : ['0'],
-    QuoteID: [{value: null, disabled: true}],
+    QuoteID: null,
     InitialLoad : false
   });
-  paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
+  paginationObj  : any = null;//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
   months : any[] = [
      {Text : 'All',value:'0'}
@@ -95,7 +95,7 @@ export class QuotesListComponent implements OnInit {
       }
 
   // Handle other cases here, if needed
-  
+
     });
   }
 
@@ -250,7 +250,19 @@ export class QuotesListComponent implements OnInit {
   }
   public SearchQuotes()
   {
-   this.LoadQuotes(false);
+    let quoteId = this.quotefilterForm.value.QuoteID;
+    this.paginationObj.pageNumber = 1
+    if(quoteId !== null && quoteId !== '')
+    {
+      this.quotesService.searchedQuoteGrid(quoteId,this.paginationObj.pageNumber).subscribe((data: any)=>{
+        this.quotesList = data && data.results.length > 0 ? data.results : [];
+        this.paginationObj = data.paginationObj;
+      })
+    }
+    else{
+      this.LoadQuotes(false);
+    }
+
   }
 
   public LoadFilters()
