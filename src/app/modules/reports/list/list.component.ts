@@ -4,7 +4,6 @@ import { QuotesService } from 'src/app/core/services/quotes.service';
 import { QuoteChartDetails } from 'src/app/_metronic/partials/content/widgets/charts/charts-custom-widget/charts-custom-widget.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { QuoteDetailsModalComponent } from '../modal/quote-details/quote-details.component';
-import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-status-modal.component';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
 
@@ -45,11 +44,10 @@ export class ListComponent implements OnInit {
       statusCode:"VS"
     },
     {
-      statusDesc:"Open Sites",
-      statusCode:"OS"
+      statusDesc:"Waiting To Be Approved Quotes",
+      statusCode:"Waiting To Be Approved Quotes"
     },
   ];
-  fiscalYears : Array<number> = [];
   selectedQuotes: string[] = [];
   fromEditPage: boolean = false;
   quotefilterForm = this.fb.group({
@@ -57,7 +55,6 @@ export class ListComponent implements OnInit {
     Type : ['A'],
     SearchText : null
   });
-  paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
   sortedColumn: string = '';
   sortDirection: number = 1;
@@ -146,6 +143,14 @@ export class ListComponent implements OnInit {
       }
     }
   );
+  this.route.queryParamMap.subscribe((params) => {
+    if(params.has('Type'))
+    {
+      this.quotefilterForm.controls['Type'].setValue(params.get('Type'));
+    }
+  }
+
+);
 
     this.LoadData();
     this.LoadFilters();
@@ -166,7 +171,7 @@ export class ListComponent implements OnInit {
       quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
     }
 
-    this.quotesService.GetSiteDetails(quotesRequestBody).subscribe((data: any)  => {
+    this.quotesService.getReports(quotesRequestBody).subscribe((data: any)  => {
       this.quotesList = data && data.length > 0 ? data.slice(0,100) : [];
       // this.paginationObj = data.paginationObj;
 
@@ -206,11 +211,6 @@ export class ListComponent implements OnInit {
   openQuoteDetailsModal(quoteId: any) {
 
 
-  }
-  openChangeStatusModal(){
-    const modalRef = this.modalService.open(ChangeStatusModalComponent,{ fullscreen : "lg", centered: true});
-    modalRef.componentInstance.quoteId = this.selectedQuotes;
-    modalRef.componentInstance.selectedQuoteIds = this.selectedQuotes;
   }
 
   rowSelect(quote: any)

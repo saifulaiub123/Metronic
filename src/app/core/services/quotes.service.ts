@@ -38,6 +38,11 @@ export class QuotesService {
     return this.http.get(`${this.API}/quotes/GetQuoteActivity/${quoteId}`,{ headers : this.headers});
   }
 
+  getReports(filtersObj : any)
+  {
+    return this.http.get(`${this.API}/quotes/GetReports/${filtersObj.Type}/${filtersObj.AccountManager}`,{ headers : this.headers });
+  }
+
   getQuoteAccountManagers(dept: string)
   {
     return this.http.get(`${this.API}/quotes/GetManagers/${dept}`,{ headers : this.headers});

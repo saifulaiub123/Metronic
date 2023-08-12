@@ -14,6 +14,10 @@ const Routing: Routes = [
     loadChildren : () => import('../modules/site-maintenance/site-maintenance.module').then(m => m.SiteMaintenanceModule),
   },
   {
+    path: 'reports',
+    loadChildren : () => import('../modules/reports/reports.module').then(m => m.ReportsModule),
+  },
+  {
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
