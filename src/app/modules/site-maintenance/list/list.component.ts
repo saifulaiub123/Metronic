@@ -102,7 +102,7 @@ export class ListComponent implements OnInit {
   selectAllRows(event: any): void {
     if (event.target.checked) {
       // Select all quotes
-      this.selectedQuotes = this.quotesList.map(quote => quote.quoteID);
+      this.selectedQuotes = this.quotesList.map(quote => quote.custNmbr);
     } else {
       // Deselect all quotes
       this.selectedQuotes = [];
@@ -167,8 +167,12 @@ export class ListComponent implements OnInit {
     }
 
     this.quotesService.GetSiteDetails(quotesRequestBody).subscribe((data: any)  => {
-      this.quotesList = data && data.length > 0 ? data.slice(0,100) : [];
+      this.quotesList = data && data.length > 0 ? data : [];
       // this.paginationObj = data.paginationObj;
+
+      this.selectedQuotes = this.quotesList
+      .filter(quote => parseFloat(quote.stopDaysCount) > 0)
+      .map(quote => quote.custNmbr);
 
     })
   }
@@ -176,6 +180,7 @@ export class ListComponent implements OnInit {
   public onFilterChanges()
   {
   // this.quotefilterForm.controls.QuoteID.enable({onlySelf: true,emitEvent:false});
+    this.quotefilterForm.controls.SearchText.enable({onlySelf: true,emitEvent:false});
     this.quotefilterForm.valueChanges.pipe(startWith(undefined), pairwise())
     .subscribe(valuesArray => {
          this.LoadData()
@@ -215,13 +220,17 @@ export class ListComponent implements OnInit {
 
   rowSelect(quote: any)
   {
-    if(this.selectedQuotes.includes(quote.custNmbr.trim()))
-    {
-      this.selectedQuotes.splice(this.selectedQuotes.indexOf(quote.custNmbr.trim()),1);
-    }
-    else{
-      this.selectedQuotes.push(quote.custNmbr.trim());
-    }
+    console.log("rowSelect function called.");
+  console.log("quote.custNmbr:", quote.custNmbr);
+  console.log("this.selectedQuotes before:", this.selectedQuotes);
+
+  if (this.selectedQuotes.includes(quote.custNmbr)) {
+    this.selectedQuotes = this.selectedQuotes.filter(id => id !== quote.custNmbr);
+  } else {
+    this.selectedQuotes.push(quote.custNmbr);
+  }
+    console.log("this.selectedQuotes after:", this.selectedQuotes);
+
   }
   changeStatus()
   {
@@ -249,8 +258,13 @@ export class ListComponent implements OnInit {
   }
   search()
   {
+    if(this.quotefilterForm.value.SearchText !== null && this.quotefilterForm.value.SearchText !== ''){
     this.quotesService.GetSearchedSiteDetails(this.quotefilterForm.value.SearchText).subscribe((data: any)  => {
-      this.quotesList = data && data.length > 0 ? data.slice(0,10) : [];
+      this.quotesList = data && data.length > 0 ? data : [];
     })
+    }
+    else{
+
+    }
   }
 }

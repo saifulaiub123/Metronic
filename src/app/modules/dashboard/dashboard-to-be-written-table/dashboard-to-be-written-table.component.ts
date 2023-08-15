@@ -55,7 +55,7 @@ export class DashboardToBeWrittenTableComponent implements OnInit {
   loadData()
   {
     this.dashboardService.getToBeWrittenQuotesData(this.filter).subscribe((res) => {
-      this.toBeWrittenQuotes = res;
+      this.toBeWrittenQuotes = res && res.length > 0 ? res.slice(0,10) : [];
     })
   }
 }

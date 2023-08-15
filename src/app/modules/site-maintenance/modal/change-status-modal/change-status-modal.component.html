@@ -18,10 +18,16 @@
             <tbody>
 
               <tr class="fw-bolder text-muted bg-light">
-                <td>Site Ids[s] : </td>
-                <td><span>{{selectedQuoteIds}}</span></td>
+                <td>Site Ids[s] :</td>
+                <td class="selected-box">
+                  <div class="selected-quote-ids">
+                    <div *ngFor="let selectedQuoteId of selectedQuoteIds" class="quote-id">
+                      {{ selectedQuoteId }}
+                    </div>
+                  </div>
+                </td>
               </tr>
-              <tr>
+              <!--<tr>
                 <td>Type</td>
                 <td>
                   <select id="type" formControlName="Type" style="font-size:10pt;width:150px;padding:4px;">
@@ -29,7 +35,7 @@
                     <option value="1">1</option>
                   </select>
                 </td>
-              </tr>
+              </tr> -->
               <tr>
                 <td>Remind Type</td>
                 <td>

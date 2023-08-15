@@ -230,21 +230,36 @@ export class ListComponent implements OnInit {
 
   getColorByStatus(status: string): string {
     switch (status) {
-      case 'Email Missing':
-        return '#f1416c';
+      case 'Sent':
+        return '#E8A90E';
+      case 'Viewed':
+        return '#008ed6';
+      case 'In Discussion':
+        return '#cc00cc';
+      case 'Accepted':
+        return '#00b300';
+      case 'Declined':
+        return '#e60000';
+      case 'To Be Sent':
+          return '#958C02';
+      case 'Cancelled':
+            return '#730202';
+      case 'Draft':
+            return 'gray';
+
       // Add more cases for other status if needed
       default:
-        return 'black'; // Default color when the status doesn't match any case
+        return 'gray'; // Default color when the status doesn't match any case
     }
   }
 
 
-  getColorByPriority(status: string): string {
-    switch (status) {
-      case 'Critical':
+  getColorByPriority(quotePriority: string): string {
+    switch (quotePriority) {
+      case 'Normal':
             return 'light red';
       default:
-        return 'white';
+        return 'light red';
     }
   }
   search()

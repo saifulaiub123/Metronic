@@ -45,14 +45,15 @@
             <th class="min-w-100px"(click)="sortTable('quoteID')"style="cursor: pointer;">Quote Id <i class="fa" [ngClass]="sortIcon('quoteID')"></i></th>
             <th class="min-w-100px"(click)="sortTable('custnmbr')"style="cursor: pointer;">Site Id <i class="fa" [ngClass]="sortIcon('custnmbr')"></i></th>
             <th class="min-w-100px"(click)="sortTable('custname')"style="cursor: pointer;">Site Name <i class="fa" [ngClass]="sortIcon('custname')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('stopDaysCount')"style="cursor: pointer;">Status <i class="fa" [ngClass]="sortIcon('stopDaysCount')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('reminderType')"style="cursor: pointer;">Description <i class="fa" [ngClass]="sortIcon('reminderType')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('modifiedBy')"style="cursor: pointer;">Quote Priority <i class="fa" [ngClass]="sortIcon('modifiedBy')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('modifiedDate')"style="cursor: pointer;">Quote Owner <i class="fa" [ngClass]="sortIcon('modifiedDate')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('modifiedBy')"style="cursor: pointer;">Quote Amount <i class="fa" [ngClass]="sortIcon('modifiedBy')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('modifiedDate')"style="cursor: pointer;">Quote Created On <i class="fa" [ngClass]="sortIcon('modifiedDate')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('modifiedBy')"style="cursor: pointer;">Modified On <i class="fa" [ngClass]="sortIcon('modifiedBy')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('modifiedDate')"style="cursor: pointer;">Age <i class="fa" [ngClass]="sortIcon('modifiedDate')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quoteStatus')"style="cursor: pointer;">Status <i class="fa" [ngClass]="sortIcon('quoteStatus')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quoteReason')"style="cursor: pointer;">Description <i class="fa" [ngClass]="sortIcon('quoteReason')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quotePriority')"style="cursor: pointer;">Quote Priority <i class="fa" [ngClass]="sortIcon('quotePriority')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quotedOwner')"style="cursor: pointer;">Quote Owner <i class="fa" [ngClass]="sortIcon('quotedOwner')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quoteAmount')"style="cursor: pointer;">Quote Amount <i class="fa" [ngClass]="sortIcon('quoteAmount')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('quotedOn')"style="cursor: pointer;">Quote Created On <i class="fa" [ngClass]="sortIcon('quotedOn')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('dateStatusChanged')"style="cursor: pointer;">Modified On <i class="fa" [ngClass]="sortIcon('dateStatusChanged')"></i></th>
+            <th class="min-w-100px"(click)="sortTable('age')"style="cursor: pointer;">Age <i class="fa" [ngClass]="sortIcon('age')"></i></th>
+            <th class="min-w-25px">Edit</th>
             
           
             <!-- <th class="min-w-200px text-end rounded-end"></th> -->
@@ -73,7 +74,7 @@
             <td>
               <span class="badge badge-light-primary fs-7 fw-bold">{{quotes.custname}}</span>
             </td>
-            <td>
+            <td class=""[style.backgroundColor]="getColorByStatus(quotes.quoteStatus)"[style.color]="'white'">
               {{quotes.quoteStatus}}
             </td>
 
@@ -106,6 +107,14 @@
             <!-- <td>
 
             </td> -->
+            <td>
+              <a [routerLink]="['', 'quotes','edit',quotes.quoteID] " class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 ">
+              <span
+                [inlineSVG]="'./assets/media/icons/duotune/art/art005.svg'"
+                class="svg-icon svg-icon-3"
+              ></span>
+            </a>
+            </td>
             
 
           </tr>

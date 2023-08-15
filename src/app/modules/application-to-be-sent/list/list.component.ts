@@ -171,7 +171,7 @@ export class ListComponent implements OnInit {
     }
  
     this.quotesService.GetAppToBeSent(quotesRequestBody).subscribe((data: any)  => {
-      this.quotesList = data && data.length > 0 ? data.slice(0,10) : [];
+      this.quotesList = data && data.length > 0 ? data : [];
       // this.paginationObj = data.paginationObj;
 
     })

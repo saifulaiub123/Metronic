@@ -87,7 +87,7 @@ export class DashboardToBeSentQuotesTableComponent implements OnInit {
   loadData()
   {
     this.dashboardService.getToBeSentQuotesData(this.filter).subscribe(res => {
-      this.toBeSentQuotes = res;
+      this.toBeSentQuotes = res && res.length > 0 ? res.slice(0,10) : [];
 
       // this.toBeSentQuotes = _.take(_.sortBy(res,['quotedOn'], ['desc']),10);
     })

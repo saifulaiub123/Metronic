@@ -31,7 +31,7 @@
           </td>
           <td>
             <div class="input-group">
-              <input type="text" class="form-control form-control-sm form-control-solid" formControlName="SearchText">
+              <input type="text" class="form-control form-control-sm form-control-solid" placeholder="Search" formControlName="SearchText">
               <div class="input-group-append ">
                 <button class="btn btn-secondary btn-sm" type="button" (click)="search()">
                   <i class="fa fa-search"></i>
@@ -93,7 +93,7 @@
 
           <tr *ngFor="let quotes of quotesList; let i = index;" [ngStyle]="{ 'background-color': isQuoteSelected(quotes) ? 'lightyellow' : 'inherit' }">
             <td>
-              <span (click)="openQuoteDetailsModal(quotes.quoteID)"
+              <span (click)="openQuoteDetailsModal(quotes.custNmbr)"
                 class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">
                 {{quotes.custNmbr}}
               </span>
@@ -126,7 +126,7 @@
               class="form-check-input widget-9-check"
               style="border:solid; border-color: lightblue; cursor: pointer;"
               type="checkbox"
-              [checked]="selectedQuotes.includes(quotes.quoteID)"
+              [checked]="selectedQuotes.includes(quotes.custNmbr)"
               (click)="rowSelect(quotes)"/>
             </td>
 
