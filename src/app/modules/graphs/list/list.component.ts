@@ -6,16 +6,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { QuoteDetailsModalComponent } from '../modal/quote-details/quote-details.component';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
+import { DatePipe } from '@angular/common';
+import { toInteger } from 'lodash';
 
-interface Quote {
-  [key: string]: string;
-  custNmbr: string;
-  custName: string;
-  stopDaysCount: string;
-  reminderType: string;
-  modifiedBy: string;
-  modifiedDate: string;
-}
+
 
 @Component({
   selector: 'app-site-maintenance-list',
@@ -23,76 +17,26 @@ interface Quote {
   styleUrls: []
 })
 export class ListComponent implements OnInit {
-  quotesList : Quote[] = [] ;
+  quotesList : any = {} ;
   accountManagers : any = [];
   Type : any = [{}];
   selectedQuotes: string[] = [];
   quotefilterForm = this.fb.group({
-    AccountManager : ['A'],
-    Type : ['A'],
-    SearchText : null
+    AccountManager : ['A']
   });
+  formattedDate: string = "";
 
-  sortedColumn: string = '';
-  sortDirection: number = 1;
-
-  sortTable(column: string): void {
-    if (this.sortedColumn === column) {
-      this.sortDirection = -this.sortDirection;
-    } else {
-      this.sortedColumn = column;
-      this.sortDirection = 1;
-    }
-
-    this.quotesList.sort((a, b) => {
-      const aValue = a[column];
-      const bValue = b[column];
-
-      
-
-
-      if (aValue < bValue) {
-        //console.log("b greater");
-        return -1 * this.sortDirection;
-      } else if (aValue > bValue) {
-        //console.log("a greater");
-        return 1 * this.sortDirection;
-      } else {
-        return 0;
-      }
-
-  // Handle other cases here, if needed
   
-    });
-  }
-
-  sortIcon(column: string): string {
-    if (this.sortedColumn === column) {
-      return this.sortDirection === 1 ? 'fa-sort-up' : 'fa-sort-down';
-    }
-    return 'fa-sort';
-  }
-
-  selectAllRows(event: any): void {
-    if (event.target.checked) {
-      // Select all quotes
-      this.selectedQuotes = this.quotesList.map(quote => quote.quoteID);
-    } else {
-      // Deselect all quotes
-      this.selectedQuotes = [];
-    }
-  }
-
-  isQuoteSelected(quote: Quote): boolean {
-    return this.selectedQuotes.includes(quote.custNmbr);
-  } 
+  
+  
 
   constructor(
     private quotesService : QuotesService,
     private fb: FormBuilder,
     private modalService: NgbModal,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
     ) {
 
       router.events.subscribe((event) => {
@@ -100,7 +44,17 @@ export class ListComponent implements OnInit {
           let browserRefresh = !router.navigated;
         }
       });
+      const date = new Date();
+      this.formattedDate = this.formatDate(date);
     }
+    search() {
+    const selectedDate = (document.getElementById('datepicker') as HTMLInputElement).value;
+    // Perform search action using the selected date
+    console.log('Searching for:', selectedDate);
+    this.formattedDate = selectedDate;
+    this.LoadData();
+  }
+    
 
   ngOnInit(): void {
 
@@ -110,20 +64,20 @@ export class ListComponent implements OnInit {
         console.log(pageReloading)
       }
   });
-    
-  this.route.queryParamMap.subscribe((params) => {
-    if(params.has('Type'))
-    {
-      this.quotefilterForm.controls['Type'].setValue(params.get('Type'));
-    }
-  }
 
-);
-
+  
     this.LoadData();
     this.LoadFilters();
     // this.LoadFiscalYears();
     this.onFilterChanges();
+    console.log( this.formattedDate);
+  }
+
+  public formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   public LoadData()
@@ -132,8 +86,8 @@ export class ListComponent implements OnInit {
     quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
     
 
-    this.quotesService.getReports(quotesRequestBody).subscribe((data: any)  => {
-      this.quotesList = data && data.length > 0 ? data.slice(0,100) : [];
+    this.quotesService.getQuoteSummary(this.formattedDate, quotesRequestBody).subscribe((data: any)  => {
+      this.quotesList = data;
       // this.paginationObj = data.paginationObj;
 
     })
@@ -152,8 +106,6 @@ export class ListComponent implements OnInit {
         //   this.LoadData(false);
         //  }
     })
-
-
   }
 
   public LoadFilters()
@@ -161,33 +113,12 @@ export class ListComponent implements OnInit {
     this.quotesService.getQuoteAccountManagers('A').subscribe(data  => {
     this.accountManagers = data;
     });
-
   }
 
   splitString(str: string): string[] {
     return str.split(';');
   }
 
-
-  openQuoteDetailsModal(quoteId: any) {
-
-
-  }
-
-  rowSelect(quote: any)
-  {
-    if(this.selectedQuotes.includes(quote.custNmbr.trim()))
-    {
-      this.selectedQuotes.splice(this.selectedQuotes.indexOf(quote.custNmbr.trim()),1);
-    }
-    else{
-      this.selectedQuotes.push(quote.custNmbr.trim());
-    }
-  }
-  changeStatus()
-  {
-
-  }
 
   getColorByStatus(status: string): string {
     switch (status) {
@@ -223,10 +154,5 @@ export class ListComponent implements OnInit {
         return 'light red';
     }
   }
-  search()
-  {
-    this.quotesService.GetSearchedSiteDetails(this.quotefilterForm.value.SearchText).subscribe((data: any)  => {
-      this.quotesList = data && data.length > 0 ? data.slice(0,10) : [];
-    })
-  }
+  
 }

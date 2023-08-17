@@ -43,6 +43,11 @@ export class QuotesService {
     return this.http.get(`${this.API}/quotes/GetReports/${filtersObj.Type}/${filtersObj.AccountManager}`,{ headers : this.headers });
   }
 
+  getQuoteSummary(date : string,filtersObj : any)
+  {
+    return this.http.get(`${this.API}/quotes/GetQuoteSummary/${date}/${filtersObj.AccountManager}`,{ headers : this.headers });
+  }
+
   getQuoteAccountManagers(dept: string)
   {
     return this.http.get(`${this.API}/quotes/GetManagers/${dept}`,{ headers : this.headers});
