@@ -46,7 +46,6 @@ export class FilterDropdownComponent implements OnInit {
   ngOnInit() {
     localStorage.setItem("AccountManagers", JSON.stringify(this.accountManagers));
     this.LoadAccountManager();
-    // this.subscribeFilterDataChange();
     this.publishFilterData();
 
   }
@@ -57,10 +56,12 @@ export class FilterDropdownComponent implements OnInit {
 
     this.dashboardService.getAccountManagers(dept).subscribe(data  => {
       this.accountManagers = data;
+      this.quotefilterForm.patchValue({
+        AccountManager: 'A'
+      });
       localStorage.setItem("AccountMangers", this.accountManagers);
       this.publishFilterData();
     });
-      //this.OnFilterDataChange();//need to be removed before final push
   }
 
 
@@ -69,7 +70,6 @@ export class FilterDropdownComponent implements OnInit {
     this.quotefilterForm.valueChanges.subscribe(data => {
       if (this.quotefilterForm.valid) {
         this.LoadAccountManager();
-        //this.publishFilterData();
       }
     });
   }
