@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReportsRoutingModule } from './reports-routing.module';
+import { QuoteAmountsRoutingModule } from './quote_amounts-routing.module';
 import { ListComponent } from './list/list.component';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutModule } from 'src/app/_metronic/layout';
@@ -8,6 +8,7 @@ import { InlineSVGModule } from 'ng-inline-svg-2';
 import { CoreModule } from 'src/app/core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WidgetsModule } from 'src/app/_metronic/partials';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { WidgetsModule } from 'src/app/_metronic/partials';
   ],
   imports: [
     ReactiveFormsModule,
-    ReportsRoutingModule,
+    QuoteAmountsRoutingModule,
     WidgetsModule,
     SharedModule,
     LayoutModule,
@@ -23,6 +24,9 @@ import { WidgetsModule } from 'src/app/_metronic/partials';
     CoreModule,
     FormsModule,
     CommonModule,
-  ]
+  ],
+  providers: [
+    DatePipe // Make sure DatePipe is included in the providers array
+  ],
 })
-export class ReportsModule { }
+export class QuoteAmountsModule { }

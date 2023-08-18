@@ -18,6 +18,10 @@ const Routing: Routes = [
     loadChildren : () => import('../modules/reports/reports.module').then(m => m.ReportsModule),
   },
   {
+    path: 'quote-amounts',
+    loadChildren : () => import('../modules/graphs/quote_amounts.module').then(m => m.QuoteAmountsModule),
+  },
+  {
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
