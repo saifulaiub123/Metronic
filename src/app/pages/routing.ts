@@ -31,6 +31,11 @@ const Routing: Routes = [
     loadChildren: () =>
       import('./dashboard-view/dashboard-view.module').then((m) => m.DashboardViewModule),
   },
+  {
+    path:'wid',
+    loadChildren: () =>
+    import('./dashboard-view/wid.component').then((m) => m.WindowIdComponent),
+  },
 
 
   {

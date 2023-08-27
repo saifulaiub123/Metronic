@@ -34,10 +34,10 @@
     <!-- begin::Item-->
     <div class="timeline-item" *ngFor="let data of recentActivities">
       <!-- begin::Label-->
-      <div class="timeline-label fw-bolder text-gray-800 fs-6">{{data.date | date: 'H:mm'}}</div>
+      <div class="timeline-label fw-bolder text-gray-800 fs-6"style="width: 64px;">{{data.date | date}}</div>
       <!-- end::Label-->
       <!-- begin::Badge-->
-      <div class="timeline-badge">
+      <div class="timeline-badge" >
         <i class="fa fa-genderless text-warning fs-1"></i>
       </div>
       <!-- end::Badge-->
@@ -45,7 +45,7 @@
       <br class="fw-mormal timeline-content text-muted ps-3">
       <div style="padding-left: 10px;">
          {{data.quoteID}}, {{data.quoteOwner}}<br>
-        Quote status changed on {{data.date | date: 'yyyy/mm/dd H:mm'}}
+        Quote status changed on <i class="fas fa-clock"></i> {{data.date | date: 'hh:mm a'}}
       </div>
       <!-- end::Text-->
     </div>

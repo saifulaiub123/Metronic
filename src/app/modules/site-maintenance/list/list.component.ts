@@ -54,9 +54,9 @@ export class ListComponent implements OnInit {
   fromEditPage: boolean = false;
   quotefilterForm = this.fb.group({
     AccountManager : ['A'],
-    Type : ['A'],
-    SearchText : null
+    Type : ['A']
   });
+  SearchText = ""
   paginationObj  : any = {};//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
 
   sortedColumn: string = '';
@@ -180,7 +180,6 @@ export class ListComponent implements OnInit {
   public onFilterChanges()
   {
   // this.quotefilterForm.controls.QuoteID.enable({onlySelf: true,emitEvent:false});
-    this.quotefilterForm.controls.SearchText.enable({onlySelf: true,emitEvent:false});
     this.quotefilterForm.valueChanges.pipe(startWith(undefined), pairwise())
     .subscribe(valuesArray => {
          this.LoadData()
@@ -258,13 +257,20 @@ export class ListComponent implements OnInit {
   }
   search()
   {
-    if(this.quotefilterForm.value.SearchText !== null && this.quotefilterForm.value.SearchText !== ''){
-    this.quotesService.GetSearchedSiteDetails(this.quotefilterForm.value.SearchText).subscribe((data: any)  => {
+    this.SearchText = (document.getElementById('SearchText') as HTMLInputElement).value;
+    if(this.SearchText !== null && this.SearchText !== ''){
+    this.quotesService.GetSearchedSiteDetails(this.SearchText).subscribe((data: any)  => {
       this.quotesList = data && data.length > 0 ? data : [];
+      console.log(window.name)
     })
     }
     else{
+      this.LoadData();
+      console.log("NULL")
 
     }
+  }
+  getwid(){
+    console.log(window.name)
   }
 }

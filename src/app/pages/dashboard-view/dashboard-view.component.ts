@@ -156,6 +156,7 @@ export class DashboardViewComponent implements OnInit{
     this.dashboardService.getToBeWrittenData(this.filters).subscribe(res => {
       this.toBeWritten = res;
       this.filterSharedService.settoBeWrittenData(res);
+      
     })
     // this.toBeWritten = 15678;//Need to be removed
   }
@@ -196,5 +197,8 @@ export class DashboardViewComponent implements OnInit{
     //   this.filterSharedService.setDashboardData(this.dashboardData);
     // })
     // this.filterSharedService.setDashboardData(this.dashboardData);//should be removed
+  }
+  getwid(){
+    return window.name
   }
 }

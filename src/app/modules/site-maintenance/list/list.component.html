@@ -30,10 +30,10 @@
             </select>
           </td>
           <td>
-            <div class="input-group">
-              <input type="text" class="form-control form-control-sm form-control-solid" placeholder="Search" formControlName="SearchText">
+            <div class="input-group" >
+              <input type="text" class="" placeholder="Search" id="SearchText" (keyup.enter)="search()">
               <div class="input-group-append ">
-                <button class="btn btn-secondary btn-sm" type="button" (click)="search()">
+                <button class="btn btn-primary btn-sm" type="button" (click)="search()">
                   <i class="fa fa-search"></i>
                 </button>
               </div>
@@ -42,6 +42,7 @@
         </tr>
       </table>
     </form>
+    
   </div>
 </div>
 

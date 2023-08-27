@@ -7,6 +7,7 @@ import { ChartsComponent } from 'src/app/modules/widgets-examples/charts/charts.
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { DashboardSalesComponent } from 'src/app/modules/dashboard/dashboard-sales/dashboard-sales.component';
 import { DashboarComponentdModule } from 'src/app/modules/dashboard/dashboard-component.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -24,7 +25,8 @@ import { DashboarComponentdModule } from 'src/app/modules/dashboard/dashboard-co
     ]),
     WidgetsModule,
     ModalsModule,
-    DashboarComponentdModule
+    DashboarComponentdModule,
+    HttpClientModule
   ],
 })
 export class DashboardViewModule { }
