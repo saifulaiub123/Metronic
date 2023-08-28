@@ -57,6 +57,14 @@ export class AuthHTTPService {
     });
   }
 
+  updatePassword(userName: string, password: string, newPassword: string): Observable<any> {
+    return this.http.put<any>(`${this.API}/quotes/UpdatePassword`, {
+      userName,
+      password,
+      newPassword
+    });
+  }
+
   createUser(user: UserModel): Observable<any> {
     user.roles = [2]; // Manager
     user.authToken = 'auth-token-' + Math.random();

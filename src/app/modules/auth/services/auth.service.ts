@@ -18,16 +18,16 @@ export class AuthService implements OnDestroy {
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
   // public fields
-  currentUser$: Observable<UserType>;
+  currentUser$: Observable<any>;
   isLoading$: Observable<boolean>;
-  currentUserSubject: BehaviorSubject<UserType>;
+  currentUserSubject: BehaviorSubject<any>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
-  get currentUserValue(): UserType {
+  get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
 
-  set currentUserValue(user: UserType) {
+  set currentUserValue(user: any) {
     this.currentUserSubject.next(user);
   }
 
@@ -36,7 +36,7 @@ export class AuthService implements OnDestroy {
     private router: Router
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
-    this.currentUserSubject = new BehaviorSubject<UserType>(undefined);
+    this.currentUserSubject = new BehaviorSubject<any>(undefined);
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.isLoading$ = this.isLoadingSubject.asObservable();
     const subscr = this.getUserByToken().subscribe(data => {});
@@ -130,6 +130,10 @@ export class AuthService implements OnDestroy {
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 
+  updatePassword(currentPassword: string, newPassword: string): Observable<any> {
+    const currentUser = this.currentUserValue;
+    return this.authHttpService.updatePassword(currentUser, currentPassword, newPassword);
+  }
   // private methods
   // private setAuthFromLocalStorage(auth: AuthModel): boolean {
   //   // store auth authToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes

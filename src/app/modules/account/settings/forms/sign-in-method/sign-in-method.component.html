@@ -6,12 +6,12 @@
     data-bs-target="#kt_account_signin_method"
   >
     <div class="card-title m-0">
-      <h3 class="fw-bolder m-0">Sign-in Method</h3>
+      <h3 class="fw-bolder m-0">Update Password</h3>
     </div>
   </div>
   <div id="kt_account_signin_method" class="collapse show">
     <div class="card-body border-top p-9">
-      <ng-container *ngIf="!showChangeEmailForm">
+      <!-- <ng-container *ngIf="!showChangeEmailForm">
         <div class="d-flex flex-wrap align-items-center">
           <div id="kt_signin_email" class="false">
             <div class="fs-6 fw-bolder mb-1">Email Address</div>
@@ -72,14 +72,14 @@
               </div>
             </form>
           </div>
-          <!-- <div id="kt_signin_email_button" class="ms-auto false">
+          <div id="kt_signin_email_button" class="ms-auto false">
             <button
               class="btn btn-light btn-active-light-primary"
               (click)="toggleEmailForm(true)"
             >
               Change Email
             </button>
-          </div> -->
+          </div>
         </div>
       </ng-container>
 
@@ -141,9 +141,9 @@
             </form>
           </div>
         </div>
-      </ng-container>
+      </ng-container> -->
 
-      <div class="separator separator-dashed my-6"></div>
+      <!-- <div class="separator separator-dashed my-6"></div> -->
 
       <ng-container *ngIf="!showChangePasswordForm">
         <div class="d-flex flex-wrap align-items-center mb-10">
@@ -165,7 +165,7 @@
       <ng-container *ngIf="showChangePasswordForm">
         <div class="d-flex flex-wrap align-items-center mb-10">
           <div id="kt_signin_password_edit" class="flex-row-fluid false">
-            <form id="kt_signin_change_password" class="form" novalidate="">
+            <form id="kt_signin_change_password" class="form" [formGroup]="updatePasswordForm" novalidate="novalidate">
               <div class="row mb-1">
                 <div class="col-lg-4">
                   <div class="fv-row mb-0">
@@ -178,6 +178,7 @@
                       class="form-control form-control-lg form-control-solid"
                       id="currentpassword"
                       name="currentPassword"
+                      formControlName="currentPassword"
                       value=""
                     />
                   </div>
@@ -193,6 +194,7 @@
                       class="form-control form-control-lg form-control-solid"
                       id="newpassword"
                       name="newPassword"
+                      formControlName="newPassword"
                       value=""
                     />
                   </div>
@@ -214,7 +216,7 @@
                 </div>
               </div>
               <div class="form-text mb-5">
-                Password must be at least 8 character and contain symbols
+                Password must be at least 3 character and contain symbols
               </div>
               <div class="d-flex">
                 <button
