@@ -11,6 +11,8 @@ const API_USERS_URL = `${environment.apiUrl}/auth`;
   providedIn: 'root',
 })
 export class AuthHTTPService {
+
+  API : string = 'https://localhost:5001/api';
   constructor(private http: HttpClient) {}
 
   // public methods
@@ -23,7 +25,7 @@ export class AuthHTTPService {
 
   // CREATE =>  POST: add a new user to the server
   createUser(user: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(API_USERS_URL, user);
+    return this.http.post<UserModel>(`${this.API}/quotes/validate`, user);
   }
 
   // Your server should check email => If email exists send link to the user and return true | If email doesn't exist return false
