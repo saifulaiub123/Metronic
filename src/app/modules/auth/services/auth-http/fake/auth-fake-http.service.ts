@@ -20,42 +20,42 @@ export class AuthHTTPService {
   constructor(private http: HttpClient) {}
 
   // public methods
-  login(email: string, password: string): Observable<any> {
-    const notFoundError = new Error('Not Found');
-    if (!email || !password) {
-      return of(notFoundError);
-    }
+  // login(email: string, password: string): Observable<any> {
+  //   const notFoundError = new Error('Not Found');
+  //   if (!email || !password) {
+  //     return of(notFoundError);
+  //   }
 
-    return this.getAllUsers().pipe(
-      map((result: UserModel[]) => {
-        if (result.length <= 0) {
-          return notFoundError;
-        }
+  //   return this.getAllUsers().pipe(
+  //     map((result: UserModel[]) => {
+  //       if (result.length <= 0) {
+  //         return notFoundError;
+  //       }
 
-        const user = result.find((u) => {
-          return (
-            u.email.toLowerCase() === email.toLowerCase() &&
-            u.password === password
-          );
-        });
-        if (!user) {
-          return notFoundError;
-        }
+  //       const user = result.find((u) => {
+  //         return (
+  //           u.email.toLowerCase() === email.toLowerCase() &&
+  //           u.password === password
+  //         );
+  //       });
+  //       if (!user) {
+  //         return notFoundError;
+  //       }
 
-        const auth = new AuthModel();
-        auth.authToken = user.authToken;
-        auth.refreshToken = user.refreshToken;
-        auth.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
-        return auth;
-      })
-    );
-  }
-  // login(userName: string, password: string): Observable<any> {
-  //   return this.http.post<LoginResponse>(`${API_USERS_URL}/quotes/validate`, {
-  //     userName,
-  //     password,
-  //   });
+  //       const auth = new AuthModel();
+  //       auth.authToken = user.authToken;
+  //       auth.refreshToken = user.refreshToken;
+  //       auth.expiresIn = new Date(Date.now() + 100 * 24 * 60 * 60 * 1000);
+  //       return auth;
+  //     })
+  //   );
   // }
+  login(userName: string, password: string): Observable<any> {
+    return this.http.post<LoginResponse>(`${this.API}/quotes/validate`, {
+      userName,
+      password,
+    });
+  }
 
   createUser(user: UserModel): Observable<any> {
     user.roles = [2]; // Manager

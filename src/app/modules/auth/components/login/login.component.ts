@@ -5,6 +5,8 @@ import { first } from 'rxjs/operators';
 import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginResponse } from '../../models/auth.model';
+import { AuthHTTPService } from '../../services/auth-http';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginComponent implements OnInit, OnDestroy {
   // KeenThemes mock, change it to:
   defaultAuth: any = {
-    email: 'admin@demo.com',
-    password: 'demo',
+    email: '',
+    password: '',
   };
   loginForm: FormGroup;
   hasError: boolean;
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authHttpService: AuthHTTPService,
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -53,16 +56,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   initForm() {
     this.loginForm = this.fb.group({
       email: [
-        this.defaultAuth.email,
+        [],
         Validators.compose([
           Validators.required,
-          Validators.email,
           Validators.minLength(3),
           Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
         ]),
       ],
       password: [
-        this.defaultAuth.password,
+        [],
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -74,17 +76,30 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submit() {
     this.hasError = false;
-    const loginSubscr = this.authService
-      .login(this.f.email.value, this.f.password.value)
-      .pipe(first())
-      .subscribe((user: UserModel | undefined) => {
-        if (user) {
-          this.router.navigate([this.returnUrl]);
-        } else {
-          this.hasError = true;
-        }
-      });
-    this.unsubscribe.push(loginSubscr);
+    const loginSubscr = this.authHttpService.login(this.f.email.value, this.f.password.value)
+    .subscribe(data =>{
+      if(data)
+      {
+        this.authService.setAuthFromLocalStorage(data);
+        this.authService.currentUserSubject.next(data);
+        this.router.navigate([this.returnUrl]);
+      }
+      else
+      {
+        this.hasError = true;
+      }
+    })
+    // const loginSubscr = this.authService
+    //   .login(this.f.email.value, this.f.password.value)
+    //   // .pipe(first())
+    //   .subscribe((user) => {
+    //     if (user) {
+    //       this.router.navigate([this.returnUrl]);
+    //     } else {
+    //       this.hasError = true;
+    //     }
+    //   });
+     this.unsubscribe.push(loginSubscr);
   }
 
   ngOnDestroy() {

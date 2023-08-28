@@ -10,14 +10,14 @@ export class AuthModel {
   }
 }
 
-export class LoginResponse {
+export class LoginResponse extends AuthModel{
   empName: string;
   empLabel: string;
-  windowsId: string;
+  windowsID: string;
 
   setAuth(auth: LoginResponse) {
     this.empName = auth.empName;
     this.empLabel = auth.empLabel;
-    this.windowsId = auth.windowsId;
+    this.windowsID = auth.windowsID;
   }
 }

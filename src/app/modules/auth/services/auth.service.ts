@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
 import { map, catchError, switchMap, finalize } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
-import { AuthModel } from '../models/auth.model';
+import { AuthModel, LoginResponse } from '../models/auth.model';
 import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -39,15 +39,31 @@ export class AuthService implements OnDestroy {
     this.currentUserSubject = new BehaviorSubject<UserType>(undefined);
     this.currentUser$ = this.currentUserSubject.asObservable();
     this.isLoading$ = this.isLoadingSubject.asObservable();
-    const subscr = this.getUserByToken().subscribe();
+    const subscr = this.getUserByToken().subscribe(data => {});
     this.unsubscribe.push(subscr);
   }
 
   // public methods
+  // login(email: string, password: string): Observable<UserType> {
+  //   this.isLoadingSubject.next(true);
+  //   return this.authHttpService.login(email, password).pipe(
+  //     map((auth: AuthModel) => {
+  //       const result = this.setAuthFromLocalStorage(auth);
+  //       return result;
+  //     }),
+  //     switchMap(() => this.getUserByToken()),
+  //     catchError((err) => {
+  //       console.error('err', err);
+  //       return of(undefined);
+  //     }),
+  //     finalize(() => this.isLoadingSubject.next(false))
+  //   );
+  // }
+
   login(email: string, password: string): Observable<UserType> {
     this.isLoadingSubject.next(true);
     return this.authHttpService.login(email, password).pipe(
-      map((auth: AuthModel) => {
+      map((auth: LoginResponse) => {
         const result = this.setAuthFromLocalStorage(auth);
         return result;
       }),
@@ -59,7 +75,6 @@ export class AuthService implements OnDestroy {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
-
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
     this.router.navigate(['/auth/login'], {
@@ -67,24 +82,29 @@ export class AuthService implements OnDestroy {
     });
   }
 
-  getUserByToken(): Observable<UserType> {
+  getUserByToken(): Observable<any> {
     const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.authToken) {
+    if (!auth || !auth.windowsID) {
       return of(undefined);
     }
 
     this.isLoadingSubject.next(true);
-    return this.authHttpService.getUserByToken(auth.authToken).pipe(
-      map((user: UserType) => {
-        if (user) {
-          this.currentUserSubject.next(user);
-        } else {
-          this.logout();
-        }
-        return user;
-      }),
-      finalize(() => this.isLoadingSubject.next(false))
-    );
+
+    this.currentUserSubject.next(auth);
+
+    this.isLoadingSubject.next(false)
+    return of(auth);
+    // return this.authHttpService.getUserByToken(auth.authToken).pipe(
+    //   map((user: UserType) => {
+    //     if (user) {
+    //       this.currentUserSubject.next(user);
+    //     } else {
+    //       this.logout();
+    //     }
+    //     return user;
+    //   }),
+    //   finalize(() => this.isLoadingSubject.next(false))
+    // );
   }
 
   // need create new user then login
@@ -111,16 +131,24 @@ export class AuthService implements OnDestroy {
   }
 
   // private methods
-  private setAuthFromLocalStorage(auth: AuthModel): boolean {
+  // private setAuthFromLocalStorage(auth: AuthModel): boolean {
+  //   // store auth authToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
+  //   if (auth && auth.authToken) {
+  //     localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
+  public setAuthFromLocalStorage(auth: LoginResponse): boolean {
     // store auth authToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes
-    if (auth && auth.authToken) {
+    if (auth && auth.windowsID) {
       localStorage.setItem(this.authLocalStorageToken, JSON.stringify(auth));
       return true;
     }
     return false;
   }
-
-  private getAuthFromLocalStorage(): AuthModel | undefined {
+  private getAuthFromLocalStorage(): any | undefined {
     try {
       const lsValue = localStorage.getItem(this.authLocalStorageToken);
       if (!lsValue) {
