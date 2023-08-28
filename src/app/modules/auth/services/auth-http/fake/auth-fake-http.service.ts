@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { UserModel } from '../../../models/user.model';
-import { AuthModel } from '../../../models/auth.model';
+import { AuthModel, LoginResponse } from '../../../models/auth.model';
 import { UsersTable } from '../../../../../_fake/users.table';
 import { environment } from '../../../../../../environments/environment';
 
@@ -14,6 +14,9 @@ const API_USERS_URL = `${environment.apiUrl}/users`;
   providedIn: 'root',
 })
 export class AuthHTTPService {
+
+  API : string = 'https://localhost:5001/api';
+
   constructor(private http: HttpClient) {}
 
   // public methods
@@ -47,6 +50,12 @@ export class AuthHTTPService {
       })
     );
   }
+  // login(userName: string, password: string): Observable<any> {
+  //   return this.http.post<LoginResponse>(`${API_USERS_URL}/quotes/validate`, {
+  //     userName,
+  //     password,
+  //   });
+  // }
 
   createUser(user: UserModel): Observable<any> {
     user.roles = [2]; // Manager

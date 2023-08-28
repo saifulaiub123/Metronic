@@ -9,3 +9,15 @@ export class AuthModel {
     this.expiresIn = auth.expiresIn;
   }
 }
+
+export class LoginResponse {
+  empName: string;
+  empLabel: string;
+  windowsId: string;
+
+  setAuth(auth: LoginResponse) {
+    this.empName = auth.empName;
+    this.empLabel = auth.empLabel;
+    this.windowsId = auth.windowsId;
+  }
+}
