@@ -15,9 +15,9 @@ export class ChangeStatusModalComponent implements OnInit {
   selectedStatus: string = 'SE';
 
   changeStatusForm = this.fb.group({
-    Type : ['0'],
+    Type : [0],
     RemindType : ['V'],
-    StopDaysCount : ['-1']
+    StopDaysCount : [-1]
   });
 
   constructor(public activeModal: NgbActiveModal,
@@ -31,7 +31,12 @@ export class ChangeStatusModalComponent implements OnInit {
   updateStatus()
   {
     try {
+      // Type and stopdays should be int
       let data = this.changeStatusForm.value;
+      if(data.StopDaysCount as number < 365)
+      {
+        data.Type = 1;
+      }
       this.quoteService.updateStopQuoteReminders(this.selectedQuoteIds.join(','),data).subscribe(res=> {
 
       })
