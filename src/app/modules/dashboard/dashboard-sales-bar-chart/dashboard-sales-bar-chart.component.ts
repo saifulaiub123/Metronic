@@ -55,12 +55,13 @@ export class DashboardSalesBarChartComponent implements OnInit {
     const baseColor = getCSSVariableValue('--kt-primary')
     const secondaryColor = getCSSVariableValue('--kt-gray-300')
     const categories = this.data.map((element) => element['statusDesc']);
-    const amounts = this.data.map((element) => element['quoteAmount']);
+    // const amounts = this.data.map((element) => element['quoteAmount']);
+    const counts = this.data.map((element) => element['countStatus']);
     return {
       series: [
         {
           name: 'Amount',
-          data: amounts,
+          data: counts,
         },
       ],
       chart: {
@@ -142,7 +143,7 @@ export class DashboardSalesBarChartComponent implements OnInit {
         },
         y: {
           formatter: function (val: number) {
-            return '$' + val + ' thousands';
+            return val;
           },
         },
       },
