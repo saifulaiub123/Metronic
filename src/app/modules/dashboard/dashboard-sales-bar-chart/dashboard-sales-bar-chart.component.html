@@ -8,7 +8,7 @@
   <!-- begin::Toolbar-->
   <div class="card-toolbar">
     <!-- begin::Menu-->
-    <div class="fw-bolder fs-3">${{totalBalance | number : '1.2-2'}}</div>
+    <div class="fw-bolder fs-3" *ngIf="empLevel === 1">${{totalBalance | number : '1.2-2'}}</div>
 
 
     <!-- end::Menu-->

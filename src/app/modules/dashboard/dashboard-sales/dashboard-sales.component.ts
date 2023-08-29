@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as _ from 'lodash';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
+import { AuthService } from '../../auth';
 @Component({
   selector: 'app-dashboard-sales',
   templateUrl: './dashboard-sales.component.html',
@@ -13,14 +14,20 @@ export class DashboardSalesComponent implements OnInit {
   @Input() data: any[] = [];
   @Input() toBeWritten: number = 0;
 
+  empLevel: number = 0;
   subscriptionDashboardFilter$: Subscription;
 
 
   salesData : any[] = [];
   totalBalance : number = 0;
-  constructor(private filterSharedService: DashboardFilterSharedService) { }
+  constructor(private filterSharedService: DashboardFilterSharedService,
+    private auth: AuthService) { }
 
   ngOnInit() {
+    this.auth.currentUserSubject.subscribe(data=>
+    {
+      this.empLevel = data.empLevel;
+    });
     this.loadData();
     this.subscribeSharedServiceData();
   }

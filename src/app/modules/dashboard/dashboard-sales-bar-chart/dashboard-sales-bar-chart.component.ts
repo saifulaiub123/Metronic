@@ -3,6 +3,7 @@ import { getCSSVariableValue } from 'src/app/_metronic/kt/_utils';
 import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth';
 
 @Component({
   selector: 'app-dashboard-sales-bar-chart',
@@ -16,14 +17,18 @@ export class DashboardSalesBarChartComponent implements OnInit {
   @Input() chartColor: string = '';
 
   totalBalance: number = 0;
-
+  empLevel: number = 0;
   subscriptionDashboardData$: Subscription;
   public chartOptions: any = {};
-  constructor(private filterSharedService: DashboardFilterSharedService) {
+  constructor(private filterSharedService: DashboardFilterSharedService,private auth: AuthService) {
     this.chartOptions = this.getChartOptions(this.chartHeight);
   }
 
   ngOnInit(): void {
+    this.auth.currentUserSubject.subscribe(data=>
+    {
+      this.empLevel = data.empLevel;
+    });
     this.subscribeSharedServiceData();
   }
 

@@ -9,9 +9,11 @@
     </div>
     <!-- end::Heading -->
     <!-- begin::Balance -->
-    <div class="d-flex text-center flex-column text-white pt-8">
+    <div class="d-flex text-center flex-column text-white pt-8" *ngIf="empLevel === 1">
       <span class="fw-bold fs-7">Balance</span>
-      <span class="fw-bolder fs-2x pt-1">${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
+      <span class="fw-bolder fs-2x pt-1">
+        <span>${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
+      </span>
     </div>
     <!-- end::Balance -->
   </div>
@@ -44,7 +46,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[1].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[1].quoteAmount | number : '1.2-2'}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder" *ngIf="empLevel === 1">${{salesData[1].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
     </div>
@@ -61,7 +63,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[2].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[2].quoteAmount | number : '1.2-2'}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder" *ngIf="empLevel === 1">${{salesData[2].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
@@ -74,7 +76,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[3].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[3].quoteAmount | number : '1.2-2'}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder" *ngIf="empLevel === 1">${{salesData[3].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
     </div>
@@ -90,7 +92,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[4].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder" *ngIf="empLevel === 1">${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
@@ -103,7 +105,7 @@
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">{{salesData[5].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">${{salesData[5].quoteAmount | number : '1.2-2'}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder"  *ngIf="empLevel === 1">${{salesData[5].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
     </div>

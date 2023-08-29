@@ -77,11 +77,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   submit() {
     this.hasError = false;
     const loginSubscr = this.authHttpService.login(this.f.email.value, this.f.password.value)
-    .subscribe(data =>{
-      if(data)
+    .subscribe((data: any[]) =>{
+      if(data.length > 0)
       {
-        this.authService.setAuthFromLocalStorage(data);
-        this.authService.currentUserSubject.next(data);
+        this.authService.setAuthFromLocalStorage(data[0]);
+        this.authService.currentUserSubject.next(data[0]);
         this.router.navigate([this.returnUrl]);
       }
       else
