@@ -167,7 +167,7 @@ export class ListComponent implements OnInit {
     }
 
     this.quotesService.GetSiteDetails(quotesRequestBody).subscribe((data: any)  => {
-      this.quotesList = data && data.length > 0 ? data : [];
+      this.quotesList = data;
       // this.paginationObj = data.paginationObj;
 
       this.selectedQuotes = this.quotesList
@@ -260,17 +260,13 @@ export class ListComponent implements OnInit {
     this.SearchText = (document.getElementById('SearchText') as HTMLInputElement).value;
     if(this.SearchText !== null && this.SearchText !== ''){
     this.quotesService.GetSearchedSiteDetails(this.SearchText).subscribe((data: any)  => {
-      this.quotesList = data && data.length > 0 ? data : [];
-      console.log(window.name)
+      this.quotesList = data;
     })
     }
     else{
       this.LoadData();
-      console.log("NULL")
 
     }
   }
-  getwid(){
-    console.log(window.name)
-  }
+  
 }

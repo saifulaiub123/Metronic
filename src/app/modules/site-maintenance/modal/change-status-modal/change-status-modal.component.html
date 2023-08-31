@@ -27,15 +27,7 @@
                   </div>
                 </td>
               </tr>
-              <!--<tr>
-                <td>Type</td>
-                <td>
-                  <select id="type" formControlName="Type" style="font-size:10pt;width:150px;padding:4px;">
-                    <option value="0" selected>0</option>
-                    <option value="1">1</option>
-                  </select>
-                </td>
-              </tr> -->
+              
               <tr>
                 <td>Remind Type</td>
                 <td>
@@ -53,14 +45,14 @@
                 <td>
                   <select id="remind-type" formControlName="StopDaysCount" style="font-size:10pt;width:150px;padding:4px;"
                     class="me-5">
-                  <option value="-1" selected>Select</option>
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                  <option value="30">30</option>
-                  <option value="40">40</option>
-                  <option value="50">50</option>
-                  <option value="365000">Permanent Stop</option>
-                  <option value="0">Permanent Allow</option>
+                  <option value=-1 selected>Select</option>
+                  <option value=10>10</option>
+                  <option value=20>20</option>
+                  <option value=30>30</option>
+                  <option value=40>40</option>
+                  <option value=50>50</option>
+                  <option value=365000>Permanent Stop</option>
+                  <option value=0>Permanent Allow</option>
                   </select>
                 </td>
               </tr>
@@ -70,6 +62,9 @@
       </div>
 
     </div>
+  </div>
+  <div class="text-center">
+    <h4 class="align-items-center" id="error-msg" style="color: brown;"*ngIf="showErrorMsg">Please Select Days to Stop</h4>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="updateStatus()">Change Status</button>

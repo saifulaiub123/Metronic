@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WidgetsModule } from 'src/app/_metronic/partials';
 import { DatePipe } from '@angular/common';
 
+
 @NgModule({
   declarations: [
     ListComponent

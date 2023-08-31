@@ -17,7 +17,7 @@
         <label class="col-lg-4 col-form-label fw-bold fs-6">New Status :</label>
         <div class="col-lg-8">
             <select class="form-select form-select-solid form-select-lg" name="quoteOwner" [(ngModel)]="selectedStatus">
-              <option value="SE" selected>Select</option>
+              <option value="" selected>Select</option>
               <option value="VI">Viewed</option>
               <option value="ID">In Discussion</option>
               <option value="AC">Accepted</option>
@@ -28,6 +28,9 @@
         </div>
     </div>
     </div>
+  </div>
+  <div class="text-center">
+    <h4 class="align-items-center" id="error-msg" style="color: brown;"*ngIf="showErrorMsg">Please Select a Valid Status</h4>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="updateStatus()">Change Status</button>

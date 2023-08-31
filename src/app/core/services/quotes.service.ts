@@ -72,30 +72,26 @@ export class QuotesService {
   {
     return this.http.get<QuoteChartDetails[]>(`${this.API}/quotes/GetQuoteChartDetails`,{ headers : this.headers});
   }
-  updateQuoteStatus(quotes: string, status: string)
+  updateQuoteStatus(quotes: string, status: string, empName: string)
   {
-    return this.http.put(`${this.API}/quotes/UpdateStatus/${quotes}/${status}/Admin`,{});
+    return this.http.put(`${this.API}/quotes/UpdateStatus/${quotes}/${status}/${empName}`,{});
   }
-  updateQuote(id: string, quote: any)
+  updateQuote(id: string, quote: any,name: string)
   {
-    return this.http.put(`${this.API}/quotes/UpdateQuote/${id}/${quote.contactName}/${quote.contactEmail}/${quote.quoteStatus}/${quote.Notes}/${quote.quotePriority}/${quote.quoteOwner}/z/1`,{});
+    return this.http.put(`${this.API}/quotes/UpdateQuote/${id}/${quote.contactName}/${quote.contactEmail}/${quote.quoteStatus}/${quote.Notes}/${quote.quotePriority}/${quote.quoteOwner}/${name}/${quote.purchaseReq}`,{});
   }
 
-  updateAppToBeSentStatus(quotes: string)
+  updateAppToBeSentStatus(quotes: string, empName: string)
   {
-    return this.http.put(`${this.API}/quotes/UpdateToBeSentStatus/${quotes}/Admin`,{});
+    return this.http.put(`${this.API}/quotes/UpdateToBeSentStatus/${quotes}/${empName}`,{});
   }
   searchedQuoteGrid(text: string | undefined, pageNumber: number)
   {
     return this.http.get<QuoteChartDetails[]>(`${this.API}/quotes/searchedgrid/${text}/${pageNumber}`,{ headers : this.headers});
   }
-  // updateStopQuoteReminders(quotes: string, type?: string, remindType?: string, stopDaysCount? : number)
-  // {
-  //   return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/${type}/${stopDaysCount}/${remindType}/Admin`,{});
-  // }
-  updateStopQuoteReminders(quotes: string, data: any)
+  updateStopQuoteReminders(quotes: string, data: any, empName: string)
   {
-    return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/${data.Type}/${data.StopDaysCount}/${data.RemindType}/Admin`,{});
+    return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/${data.Type}/${data.StopDaysCount}/${data.RemindType}/${empName}`,{});
   }
 
 }

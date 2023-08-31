@@ -55,12 +55,15 @@ export class DashboardSalesBarChartComponent implements OnInit {
     const baseColor = getCSSVariableValue('--kt-primary')
     const secondaryColor = getCSSVariableValue('--kt-gray-300')
     const categories = this.data.map((element) => element['statusDesc']);
-    // const amounts = this.data.map((element) => element['quoteAmount']);
+    const amounts = this.data.map((element) => element['quoteAmount']);
     const counts = this.data.map((element) => element['countStatus']);
+    const empLevel = this.empLevel;
+    const seriesName = empLevel == 1 ? 'Amount' : 'Count';
     return {
+      
       series: [
         {
-          name: 'Amount',
+          name: seriesName,
           data: counts,
         },
       ],
@@ -70,6 +73,14 @@ export class DashboardSalesBarChartComponent implements OnInit {
         height: height,
         toolbar: {
           show: false,
+        },
+        events: {
+          dataPointMouseEnter: function (event: any, chartContext: any, config: any) {
+            // Get the amount value for the hovered data point
+            const amount = amounts[config.dataPointIndex];
+            // Update the tooltip content with the amount value
+            chartContext.w.globals.tooltip.title.formatter = () => amount;
+          },
         },
       },
       plotOptions: {
@@ -106,6 +117,7 @@ export class DashboardSalesBarChartComponent implements OnInit {
         },
       },
       yaxis: {
+        text: 'Count',
         labels: {
           style: {
             colors: labelColor,
@@ -138,14 +150,22 @@ export class DashboardSalesBarChartComponent implements OnInit {
         },
       },
       tooltip: {
+        enabled: true,
         style: {
           fontSize: '12px',
         },
         y: {
-          formatter: function (val: number) {
-            return val;
-          },
+          formatter: function (val: number, { seriesIndex, dataPointIndex, w }: { seriesIndex: number, dataPointIndex: number, w: any }) {
+          if (empLevel == 1) {
+            const amount = amounts[dataPointIndex]; // Get the amount for the hovered data point
+            const formattedAmount = parseFloat(amount).toLocaleString('en-US', { style: 'currency', currency: 'USD' }); // Format amount as USD
+            return `${formattedAmount}`; // Display count and amount in USD
+          }
+          else{
+            return `${val}`;
+          }
         },
+      },
       },
       colors: [baseColor, secondaryColor],
       grid: {
