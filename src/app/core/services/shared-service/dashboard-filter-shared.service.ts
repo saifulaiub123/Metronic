@@ -78,4 +78,15 @@ export class DashboardFilterSharedService {
   {
     this.toBeSentTable$.next([]);
   }
+
+  private isHome$ = new BehaviorSubject<any>(false);
+  isHomePage$ = this.isHome$.asObservable();
+
+  setHomePage(isHome: boolean) {
+    this.isHome$.next(isHome);
+  }
+  resetHomePage()
+  {
+    this.isHome$.next(null);
+  }
 }

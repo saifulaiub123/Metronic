@@ -8,6 +8,7 @@ import { ChangeStatusModalComponent } from '../modal/change-status-modal/change-
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
 import { QuoteSharedService } from '../quote-shared.service';
+import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 
 interface Quote {
   [key:string]: string;
@@ -133,7 +134,8 @@ export class QuotesListComponent implements OnInit {
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router,
-    private quoteSharedService: QuoteSharedService
+    private quoteSharedService: QuoteSharedService,
+    private filterDashboardService: DashboardFilterSharedService
     ) {
 
       router.events.subscribe((event) => {
@@ -159,6 +161,7 @@ export class QuotesListComponent implements OnInit {
     }
 
   );
+    this.filterDashboardService.setHomePage(false);
     this.subscribeSharedServiceData();
     this.LoadQuotes(true);
     this.LoadFilters();

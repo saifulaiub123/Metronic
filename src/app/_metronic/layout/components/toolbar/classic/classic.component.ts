@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LayoutService } from '../../../core/layout.service';
+import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 
 @Component({
   selector: 'app-classic',
@@ -9,6 +10,7 @@ import { LayoutService } from '../../../core/layout.service';
 })
 export class ClassicComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];
+  isHomePage : any = null;
   appToolbarPrimaryButton: boolean;
   appToolbarPrimaryButtonLabel: string = '';
   appToolbarPrimaryButtonUrl: string = '';
@@ -24,7 +26,7 @@ export class ClassicComponent implements OnInit, OnDestroy {
   filterButtonClass: string = '';
   daterangepickerButtonClass: string = '';
 
-  constructor(private layout: LayoutService) {}
+  constructor(private layout: LayoutService, private filterDashboardService: DashboardFilterSharedService) {}
 
   ngOnInit(): void {
     this.updateProps();
@@ -34,6 +36,14 @@ export class ClassicComponent implements OnInit, OnDestroy {
         this.updateProps();
       });
     this.unsubscribe.push(subscr);
+
+    this.filterDashboardService.isHomePage$.subscribe((data: boolean) =>{
+      if(data !== null)
+      {
+        this.isHomePage = data;
+        this.filterDashboardService.resetHomePage();
+      }
+    })
   }
 
   updateProps() {

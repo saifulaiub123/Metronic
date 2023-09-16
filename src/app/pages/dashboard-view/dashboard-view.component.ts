@@ -131,7 +131,7 @@ export class DashboardViewComponent implements OnInit{
     this.subscribeSharedServiceData();
     this.getToBeWrittenData();
     this.getWeeklyQuotes();
-
+    this.filterSharedService.setHomePage(true);
   }
 
   async openModal() {
@@ -156,7 +156,7 @@ export class DashboardViewComponent implements OnInit{
     this.dashboardService.getToBeWrittenData(this.filters).subscribe(res => {
       this.toBeWritten = res;
       this.filterSharedService.settoBeWrittenData(res);
-      
+
     })
     // this.toBeWritten = 15678;//Need to be removed
   }
