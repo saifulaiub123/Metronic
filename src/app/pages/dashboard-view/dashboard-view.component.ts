@@ -198,7 +198,4 @@ export class DashboardViewComponent implements OnInit{
     // })
     // this.filterSharedService.setDashboardData(this.dashboardData);//should be removed
   }
-  getwid(){
-    return window.name
-  }
 }
