@@ -25,36 +25,36 @@ export class DashboardViewComponent implements OnInit{
   }
   dashboardData : any = [
     {
-        "countStatus": 6,
+        "countStatus": 0,
         "status": "SE",
-        "quoteAmount": 306178.65,
+        "quoteAmount": 0,
         "statusDesc": "Sent",
         "sortOrder": 1,
         "curMonth": 7,
         "curYear": 2023
     },
     {
-        "countStatus": 2,
+        "countStatus": 0,
         "status": "VI",
-        "quoteAmount": 6997.14,
+        "quoteAmount": 0,
         "statusDesc": "Viewed",
         "sortOrder": 2,
         "curMonth": 7,
         "curYear": 2023
     },
     {
-        "countStatus": 15,
+        "countStatus": 0,
         "status": "ID",
-        "quoteAmount": 143021.12,
+        "quoteAmount": 0,
         "statusDesc": "In Discussion",
         "sortOrder": 3,
         "curMonth": 7,
         "curYear": 2023
     },
     {
-        "countStatus": 2,
+        "countStatus": 0,
         "status": "AC",
-        "quoteAmount": 6625,
+        "quoteAmount": 0,
         "statusDesc": "Accepted",
         "sortOrder": 4,
         "curMonth": 7,
@@ -70,18 +70,18 @@ export class DashboardViewComponent implements OnInit{
         "curYear": 2023
     },
     {
-        "countStatus": 22,
+        "countStatus": 0,
         "status": "DR",
-        "quoteAmount": 171438.91,
+        "quoteAmount": 0,
         "statusDesc": "To Be Sent",
         "sortOrder": 6,
         "curMonth": 7,
         "curYear": 2023
     },
     {
-        "countStatus": 11,
+        "countStatus": 0,
         "status": "CN",
-        "quoteAmount": 49077.87,
+        "quoteAmount": 0,
         "statusDesc": "Cancelled",
         "sortOrder": 7,
         "curMonth": 7,
@@ -114,7 +114,7 @@ export class DashboardViewComponent implements OnInit{
     },
     {
         "date": "2023-06-25T00:00:00",
-        "quotes": 19
+        "quotes": 0
     },
     {
         "date": "2023-07-02T00:00:00",

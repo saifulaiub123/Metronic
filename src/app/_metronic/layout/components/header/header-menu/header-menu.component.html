@@ -65,37 +65,61 @@
         w-lg-225px
       " data-kt-menu-dismiss="true" data-popper-placement="bottom-start">
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
-      <a href="/reports?Type=Waiting to be approved Quotes" class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
+      <a
+      routerLinkActive="active menu-here" 
+      [routerLink]="['/reports']"
+      [queryParams]="{ Type: 'Waiting to be approved Quotes'}"
+      class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Waiting to be approved Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
-      <a href="/reports?Type=TM Quotes" class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
+      <a 
+      routerLinkActive="active menu-here" 
+      [routerLink]="['/reports']"
+      [queryParams]="{ Type: 'TM Quotes'}"
+      class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">TM Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
-      <a href="/reports?Type=Battery Installation Quotes" class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
+      <a
+      routerLinkActive="active menu-here" 
+      [routerLink]="['/reports']"
+      [queryParams]="{ Type: 'Battery Installation Quotes'}"
+       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Battery Installation Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
-      <a href="/reports?Type=Critical Quotes" class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
+      <a 
+      routerLinkActive="active menu-here" 
+      [routerLink]="['/reports']"
+      [queryParams]="{ Type: 'Critical Quotes'}"
+      class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Critical Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
-      <a href="/reports?Type=Expiring Today" class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
+      <a 
+      routerLinkActive="active menu-here" 
+      [routerLink]="['/reports']"
+      [queryParams]="{ Type: 'Expiring Today'}"
+      class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Expiring Today</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
-      <a href="/reports?Type=CapAndFans Installation Quotes" class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
+      <a 
+      routerLinkActive="active menu-here" 
+      [routerLink]="['/reports']"
+      [queryParams]="{ Type: 'CapAndFans Installation Quotes'}"
+      class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Cap And Fans Installation Quotes</span>
       </a>
@@ -120,7 +144,10 @@ py-lg-4
 w-lg-225px
 " data-kt-menu-dismiss="true" data-popper-placement="bottom-start">
 <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
-<a href="/quote-amounts" class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
+<a 
+routerLinkActive="active menu-here" 
+      [routerLink]="['/quote-amounts']"
+      class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
 <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
 <span class="menu-title" data-link="/crafted/widgets">Quote Amounts</span>
 </a>
