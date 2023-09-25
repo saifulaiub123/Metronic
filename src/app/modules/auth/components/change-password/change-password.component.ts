@@ -90,7 +90,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     .subscribe((data: any) =>{
       if(data == 'Success')
       {
-        this.router.navigate(['/']);
+        this.router.navigate(['/auth/logout']);
       }
       else
       {
