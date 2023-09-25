@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LayoutType } from '../../../core/configs/config';
 import { LayoutInitService } from '../../../core/layout-init.service';
 import { LayoutService } from '../../../core/layout.service';
-import { AuthService } from 'C:/Users/tejas/Downloads/QuoteMasterAngular/src/app/modules/auth';
+import { AuthService } from 'src/app/modules/auth';
 
 @Component({
   selector: 'app-header-menu',

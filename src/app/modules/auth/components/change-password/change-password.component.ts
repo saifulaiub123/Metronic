@@ -9,11 +9,11 @@ import { LoginResponse } from '../../models/auth.model';
 import { AuthHTTPService } from '../../services/auth-http';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class ChangePasswordComponent implements OnInit, OnDestroy {
   // KeenThemes mock, change it to:
   defaultAuth: any = {
     email: '',
@@ -55,20 +55,22 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.loginForm = this.fb.group({
-      email: [
+      currentPassword: [
         [],
         Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+          Validators.required
         ]),
       ],
-      password: [
+      newPassword: [
         [],
         Validators.compose([
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
+          Validators.required
+        ]),
+      ],
+      confirmPassword: [
+        [],
+        Validators.compose([
+          Validators.required
         ]),
       ],
     });
@@ -82,11 +84,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       {
         this.authService.setAuthFromLocalStorage(data[0]);
         this.authService.currentUserSubject.next(data[0]);
-        localStorage.setItem('userData', data[0]);
-        if(data[0].firstLogin = 0)
-        {
-          this.router.navigate(['/change-password']);
-        }
         this.router.navigate([this.returnUrl]);
       }
       else
@@ -111,3 +108,4 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }
+
