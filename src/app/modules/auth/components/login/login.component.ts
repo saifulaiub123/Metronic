@@ -83,11 +83,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authService.setAuthFromLocalStorage(data[0]);
         this.authService.currentUserSubject.next(data[0]);
         localStorage.setItem('userData', data[0]);
-        if(data[0].firstLogin = 0)
+        if(data[0].firstLogin == 0)
         {
-          this.router.navigate(['/change-password']);
+          this.router.navigateByUrl('/auth/change-password');
         }
-        this.router.navigate([this.returnUrl]);
+        else{
+          this.router.navigate([this.returnUrl]);
+        }
+        
       }
       else
       {

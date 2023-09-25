@@ -23,6 +23,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   hasError: boolean;
   returnUrl: string;
   isLoading$: Observable<boolean>;
+  errorMessage: string;
 
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
@@ -37,16 +38,16 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
-    if (this.authService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
+    // if (this.authService.currentUserValue) {
+    //   this.router.navigate(['/']);
+    // }
   }
 
   ngOnInit(): void {
     this.initForm();
     // get return url from route parameters or default to '/'
-    this.returnUrl =
-      this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
+    // this.returnUrl =
+    //   this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
   }
 
   // convenience getter for easy access to form fields
@@ -79,22 +80,21 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   submit() {
     this.hasError = false;
+    let p = this.changePasswordForm.controls;
+    if( this.changePasswordForm.controls['newpassword'].value !=  this.changePasswordForm.controls['confirmPassword'].value)
+    {
+      this.errorMessage = 'Password not matched';
+    }
     const loginSubscr = this._authService.updatePassword(this.f.currentPassword.value, this.f.newPassword.value)
-    .subscribe((data: any[]) =>{
-      if(data.length > 0)
+    .subscribe((data: any) =>{
+      if(data == 'Success')
       {
-        this.authService.setAuthFromLocalStorage(data[0]);
-        this.authService.currentUserSubject.next(data[0]);
-        localStorage.setItem('userData', data[0]);
-        if(data[0].firstLogin == 0)
-        {
-          this.router.navigate([this.returnUrl]);
-        }
-        this.router.navigate(['change-password']);
+        this.router.navigate(['/']);
       }
       else
       {
         this.hasError = true;
+        this.errorMessage = data;
       }
     })
     // const loginSubscr = this.authService
