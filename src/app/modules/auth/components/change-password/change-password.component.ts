@@ -81,8 +81,9 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   submit() {
     this.hasError = false;
     let p = this.changePasswordForm.controls;
-    if( this.changePasswordForm.controls['newpassword'].value !=  this.changePasswordForm.controls['confirmPassword'].value)
+    if( this.changePasswordForm.controls.newPassword.value !=  this.changePasswordForm.controls.confirmPassword.value)
     {
+      this.hasError = true;
       this.errorMessage = 'Password not matched';
     }
     const loginSubscr = this._authService.updatePassword(this.f.currentPassword.value, this.f.newPassword.value)
