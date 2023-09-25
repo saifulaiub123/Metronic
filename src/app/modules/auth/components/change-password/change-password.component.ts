@@ -84,7 +84,12 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
       {
         this.authService.setAuthFromLocalStorage(data[0]);
         this.authService.currentUserSubject.next(data[0]);
-        this.router.navigate([this.returnUrl]);
+        localStorage.setItem('userData', data[0]);
+        if(data[0].firstLogin == 0)
+        {
+          this.router.navigate([this.returnUrl]);
+        }
+        this.router.navigate(['change-password']);
       }
       else
       {
