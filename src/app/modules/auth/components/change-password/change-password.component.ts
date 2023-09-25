@@ -19,7 +19,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     email: '',
     password: '',
   };
-  loginForm: FormGroup;
+  changePasswordForm: FormGroup;
   hasError: boolean;
   returnUrl: string;
   isLoading$: Observable<boolean>;
@@ -33,6 +33,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private authHttpService: AuthHTTPService,
+    private _authService: AuthService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -50,11 +51,11 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   // convenience getter for easy access to form fields
   get f() {
-    return this.loginForm.controls;
+    return this.changePasswordForm.controls;
   }
 
   initForm() {
-    this.loginForm = this.fb.group({
+    this.changePasswordForm = this.fb.group({
       currentPassword: [
         [],
         Validators.compose([
@@ -78,7 +79,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   submit() {
     this.hasError = false;
-    const loginSubscr = this.authHttpService.login(this.f.email.value, this.f.password.value)
+    const loginSubscr = this._authService.updatePassword(this.f.currentPassword.value, this.f.newPassword.value)
     .subscribe((data: any[]) =>{
       if(data.length > 0)
       {
