@@ -15,6 +15,7 @@ export class DashboardSalesComponent implements OnInit {
   @Input() toBeWritten: number = 0;
 
   empLevel: number = 0;
+  empName: string = '';
   subscriptionDashboardFilter$: Subscription;
 
 
@@ -27,6 +28,7 @@ export class DashboardSalesComponent implements OnInit {
     this.auth.currentUserSubject.subscribe(data=>
     {
       this.empLevel = data.empLevel;
+      this.empName = data.empName;
     });
     this.loadData();
     this.subscribeSharedServiceData();

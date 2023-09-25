@@ -144,6 +144,10 @@ export class ListComponent implements OnInit {
           this.fromEditPage = true;
         }
       }
+      if(params.has('quoteOwner'))
+      {
+        this.quotefilterForm.controls['AccountManager'].setValue(params.get('quoteOwner'));
+      }
     }
   );
 

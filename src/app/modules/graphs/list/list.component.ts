@@ -65,6 +65,13 @@ export class ListComponent implements OnInit {
       }
   });
 
+  this.route.queryParamMap.subscribe((params) => {
+    if(params.has('quoteOwner'))
+    {
+      this.quotefilterForm.controls['AccountManager'].setValue(params.get('quoteOwner'));
+    }
+  });
+
   
     this.LoadData();
     this.LoadFilters();

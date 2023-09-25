@@ -15,7 +15,7 @@ export class DashboardService {
   private headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*'
   });
-  // API : string = 'https://localhost:44387/api';
+  //API : string = 'http://www.testquoteapi.com/api';
   API : string = 'https://localhost:5001/api';
 
   getDashboardData(filtersObj : any)

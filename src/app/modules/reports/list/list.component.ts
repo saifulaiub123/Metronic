@@ -116,9 +116,11 @@ export class ListComponent implements OnInit {
     {
       this.quotefilterForm.controls['Type'].setValue(params.get('Type'));
     }
-  }
-
-);
+    if(params.has('quoteOwner'))
+    {
+      this.quotefilterForm.controls['AccountManager'].setValue(params.get('quoteOwner'));
+    }
+  });
 
     this.LoadData();
     this.LoadFilters();

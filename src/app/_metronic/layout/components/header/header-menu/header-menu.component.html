@@ -8,7 +8,7 @@
 </div>
 
 <div class="menu-item me-lg-1">
-  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/quotes/list"><span class="menu-title">My Quotes</span></a>
+  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/quotes/list" [queryParams]="{ quoteOwner: empName}"><span class="menu-title">My Quotes</span></a>
 </div>
 
 
@@ -24,7 +24,7 @@
       w-lg-225px
     " data-kt-menu-dismiss="true" data-popper-placement="bottom-start" >
     <a class="menu-item menu-lg-down-accordion me-lg-1 menu-link" 
-      data-kt-menu-placement="right-start" routerLinkActive="active"  routerLink="/application-sent" >
+      data-kt-menu-placement="right-start" routerLinkActive="active"  routerLink="/application-sent"  [queryParams]="{ quoteOwner: empName}">
       <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/application-sent')" ><span class="menu-icon"><i
             class="bi fs-3 bi-layers"></i></span><span class="menu-title">Automation To Be Sent</span></span>
     </a>
@@ -68,7 +68,7 @@
       <a
       routerLinkActive="active menu-here" 
       [routerLink]="['/reports']"
-      [queryParams]="{ Type: 'Waiting to be approved Quotes'}"
+      [queryParams]="{ Type: 'Waiting to be approved Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Waiting to be approved Quotes</span>
@@ -78,7 +78,7 @@
       <a 
       routerLinkActive="active menu-here" 
       [routerLink]="['/reports']"
-      [queryParams]="{ Type: 'TM Quotes'}"
+      [queryParams]="{ Type: 'TM Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">TM Quotes</span>
@@ -88,7 +88,7 @@
       <a
       routerLinkActive="active menu-here" 
       [routerLink]="['/reports']"
-      [queryParams]="{ Type: 'Battery Installation Quotes'}"
+      [queryParams]="{ Type: 'Battery Installation Quotes',quoteOwner: empName}"
        class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Battery Installation Quotes</span>
@@ -98,7 +98,7 @@
       <a 
       routerLinkActive="active menu-here" 
       [routerLink]="['/reports']"
-      [queryParams]="{ Type: 'Critical Quotes'}"
+      [queryParams]="{ Type: 'Critical Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Critical Quotes</span>
@@ -108,7 +108,7 @@
       <a 
       routerLinkActive="active menu-here" 
       [routerLink]="['/reports']"
-      [queryParams]="{ Type: 'Expiring Today'}"
+      [queryParams]="{ Type: 'Expiring Today',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Expiring Today</span>
@@ -118,7 +118,7 @@
       <a 
       routerLinkActive="active menu-here" 
       [routerLink]="['/reports']"
-      [queryParams]="{ Type: 'CapAndFans Installation Quotes'}"
+      [queryParams]="{ Type: 'CapAndFans Installation Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
         <span class="menu-title" data-link="/crafted/widgets">Cap And Fans Installation Quotes</span>
@@ -146,7 +146,7 @@ w-lg-225px
 <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
 <a 
 routerLinkActive="active menu-here" 
-      [routerLink]="['/quote-amounts']"
+      [routerLink]="['/quote-amounts']" [queryParams]="{ quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
 <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
 <span class="menu-title" data-link="/crafted/widgets">Quote Amounts</span>
@@ -168,7 +168,7 @@ routerLinkActive="active menu-here"
       w-lg-225px
     " data-kt-menu-dismiss="true" data-popper-placement="bottom-start" >
     <a class="menu-item menu-lg-down-accordion me-lg-1 menu-link" 
-      data-kt-menu-placement="right-start" routerLinkActive="active"  routerLink="/site-maintenance" >
+      data-kt-menu-placement="right-start" routerLinkActive="active"  routerLink="/site-maintenance" [queryParams]="{ quoteOwner: empName}">
       <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/site-maintenance')" ><span class="menu-icon"><i
             class="bi fs-3 bi-layers"></i></span><span class="menu-title">Site Maintenance</span></span>
       </a>

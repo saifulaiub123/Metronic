@@ -158,6 +158,10 @@ export class QuotesListComponent implements OnInit {
       {
         this.quotefilterForm.controls['QuoteStatus'].setValue(params.get('status'));
       }
+      if(params.has('quoteOwner'))
+      {
+        this.quotefilterForm.controls['AccountManager'].setValue(params.get('quoteOwner'));
+      }
     }
 
   );
@@ -216,11 +220,11 @@ export class QuotesListComponent implements OnInit {
     }
 
 
-    //Needs to be Modified
+    
     if(quotesRequestBody.QuoteID == ''){
       quotesRequestBody.QuoteID = null;
     }
-    //Needs to be Modified
+    
     if(quotesRequestBody.PageNumber == undefined){
       quotesRequestBody.PageNumber = 1;
     }
