@@ -58,7 +58,7 @@ export class AuthHTTPService {
     });
   }
 
-  updatePassword(userName: string, password: string, newPassword: string): Observable<any> {
+  updatePassword(userName: string, password: string, newPassword: string){
     return this.http.put<any>(`${this.API}/quotes/UpdatePassword`, {
       userName,
       password,

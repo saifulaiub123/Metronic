@@ -130,9 +130,12 @@ export class AuthService implements OnDestroy {
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 
-  updatePassword(currentPassword: string, newPassword: string): Observable<any> {
+  updatePassword(currentPassword: string, newPassword: string) {
     const currentUser = this.currentUserValue;
-    return this.authHttpService.updatePassword(currentUser, currentPassword, newPassword);
+    return this.authHttpService.updatePassword(currentUser, currentPassword, newPassword).pipe(
+      map((data: any) => {
+        return data;
+      }))
   }
   // private methods
   // private setAuthFromLocalStorage(auth: AuthModel): boolean {

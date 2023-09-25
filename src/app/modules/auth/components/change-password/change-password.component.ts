@@ -86,9 +86,10 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
       this.hasError = true;
       this.errorMessage = 'Password not matched';
     }
-    const loginSubscr = this._authService.updatePassword(this.f.currentPassword.value, this.f.newPassword.value)
+    const currentUser = this._authService.currentUserValue;
+     this.authHttpService.updatePassword(currentUser,this.f.currentPassword.value, this.f.newPassword.value)
     .subscribe((data: any) =>{
-      if(data == 'Success')
+      if(data == 'Password updated successfully.')
       {
         this.router.navigate(['/auth/logout']);
       }
@@ -108,11 +109,11 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     //       this.hasError = true;
     //     }
     //   });
-     this.unsubscribe.push(loginSubscr);
+     
   }
 
   ngOnDestroy() {
-    this.unsubscribe.forEach((sb) => sb.unsubscribe());
+    //this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }
 
