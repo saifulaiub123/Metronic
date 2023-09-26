@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,7 +20,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     password: '',
   };
   changePasswordForm: FormGroup;
-  hasError: boolean;
+  hasError: boolean = false;
   returnUrl: string;
   isLoading$: Observable<boolean>;
   errorMessage: string;
@@ -80,41 +80,30 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   submit() {
     this.hasError = false;
-    let p = this.changePasswordForm.controls;
     if( this.changePasswordForm.controls.newPassword.value !=  this.changePasswordForm.controls.confirmPassword.value)
     {
       this.hasError = true;
       this.errorMessage = 'Password not matched';
     }
     const currentUser = this._authService.currentUserValue;
-     this.authHttpService.updatePassword(currentUser,this.f.currentPassword.value, this.f.newPassword.value)
-     .pipe(first())
-     .subscribe((data: any) =>{
-      if(data == 'Password updated successfully.')
-      {
-        this.router.navigate(['/auth/logout']);
-      }
-      else
-      {
-        this.hasError = true;
-        this.errorMessage = data;
-      }
-    })
-    // const loginSubscr = this.authService
-    //   .login(this.f.email.value, this.f.password.value)
-    //   // .pipe(first())
-    //   .subscribe((user) => {
-    //     if (user) {
-    //       this.router.navigate([this.returnUrl]);
-    //     } else {
-    //       this.hasError = true;
-    //     }
-    //   });
-     
+    const loginSubscr = this.authHttpService.updatePassword(currentUser,this.f.currentPassword.value, this.f.newPassword.value)
+    .subscribe(response => {
+        if(response.status == 200)
+        {
+          this.router.navigate(['/auth/logout']);
+        }
+        else{
+          this.hasError = true;
+          this.errorMessage = "Password update failed";
+        }
+    }, error => {
+          console.log(error.status);
+    });
+    this.unsubscribe.push(loginSubscr);
   }
 
   ngOnDestroy() {
-    //this.unsubscribe.forEach((sb) => sb.unsubscribe());
+    this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 }
 

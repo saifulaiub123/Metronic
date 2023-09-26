@@ -75,11 +75,12 @@ export class SignInMethodComponent implements OnInit, OnDestroy {
 
   savePassword() {
     this.isLoading$.next(true);
-    this.authService.updatePassword(this.f.currentPassword.value, this.f.newPassword.value).subscribe((data : string)=> {
-      if(!data.includes('success'))
+    this.authService.updatePassword(this.f.currentPassword.value, this.f.newPassword.value).subscribe(res => {
+      if(res.status !== 200)
       {
         this.updateSuccess = false;
       }
+      this.isLoading = false;
     })
     // setTimeout(() => {
     //   this.isLoading$.next(false);

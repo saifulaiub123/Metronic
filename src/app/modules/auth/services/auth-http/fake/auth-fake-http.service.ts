@@ -58,12 +58,13 @@ export class AuthHTTPService {
     });
   }
 
-  updatePassword(userName: string, password: string, newPassword: string): Observable<any> {
-    return this.http.put<any>(`${this.API}/quotes/UpdatePassword`, {
+  updatePassword(userName: string, password: string, newPassword: string) : Observable<any>
+  {
+    return this.http.put(`${this.API}/quotes/UpdatePassword`, {
       userName,
       password,
       newPassword
-    });
+    },{ observe: 'response' });
   }
 
   createUser(user: UserModel): Observable<any> {
