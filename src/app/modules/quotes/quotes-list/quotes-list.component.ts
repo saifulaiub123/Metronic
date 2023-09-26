@@ -34,6 +34,7 @@ export class QuotesListComponent implements OnInit {
 
   quotesList : Quote[] = [] ;
   accountManagers : any = [];
+  quoteOwner: any;
   quoteStatus : any = [];
   chartData : QuoteChartDetails[];
   fiscalYears : Array<number> = [];
@@ -160,6 +161,7 @@ export class QuotesListComponent implements OnInit {
       }
       if(params.has('quoteOwner'))
       {
+        this.quoteOwner = params.get('quoteOwner');
         this.quotefilterForm.controls['AccountManager'].setValue(params.get('quoteOwner'));
       }
     }
@@ -220,11 +222,11 @@ export class QuotesListComponent implements OnInit {
     }
 
 
-    
+
     if(quotesRequestBody.QuoteID == ''){
       quotesRequestBody.QuoteID = null;
     }
-    
+
     if(quotesRequestBody.PageNumber == undefined){
       quotesRequestBody.PageNumber = 1;
     }
@@ -274,9 +276,16 @@ export class QuotesListComponent implements OnInit {
 
   public LoadFilters()
   {
-    this.quotesService.getQuoteAccountManagers('A').subscribe(data  => {
+    this.quotesService.getQuoteAccountManagers('A').subscribe((data : any)  => {
     this.accountManagers = data;
-
+    const searchIndex = data.find((x: { text: string; }) => x.text.trim() == this.quoteOwner);
+    if(searchIndex === undefined)
+    {
+      this.quotefilterForm.controls['AccountManager'].setValue('A');
+    }
+    else{
+      this.quotefilterForm.controls['AccountManager'].setValue(this.quoteOwner);
+    }
     });
 
     this.quotesService.getQuoteStatus().subscribe(data  => {
