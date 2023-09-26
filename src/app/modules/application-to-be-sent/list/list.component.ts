@@ -30,6 +30,8 @@ interface Quote {
 export class ListComponent implements OnInit {
   quotesList : Quote[] = [] ;
   accountManagers : any = [];
+  quoteOwner: any;
+
   quoteStatus : any = [
     {
       statusDesc:"In Progress",
@@ -91,7 +93,7 @@ export class ListComponent implements OnInit {
       }
 
   // Handle other cases here, if needed
-  
+
     });
   }
 
@@ -114,9 +116,9 @@ export class ListComponent implements OnInit {
 
   isQuoteSelected(quote: Quote): boolean {
     return this.selectedQuotes.includes(quote.quoteID);
-  }  
+  }
 
-  
+
   constructor(
     private quotesService : QuotesService,
     private fb: FormBuilder,
@@ -152,7 +154,7 @@ export class ListComponent implements OnInit {
       {
         this.quotefilterForm.controls['AccountManager'].setValue(params.get('quoteOwner'));
       }
-    } 
+    }
   );
 
     this.LoadData();
@@ -173,7 +175,7 @@ export class ListComponent implements OnInit {
     {
       quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
     }
- 
+
     this.quotesService.GetAppToBeSent(quotesRequestBody).subscribe((data: any)  => {
       this.quotesList = data && data.length > 0 ? data : [];
       // this.paginationObj = data.paginationObj;
@@ -188,7 +190,7 @@ export class ListComponent implements OnInit {
     .subscribe(valuesArray => {
          this.LoadData()
          this.selectedQuotes = [];
-      
+
         //  if ((oldVal !== undefined && oldVal['QuoteID'] === newVal?.QuoteID)) {
         //   this.paginationObj['PageNumber'] = 1;
         //   this.LoadData(false);
@@ -200,9 +202,17 @@ export class ListComponent implements OnInit {
 
   public LoadFilters()
   {
-    this.quotesService.getQuoteAccountManagers('A').subscribe(data  => {
-    this.accountManagers = data;
-    });
+    this.quotesService.getQuoteAccountManagers('A').subscribe((data: any)  => {
+      this.accountManagers = data;
+      const searchIndex = data.find((x: { text: string; }) => x.text.trim() == this.quoteOwner);
+      if(searchIndex === undefined)
+      {
+        this.quotefilterForm.controls['AccountManager'].setValue('A');
+      }
+      else{
+        this.quotefilterForm.controls['AccountManager'].setValue(this.quoteOwner);
+      }
+      });
 
   }
 
@@ -210,9 +220,9 @@ export class ListComponent implements OnInit {
     return str.split(';');
   }
 
-  
+
   openQuoteDetailsModal(quoteId: any) {
-  
+
 
   }
   openChangeStatusModal(){
@@ -253,7 +263,7 @@ export class ListComponent implements OnInit {
         return 'black'; // Default color when the status doesn't match any case
     }
   }
- 
 
-  
+
+
 }

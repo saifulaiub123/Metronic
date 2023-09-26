@@ -25,6 +25,7 @@ interface Quote {
 export class ListComponent implements OnInit {
   quotesList : Quote[] = [] ;
   accountManagers : any = [];
+  quoteOwner: any;
   Type : any = [{}];
   selectedQuotes: string[] = [];
   quotefilterForm = this.fb.group({
@@ -48,7 +49,7 @@ export class ListComponent implements OnInit {
       const aValue = a[column];
       const bValue = b[column];
 
-      
+
 
 
       if (aValue < bValue) {
@@ -62,7 +63,7 @@ export class ListComponent implements OnInit {
       }
 
   // Handle other cases here, if needed
-  
+
     });
   }
 
@@ -85,7 +86,7 @@ export class ListComponent implements OnInit {
 
   isQuoteSelected(quote: Quote): boolean {
     return this.selectedQuotes.includes(quote.custNmbr);
-  } 
+  }
 
   constructor(
     private quotesService : QuotesService,
@@ -110,7 +111,7 @@ export class ListComponent implements OnInit {
         console.log(pageReloading)
       }
   });
-    
+
   this.route.queryParamMap.subscribe((params) => {
     if(params.has('Type'))
     {
@@ -132,7 +133,7 @@ export class ListComponent implements OnInit {
   {
     var quotesRequestBody;
     quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
-    
+
 
     this.quotesService.getReports(quotesRequestBody).subscribe((data: any)  => {
       this.quotesList = data && data.length > 0 ? data.slice(0,100) : [];
@@ -160,9 +161,17 @@ export class ListComponent implements OnInit {
 
   public LoadFilters()
   {
-    this.quotesService.getQuoteAccountManagers('A').subscribe(data  => {
-    this.accountManagers = data;
-    });
+    this.quotesService.getQuoteAccountManagers('A').subscribe((data: any)  => {
+      this.accountManagers = data;
+      const searchIndex = data.find((x: { text: string; }) => x.text.trim() == this.quoteOwner);
+      if(searchIndex === undefined)
+      {
+        this.quotefilterForm.controls['AccountManager'].setValue('A');
+      }
+      else{
+        this.quotefilterForm.controls['AccountManager'].setValue(this.quoteOwner);
+      }
+      });
 
   }
 

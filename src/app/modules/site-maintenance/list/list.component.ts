@@ -26,6 +26,7 @@ interface Quote {
 })
 export class ListComponent implements OnInit {
   quotesList : Quote[] = [] ;
+  quoteOwner: any;
   accountManagers : any = [];
   Type : any = [
     {
@@ -74,7 +75,7 @@ export class ListComponent implements OnInit {
       const aValue = a[column];
       const bValue = b[column];
 
-      
+
 
 
       if (aValue < bValue) {
@@ -88,7 +89,7 @@ export class ListComponent implements OnInit {
       }
 
   // Handle other cases here, if needed
-  
+
     });
   }
 
@@ -111,7 +112,7 @@ export class ListComponent implements OnInit {
 
   isQuoteSelected(quote: Quote): boolean {
     return this.selectedQuotes.includes(quote.custNmbr);
-  } 
+  }
 
   constructor(
     private quotesService : QuotesService,
@@ -200,9 +201,17 @@ export class ListComponent implements OnInit {
 
   public LoadFilters()
   {
-    this.quotesService.getQuoteAccountManagers('A').subscribe(data  => {
-    this.accountManagers = data;
-    });
+    this.quotesService.getQuoteAccountManagers('A').subscribe((data: any)  => {
+      this.accountManagers = data;
+      const searchIndex = data.find((x: { text: string; }) => x.text.trim() == this.quoteOwner);
+      if(searchIndex === undefined)
+      {
+        this.quotefilterForm.controls['AccountManager'].setValue('A');
+      }
+      else{
+        this.quotefilterForm.controls['AccountManager'].setValue(this.quoteOwner);
+      }
+      });
 
   }
 
@@ -272,5 +281,5 @@ export class ListComponent implements OnInit {
 
     }
   }
-  
+
 }

@@ -19,6 +19,7 @@ import { toInteger } from 'lodash';
 export class ListComponent implements OnInit {
   quotesList : any = {} ;
   accountManagers : any = [];
+  quoteOwner: any;
   Type : any = [{}];
   selectedQuotes: string[] = [];
   quotefilterForm = this.fb.group({
@@ -26,9 +27,9 @@ export class ListComponent implements OnInit {
   });
   formattedDate: string = "";
 
-  
-  
-  
+
+
+
 
   constructor(
     private quotesService : QuotesService,
@@ -54,7 +55,7 @@ export class ListComponent implements OnInit {
     this.formattedDate = selectedDate;
     this.LoadData();
   }
-    
+
 
   ngOnInit(): void {
 
@@ -72,7 +73,7 @@ export class ListComponent implements OnInit {
     }
   });
 
-  
+
     this.LoadData();
     this.LoadFilters();
     // this.LoadFiscalYears();
@@ -91,7 +92,7 @@ export class ListComponent implements OnInit {
   {
     var quotesRequestBody;
     quotesRequestBody = JSON.parse(JSON.stringify(this.quotefilterForm.value));
-    
+
 
     this.quotesService.getQuoteSummary(this.formattedDate, quotesRequestBody).subscribe((data: any)  => {
       this.quotesList = data;
@@ -117,9 +118,17 @@ export class ListComponent implements OnInit {
 
   public LoadFilters()
   {
-    this.quotesService.getQuoteAccountManagers('A').subscribe(data  => {
-    this.accountManagers = data;
-    });
+    this.quotesService.getQuoteAccountManagers('A').subscribe((data: any)  => {
+      this.accountManagers = data;
+      const searchIndex = data.find((x: { text: string; }) => x.text.trim() == this.quoteOwner);
+      if(searchIndex === undefined)
+      {
+        this.quotefilterForm.controls['AccountManager'].setValue('A');
+      }
+      else{
+        this.quotefilterForm.controls['AccountManager'].setValue(this.quoteOwner);
+      }
+      });
   }
 
   splitString(str: string): string[] {
@@ -161,5 +170,5 @@ export class ListComponent implements OnInit {
         return 'light red';
     }
   }
-  
+
 }
