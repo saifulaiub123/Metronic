@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { ModalComponent, ModalConfig } from 'src/app/_metronic/partials';
 import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 import * as _ from 'lodash';
@@ -129,8 +129,6 @@ export class DashboardViewComponent implements OnInit{
 
   ngOnInit(): void {
     this.subscribeSharedServiceData();
-    this.getToBeWrittenData();
-    this.getWeeklyQuotes();
     this.filterSharedService.setHomePage(true);
   }
 
@@ -151,51 +149,28 @@ export class DashboardViewComponent implements OnInit{
      });
   }
 
-  getToBeWrittenData()
-  {
-    this.dashboardService.getToBeWrittenData(this.filters).subscribe(res => {
-      this.toBeWritten = res;
-      this.filterSharedService.settoBeWrittenData(res);
-
-    })
-    // this.toBeWritten = 15678;//Need to be removed
-  }
-  getWeeklyQuotes()
-  {
-    this.dashboardService.getWeeklyQuotes(this.filters).subscribe(res => {
-      this.weeklyQuotes = res
-      this.filterSharedService.setWeeklyQuotesData(this.weeklyQuotes);
-    })
-    // this.filterSharedService.setWeeklyQuotesData(this.weeklyQuotes);//Need to be removed
-  }
-  getSalesSummaryData()
-  {
-    this.dashboardService.getDashboardData(this.filters).subscribe(res => {
-      this.dashboardData = res;
-      this.filterSharedService.setDashboardData(this.dashboardData);
-    })
-    this.filterSharedService.setDashboardData(this.dashboardData);
-
-  }
-  getToBeWrittenTableData()
-  {
-    this.filterSharedService.setToBeWrittenTableData(this.filters);
-  }
+  
+  
   getToBeSentTableData()
   {
     this.filterSharedService.setToBeSentTableData(this.filters);
   }
-  loadDashboardData()
-  {
-    this.getSalesSummaryData();
-    this.getToBeWrittenData();
-    this.getWeeklyQuotes();
-    this.getToBeWrittenTableData();
-    this.getToBeSentTableData();
-    // this.dashboardService.getWeeklyQuotes(this.filters).subscribe(res => {
-    //   this.dashboardData = res;
-    //   this.filterSharedService.setDashboardData(this.dashboardData);
-    // })
-    // this.filterSharedService.setDashboardData(this.dashboardData);//should be removed
+  loadDashboardData() {
+    combineLatest([
+      this.dashboardService.getDashboardData(this.filters),
+      this.dashboardService.getToBeWrittenData(this.filters),
+      this.dashboardService.getWeeklyQuotes(this.filters),
+    ]).subscribe(([dashboardData, toBeWritten, weeklyQuotes]) => {
+      this.dashboardData = dashboardData;
+      this.toBeWritten = toBeWritten;
+      this.weeklyQuotes = weeklyQuotes;
+
+      this.filterSharedService.setDashboardData(dashboardData);
+      this.filterSharedService.settoBeWrittenData(toBeWritten);
+      this.filterSharedService.setWeeklyQuotesData(weeklyQuotes);
+
+      
+      this.getToBeSentTableData();
+    });
   }
 }

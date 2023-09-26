@@ -88,7 +88,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     }
     const currentUser = this._authService.currentUserValue;
      this.authHttpService.updatePassword(currentUser,this.f.currentPassword.value, this.f.newPassword.value)
-    .subscribe((data: any) =>{
+     .pipe(first())
+     .subscribe((data: any) =>{
       if(data == 'Password updated successfully.')
       {
         this.router.navigate(['/auth/logout']);
