@@ -84,6 +84,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     {
       this.hasError = true;
       this.errorMessage = 'Password not matched';
+      return;
     }
     const currentUser = this._authService.currentUserValue;
     const loginSubscr = this.authHttpService.updatePassword(currentUser,this.f.currentPassword.value, this.f.newPassword.value)
