@@ -108,8 +108,7 @@ export class DashboardRecentActivitiesComponent implements OnInit {
 
   loadData()
   {
-    console.log(this.filter)
-    this.dashboardService.getRecentActivitiesData(this.filter).subscribe((res) => {
+    this.dashboardService.getRecentActivitiesData(this.filter.accountManager).subscribe((res) => {
       this.recentActivities = res.sort((a, b) => {
         let da : any = new Date(a.date),
             db : any = new Date(b.date);

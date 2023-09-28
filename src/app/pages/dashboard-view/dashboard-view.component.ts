@@ -21,7 +21,7 @@ export class DashboardViewComponent implements OnInit{
   subscriptionDashboardFilter$: Subscription;
   filters : any = {
     department : 'A',
-    accountManager : 'A'
+    accountManager : 'Erik Sureda'
   }
   dashboardData : any = [
     {
@@ -151,10 +151,10 @@ export class DashboardViewComponent implements OnInit{
 
   
   
-  getToBeSentTableData()
-  {
-    this.filterSharedService.setToBeSentTableData(this.filters);
-  }
+  //getToBeSentTableData()
+  //{
+    //this.filterSharedService.setToBeSentTableData(this.filters);
+  //}
   loadDashboardData() {
     combineLatest([
       this.dashboardService.getDashboardData(this.filters),
@@ -162,15 +162,15 @@ export class DashboardViewComponent implements OnInit{
       this.dashboardService.getWeeklyQuotes(this.filters),
     ]).subscribe(([dashboardData, toBeWritten, weeklyQuotes]) => {
       this.dashboardData = dashboardData;
-      this.toBeWritten = toBeWritten;
+      //this.toBeWritten = toBeWritten;
       this.weeklyQuotes = weeklyQuotes;
 
       this.filterSharedService.setDashboardData(dashboardData);
-      this.filterSharedService.settoBeWrittenData(toBeWritten);
-      this.filterSharedService.setWeeklyQuotesData(weeklyQuotes);
+      //this.filterSharedService.settoBeWrittenData(toBeWritten);
+      //this.filterSharedService.setWeeklyQuotesData(weeklyQuotes);
 
       
-      this.getToBeSentTableData();
+      //this.getToBeSentTableData();
     });
   }
 }

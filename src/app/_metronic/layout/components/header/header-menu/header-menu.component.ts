@@ -18,8 +18,73 @@ export class HeaderMenuComponent implements OnInit {
   ngOnInit() {
     this.auth.currentUserSubject.subscribe(data=>
       {
-        this.empName = data.empName;
+        this.empName = data.empName.trim();
       });
+
+      const link1 = document.getElementById('r1');
+      const link2 = document.getElementById('r2');
+      const link3 = document.getElementById('r3');
+      const link4 = document.getElementById('r4');
+      const link5 = document.getElementById('r5');
+      const link6 = document.getElementById('r6');
+      const link7 = document.getElementById('r7');
+      // Add more variables for additional links if needed
+  
+      if (link1) {
+        link1.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when Link 1 is clicked
+        });
+      }
+  
+      if (link2) {
+        link2.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when Link 1 is clicked
+        });
+      }
+
+      if (link3) {
+        link3.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when Link 1 is clicked
+        });
+      }
+
+      if (link4) {
+        link4.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when Link 1 is clicked
+        });
+      }
+  
+      if (link5) {
+        link5.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when Link 1 is clicked
+        });
+      }
+
+      if (link6) {
+        link6.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when Link 1 is clicked
+        });
+      }
+
+      if (link7) {
+        link7.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when Link 1 is clicked
+        });
+      }
   }
 
   calculateMenuItemCssClass(url: string): string {

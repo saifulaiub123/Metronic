@@ -95,5 +95,10 @@ export class QuotesService {
     return this.http.put(`${this.API}/quotes/UpdateStopReminders/${quotes}/${data.Type}/${data.StopDaysCount}/${data.RemindType}/${empName}`,{});
   }
 
+  importQuotes(quoteOwner: string)
+  {
+    return this.http.put(`${this.API}/quotes/ImportQuotes/${quoteOwner}`,{});
+  }
+
 }
 
