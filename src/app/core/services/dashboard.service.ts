@@ -38,9 +38,9 @@ export class DashboardService {
   {
     return this.http.get<ToBeWrittenQuotes[]>(`${this.API}/quotes/GetQuoteDashboardToBeWrittenQuotes/${filtersObj.accountManager}`,{ headers : this.headers });
   }
-  getRecentActivitiesData(filtersObj : any)
+  getRecentActivitiesData(quoteOwner : string)
   {
-    return this.http.get<RecentActivities[]>(`${this.API}/quotes/GetQuoteDashBoardRecentActivityLog/${filtersObj.accountManager}`,{ headers : this.headers });
+    return this.http.get<RecentActivities[]>(`${this.API}/quotes/GetQuoteDashBoardRecentActivityLog/${quoteOwner}`,{ headers : this.headers });
   }
 
   getToBeSentQuotesData(filtersObj : any)

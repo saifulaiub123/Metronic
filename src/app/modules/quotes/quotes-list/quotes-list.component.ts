@@ -9,6 +9,7 @@ import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular
 import { filter, pairwise, startWith } from 'rxjs/operators'
 import { QuoteSharedService } from '../quote-shared.service';
 import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
+import { AuthService } from '../../auth';
 
 interface Quote {
   [key:string]: string;
@@ -51,6 +52,7 @@ export class QuotesListComponent implements OnInit {
     InitialLoad : false
   });
   paginationObj  : any = null;//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
+  empName: string = '';
 
   months : any[] = [
      {Text : 'All',value:'0'}
@@ -136,7 +138,8 @@ export class QuotesListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private quoteSharedService: QuoteSharedService,
-    private filterDashboardService: DashboardFilterSharedService
+    private filterDashboardService: DashboardFilterSharedService,
+    private auth: AuthService
     ) {
 
       router.events.subscribe((event) => {
@@ -154,6 +157,10 @@ export class QuotesListComponent implements OnInit {
         console.log(pageReloading)
       }
   });
+    this.auth.currentUserSubject.subscribe(data=>
+    {
+      this.empName = data.empName;
+    });
     this.route.queryParamMap.subscribe((params) => {
       if(params.has('status'))
       {
@@ -286,6 +293,7 @@ export class QuotesListComponent implements OnInit {
     else{
       this.quotefilterForm.controls['AccountManager'].setValue(this.quoteOwner);
     }
+    this.LoadQuotes();
     });
 
     this.quotesService.getQuoteStatus().subscribe(data  => {
@@ -338,8 +346,11 @@ export class QuotesListComponent implements OnInit {
       this.selectedQuotes.push(quote.quoteID);
     }
   }
-  changeStatus()
+  importQuotes()
   {
+    this.quotesService.importQuotes(this.empName).subscribe(res=> {
+        
+    });
 
   }
 

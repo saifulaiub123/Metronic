@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginResponse } from '../../models/auth.model';
 import { AuthHTTPService } from '../../services/auth-http';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-change-password',
@@ -34,7 +35,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private authHttpService: AuthHTTPService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private location: Location
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -92,6 +94,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
         if(response.status == 200)
         {
           this.router.navigate(['/auth/logout']);
+          alert("Password has been updated");
         }
         else{
           this.hasError = true;
@@ -105,6 +108,12 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
+  }
+  goBack() {
+    window.history.back(); // Go back one step in the browser history
+  setTimeout(() => {
+    location.reload(); // Reload the current page after a brief delay
+  }, 100);
   }
 }
 

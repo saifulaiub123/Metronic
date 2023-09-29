@@ -147,6 +147,7 @@ export class ListComponent implements OnInit {
       }
       if(params.has('quoteOwner'))
       {
+        this.quoteOwner = params.get('quoteOwner');
         this.quotefilterForm.controls['AccountManager'].setValue(params.get('quoteOwner'));
       }
     }
