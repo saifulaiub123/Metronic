@@ -21,7 +21,7 @@ export class DashboardViewComponent implements OnInit{
   subscriptionDashboardFilter$: Subscription;
   filters : any = {
     department : 'A',
-    accountManager : 'Erik Sureda'
+    accountManager : 'A'
   }
   dashboardData : any = [
     {
@@ -144,7 +144,7 @@ export class DashboardViewComponent implements OnInit{
         this.filters = filters;
 
         this.loadDashboardData();
-        // this.filterSharedService.resetDashboardFilters();
+        this.filterSharedService.resetDashboardFilters();
       }
      });
   }
@@ -167,10 +167,10 @@ export class DashboardViewComponent implements OnInit{
 
       this.filterSharedService.setDashboardData(dashboardData);
       //this.filterSharedService.settoBeWrittenData(toBeWritten);
-      //this.filterSharedService.setWeeklyQuotesData(weeklyQuotes);
+      this.filterSharedService.setWeeklyQuotesData(weeklyQuotes);
 
       
       //this.getToBeSentTableData();
     });
-  }
+      }
 }
