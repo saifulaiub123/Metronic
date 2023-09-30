@@ -85,6 +85,9 @@ export class DashboardRecentActivitiesComponent implements OnInit {
         {
           this.filter.accountManager = item.text;
         }
+        else{
+          this.filter.accountManager = 'A';
+        }
 
         this.loadData();
         this.filterSharedService.resetDashboardFilters();
