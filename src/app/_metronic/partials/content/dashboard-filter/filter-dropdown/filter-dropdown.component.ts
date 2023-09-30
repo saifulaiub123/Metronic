@@ -50,7 +50,7 @@ export class FilterDropdownComponent implements OnInit {
 
   }
 
-  LoadAccountManager()
+  LoadAccountManager(loadDefault: boolean = false)
   {
     let dept = this.quotefilterForm.value.Department as string;
     let userData = JSON.parse(localStorage.getItem("userData")!);
@@ -58,7 +58,7 @@ export class FilterDropdownComponent implements OnInit {
     this.dashboardService.getAccountManagers(dept).subscribe((data: any)  => {
       this.accountManagers = data;
       const searchIndex = data.find((x: { text: string; }) => x.text.trim() == userData.empName);
-      if(searchIndex === undefined)
+      if(searchIndex === undefined || loadDefault)
       {
         this.quotefilterForm.patchValue({
           AccountManager: 'A'
@@ -84,7 +84,7 @@ export class FilterDropdownComponent implements OnInit {
   }
   changeDepartment()
   {
-    this.LoadAccountManager();
+    this.LoadAccountManager(true);
   }
   changeAccountManager()
   {
