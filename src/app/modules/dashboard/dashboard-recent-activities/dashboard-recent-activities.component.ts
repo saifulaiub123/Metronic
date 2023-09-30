@@ -80,7 +80,7 @@ export class DashboardRecentActivitiesComponent implements OnInit {
       if(!_.isEmpty(filters))
       {
         this.accountManagers = JSON.parse(localStorage.getItem("AccountManagers")!);
-        var item = this.accountManagers.find(x => x.value === filters.accountManager);
+        var item = this.accountManagers.find(x => x.text.trim() === filters.accountManager.trim());
         if(item !== undefined)
         {
           this.filter.accountManager = item.text;
