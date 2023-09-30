@@ -30,9 +30,11 @@
           class="svg-icon svg-icon-3x svg-icon-warning d-block my-2"
         ></span>
         <div flex-grow-1 me-2>
-          <a id="rel" href="#/reports?Type=TM Quotes&quoteOwner={{empName}}" class="text-warning fw-bold fs-3">{{salesData[0].statusDesc}}</a>
+          <a id="r7" [routerLink]="['/reports']"
+          [queryParams]="{ Type: 'Waiting to be approved Quotes', quoteOwner: empName }"
+          [routerLinkActive]="'active menu-here'" target="_blank" class="text-warning fw-bold fs-3">{{salesData[0].statusDesc}}</a>
           <br>
-          <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">Count : {{salesData[0].countStatus}}</span>
+          <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[0].countStatus}}</span>
         </div>
       </div>
       <!-- end::Col -->
@@ -42,11 +44,11 @@
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
         ></span>
-        <a href="#/quotes/list?status=DR&quoteOwner={{empName}}" class="text-primary fw-bold fs-3">{{salesData[1].statusDesc}}</a>
+        <a href="#/quotes/list?status=DR&quoteOwner={{empName}}" class="text-primary fw-bold fs-4">{{salesData[1].statusDesc}}</a>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">Count : {{salesData[1].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[1].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3" *ngIf="empLevel === 1">${{salesData[1].quoteAmount | number : '1.2-2'}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-4" *ngIf="empLevel === 1">${{salesData[1].quoteAmount | number : '1.2-2'}}</span>
       </div>
       <!-- end::Col -->
     </div>
@@ -61,7 +63,7 @@
         ></span>
         <a href="#/quotes/list?status=SE&quoteOwner={{empName}}" class="text-danger fw-bold fs-3 mt-2">{{salesData[2].statusDesc}}</a>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">Count : {{salesData[2].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[2].countStatus}}</span>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3" *ngIf="empLevel === 1">${{salesData[2].quoteAmount | number : '1.2-2'}}</span>
       </div>
@@ -74,7 +76,7 @@
         ></span>
         <a href="#/quotes/list?status=VI&quoteOwner={{empName}}" class="text-success fw-bold fs-3 mt-2">{{salesData[3].statusDesc}}</a>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">Count : {{salesData[3].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[3].countStatus}}</span>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3" *ngIf="empLevel === 1">${{salesData[3].quoteAmount | number : '1.2-2'}}</span>
       </div>
@@ -90,7 +92,7 @@
         ></span>
         <a href="#/quotes/list?status=AC&quoteOwner={{empName}}" class="text-primary fw-bold fs-3 mt-2">{{salesData[4].statusDesc}}</a>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">Count : {{salesData[4].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[4].countStatus}}</span>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3" *ngIf="empLevel === 1">${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
       </div>
@@ -103,7 +105,7 @@
         ></span>
         <a href="#/quotes/list?status=DE&quoteOwner={{empName}}" class="text-danger fw-bold fs-3 mt-2">{{salesData[5].statusDesc}}</a>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder">Count : {{salesData[5].countStatus}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[5].countStatus}}</span>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3"  *ngIf="empLevel === 1">${{salesData[5].quoteAmount | number : '1.2-2'}}</span>
       </div>

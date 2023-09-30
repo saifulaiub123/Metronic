@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FilterDropdownComponent } from 'src/app/_metronic/partials/content/dashboard-filter/filter-dropdown/filter-dropdown.component';
 import { MatTableModule } from '@angular/material/table';
 import { DashboardRecentActivitiesComponent } from './dashboard-recent-activities/dashboard-recent-activities.component'
+import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +23,8 @@ import { DashboardRecentActivitiesComponent } from './dashboard-recent-activitie
     NgbDropdownModule,
     ReactiveFormsModule,
     DashboardFilterModule,
-    MatTableModule
+    MatTableModule,
+    RouterModule
   ],
   exports:[
     DashboardSalesComponent,

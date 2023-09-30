@@ -52,6 +52,16 @@ export class DashboardSalesComponent implements OnInit {
         this.filterSharedService.resetDashboardData();
       }
      });
+     const link7 = document.getElementById('r7');
+      // Add more variables for additional links if needed
+  
+      if (link7) {
+        link7.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when Link 7 is clicked
+        });
+      }
   }
 
   loadData()
