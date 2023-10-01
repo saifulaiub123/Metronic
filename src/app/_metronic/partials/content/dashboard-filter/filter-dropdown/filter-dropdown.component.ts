@@ -35,7 +35,7 @@ export class FilterDropdownComponent implements OnInit {
 ;
   quotefilterForm = this.fb.group({
     Department : ['A'],
-    AccountManager : ['A'],
+    AccountManager : [JSON.parse(localStorage.getItem("userData")!)["empName"]],
     DateRange : ['CY']
   });
   constructor(private dashboardService: DashboardService,
@@ -70,7 +70,6 @@ export class FilterDropdownComponent implements OnInit {
         });
       }
       localStorage.setItem("AccountManagers", JSON.stringify(this.accountManagers));
-      this.publishFilterData();
     });
   }
 
@@ -85,6 +84,7 @@ export class FilterDropdownComponent implements OnInit {
   changeDepartment()
   {
     this.LoadAccountManager(true);
+    this.publishFilterData();
   }
   changeAccountManager()
   {
