@@ -16,6 +16,7 @@ export class DashboardRecentActivitiesComponent implements OnInit {
   subscriptionToBeWrittenData$: Subscription;
   filter : any = {
     accountManager : 'A'
+    //accountManager : JSON.parse(localStorage.getItem("userData")!)["empName"]
   }
   accountManagers: any[] = [];
   recentActivities: RecentActivities[];

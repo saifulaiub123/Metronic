@@ -4,6 +4,10 @@
     <!-- begin::Heading -->
     <div class="d-flex flex-stack">
       <h3 class="m-0 text-white fw-bolder fs-3">Accepted Quotes Total</h3>
+      <br>
+      <span class="fs-6 text-light-800  fw-bolder fs-2" style="font-size: 48px !important;">{{salesData[4].countStatus}}</span>
+        
+
       <div class="ms-1">
       </div>
     </div>
@@ -30,9 +34,9 @@
           class="svg-icon svg-icon-3x svg-icon-warning d-block my-2"
         ></span>
         <div flex-grow-1 me-2>
-          <a id="r7" [routerLink]="['/reports']"
-          [queryParams]="{ Type: 'Waiting to be approved Quotes', quoteOwner: empName }"
-          [routerLinkActive]="'active menu-here'" target="_blank" class="text-warning fw-bold fs-3">{{salesData[0].statusDesc}}</a>
+          <a id="r8" [routerLink]="['/reports']"
+          [queryParams]="{ Type: 'To Be Written Quotes', quoteOwner: empName }"
+          [routerLinkActive]="'active menu-here'" class="text-warning fw-bold fs-3">{{salesData[0].statusDesc}}</a>
           <br>
           <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[0].countStatus}}</span>
         </div>

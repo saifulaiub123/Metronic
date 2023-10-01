@@ -28,6 +28,7 @@ export class HeaderMenuComponent implements OnInit {
       const link5 = document.getElementById('r5');
       const link6 = document.getElementById('r6');
       const link7 = document.getElementById('r7');
+      const home = document.getElementById('home');
       // Add more variables for additional links if needed
   
       if (link1) {
@@ -42,7 +43,7 @@ export class HeaderMenuComponent implements OnInit {
         link2.addEventListener('click', () => {
           setTimeout(() => {
             location.reload(); // Reload the current page after a brief delay
-          }, 100); // Reload the current page when Link 1 is clicked
+          }, 100); // Reload the current page when Link 2 is clicked
         });
       }
 
@@ -50,7 +51,7 @@ export class HeaderMenuComponent implements OnInit {
         link3.addEventListener('click', () => {
           setTimeout(() => {
             location.reload(); // Reload the current page after a brief delay
-          }, 100); // Reload the current page when Link 1 is clicked
+          }, 100); // Reload the current page when Link 3 is clicked
         });
       }
 
@@ -58,7 +59,7 @@ export class HeaderMenuComponent implements OnInit {
         link4.addEventListener('click', () => {
           setTimeout(() => {
             location.reload(); // Reload the current page after a brief delay
-          }, 100); // Reload the current page when Link 1 is clicked
+          }, 100); // Reload the current page when Link 4 is clicked
         });
       }
   
@@ -66,7 +67,7 @@ export class HeaderMenuComponent implements OnInit {
         link5.addEventListener('click', () => {
           setTimeout(() => {
             location.reload(); // Reload the current page after a brief delay
-          }, 100); // Reload the current page when Link 1 is clicked
+          }, 100); // Reload the current page when Link 5 is clicked
         });
       }
 
@@ -74,7 +75,7 @@ export class HeaderMenuComponent implements OnInit {
         link6.addEventListener('click', () => {
           setTimeout(() => {
             location.reload(); // Reload the current page after a brief delay
-          }, 100); // Reload the current page when Link 1 is clicked
+          }, 100); // Reload the current page when Link 6 is clicked
         });
       }
 
@@ -82,7 +83,15 @@ export class HeaderMenuComponent implements OnInit {
         link7.addEventListener('click', () => {
           setTimeout(() => {
             location.reload(); // Reload the current page after a brief delay
-          }, 100); // Reload the current page when Link 1 is clicked
+          }, 100); // Reload the current page when Link 7 is clicked
+        });
+      }
+
+      if (home) {
+        home.addEventListener('click', () => {
+          setTimeout(() => {
+            location.reload(); // Reload the current page after a brief delay
+          }, 100); // Reload the current page when home is clicked
         });
       }
   }

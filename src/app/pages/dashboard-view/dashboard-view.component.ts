@@ -162,11 +162,11 @@ export class DashboardViewComponent implements OnInit{
       this.dashboardService.getWeeklyQuotes(this.filters),
     ]).subscribe(([dashboardData, toBeWritten, weeklyQuotes]) => {
       this.dashboardData = dashboardData;
-      //this.toBeWritten = toBeWritten;
+      this.toBeWritten = toBeWritten;
       this.weeklyQuotes = weeklyQuotes;
 
       this.filterSharedService.setDashboardData(dashboardData);
-      //this.filterSharedService.settoBeWrittenData(toBeWritten);
+      this.filterSharedService.settoBeWrittenData(toBeWritten);
       this.filterSharedService.setWeeklyQuotesData(weeklyQuotes);
 
       

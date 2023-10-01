@@ -17,6 +17,7 @@ export class DashboardSalesComponent implements OnInit {
   empLevel: number = 0;
   empName: string = '';
   subscriptionDashboardFilter$: Subscription;
+  //showDelayedContent = false;
 
 
   salesData : any[] = [];
@@ -32,6 +33,9 @@ export class DashboardSalesComponent implements OnInit {
     });
     this.loadData();
     this.subscribeSharedServiceData();
+    //setTimeout(() => {
+    //  this.showDelayedContent = true;
+    //}, 1000);
   }
 
   subscribeSharedServiceData()
@@ -52,11 +56,11 @@ export class DashboardSalesComponent implements OnInit {
         this.filterSharedService.resetDashboardData();
       }
      });
-     const link7 = document.getElementById('r7');
+     const link8 = document.getElementById('r8');
       // Add more variables for additional links if needed
   
-      if (link7) {
-        link7.addEventListener('click', () => {
+      if (link8) {
+        link8.addEventListener('click', () => {
           setTimeout(() => {
             location.reload(); // Reload the current page after a brief delay
           }, 100); // Reload the current page when Link 7 is clicked
