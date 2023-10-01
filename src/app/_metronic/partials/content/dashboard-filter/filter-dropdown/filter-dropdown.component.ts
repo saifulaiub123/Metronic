@@ -35,7 +35,8 @@ export class FilterDropdownComponent implements OnInit {
 ;
   quotefilterForm = this.fb.group({
     Department : ['A'],
-    AccountManager : [JSON.parse(localStorage.getItem("userData")!)["empName"]],
+    //AccountManager : [JSON.parse(localStorage.getItem("userData")!)["empName"]],
+    AccountManager : ['A'],
     DateRange : ['CY']
   });
   constructor(private dashboardService: DashboardService,
