@@ -18,20 +18,7 @@ export class FilterDropdownComponent implements OnInit {
   @Input() showManagers : boolean = false;
   @Input() showDateRanges : boolean = false;
 
-  accountManagers : any = [
-    {
-        "text": " DC Group as Subcntr",
-        "value": "77"
-    },
-    {
-        "text": "Account House",
-        "value": "76"
-    },
-    {
-        "text": "Alaina Price",
-        "value": "51"
-    },
-  ]
+  accountManagers : any = []
 ;
   quotefilterForm = this.fb.group({
     Department : ['A'],
@@ -46,12 +33,12 @@ export class FilterDropdownComponent implements OnInit {
 
   ngOnInit() {
     //localStorage.setItem("AccountManagers", JSON.stringify(this.accountManagers));
-    this.LoadAccountManager();
-    this.publishFilterData();
+    this.LoadAccountManager(false,true);
+    //this.publishFilterData();
 
   }
 
-  LoadAccountManager(loadDefault: boolean = false)
+  LoadAccountManager(loadDefault: boolean = false, publish: boolean = false)
   {
     let dept = this.quotefilterForm.value.Department as string;
     let userData = JSON.parse(localStorage.getItem("userData")!);
@@ -71,7 +58,12 @@ export class FilterDropdownComponent implements OnInit {
         });
       }
       localStorage.setItem("AccountManagers", JSON.stringify(this.accountManagers));
+      if(publish)
+    {
+      this.publishFilterData();
+    }
     });
+    
   }
 
   subscribeFilterDataChange()
@@ -84,8 +76,8 @@ export class FilterDropdownComponent implements OnInit {
   }
   changeDepartment()
   {
-    this.LoadAccountManager(true);
-    this.publishFilterData();
+    this.LoadAccountManager(true,true);
+    // this.publishFilterData();
   }
   changeAccountManager()
   {

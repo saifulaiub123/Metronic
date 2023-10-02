@@ -54,7 +54,7 @@ export class FilterToBeSentComponent implements OnInit {
   {
     let dept = this.quotefilterForm.value.Department as string;
 
-    this.accountManagers = localStorage.getItem("AccountMangers");
+    this.accountManagers = localStorage.getItem("AccountManagers");
 
     // this.dashboardService.getAccountManagers(dept).subscribe(data  => {
     //   // this.accountManagers = data;
