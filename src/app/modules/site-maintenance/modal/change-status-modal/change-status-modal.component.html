@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">
-    <h4 class="modal-title">Update Application to be sent</h4>
+    <h4 class="modal-title text-dark fw-bold text-dark fs-1">Update Application to be sent</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -17,11 +17,11 @@
             <!-- begin::Table head -->
             <tbody>
 
-              <tr class="fw-bolder text-muted bg-light">
+              <tr class="fw-bolder bg-light fw-bold text-dark fs-3">
                 <td>Site Ids[s] :</td>
                 <td class="selected-box">
                   <div class="selected-quote-ids">
-                    <div *ngFor="let selectedQuoteId of selectedQuoteIds" class="quote-id">
+                    <div *ngFor="let selectedQuoteId of selectedQuoteIds" class="quote-id fw-bold text-dark fs-3">
                       {{ selectedQuoteId }}
                     </div>
                   </div>
@@ -29,30 +29,30 @@
               </tr>
               
               <tr>
-                <td>Remind Type</td>
+                <td class="fw-bold text-dark fs-3">Remind Type</td>
                 <td>
                   <select id="remind-type" formControlName="RemindType" style="font-size:10pt;width:150px;padding:4px;"
-                    class="me-5">
-                  <option value="V" selected>Voice</option>
-                  <option value="E">Email</option>
-                  <option value="B">Email & Voice</option>
-                  <option value="N">None</option>
+                    class="me-5 fw-bold text-dark fs-3">
+                  <option class="fw-bold text-dark fs-3" value="V" selected>Voice</option>
+                  <option class="fw-bold text-dark fs-3" value="E">Email</option>
+                  <option class="fw-bold text-dark fs-3" value="B">Email & Voice</option>
+                  <option class="fw-bold text-dark fs-3" value="N">None</option>
                   </select>
                 </td>
               </tr>
               <tr>
-                <td>Stop days count</td>
+                <td class="fw-bold text-dark fs-3">Stop days count</td>
                 <td>
                   <select id="remind-type" formControlName="StopDaysCount" style="font-size:10pt;width:150px;padding:4px;"
-                    class="me-5">
-                  <option value=-1 selected>Select</option>
-                  <option value=10>10</option>
-                  <option value=20>20</option>
-                  <option value=30>30</option>
-                  <option value=40>40</option>
-                  <option value=50>50</option>
-                  <option value=365000>Permanent Stop</option>
-                  <option value=0>Permanent Allow</option>
+                    class="me-5 fw-bold text-dark fs-3">
+                  <option class="fw-bold text-dark fs-3" value=-1 selected>Select</option>
+                  <option class="fw-bold text-dark fs-3" value=10>10</option>
+                  <option class="fw-bold text-dark fs-3" value=20>20</option>
+                  <option class="fw-bold text-dark fs-3" value=30>30</option>
+                  <option class="fw-bold text-dark fs-3" value=40>40</option>
+                  <option class="fw-bold text-dark fs-3" value=50>50</option>
+                  <option class="fw-bold text-dark fs-3" value=365000>Permanent Stop</option>
+                  <option class="fw-bold text-dark fs-3" value=0>Permanent Allow</option>
                   </select>
                 </td>
               </tr>

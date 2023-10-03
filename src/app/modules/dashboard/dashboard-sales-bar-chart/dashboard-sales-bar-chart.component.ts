@@ -111,8 +111,8 @@ export class DashboardSalesBarChartComponent implements OnInit {
         },
         labels: {
           style: {
-            colors: labelColor,
-            fontSize: '12px',
+            colors: ['black'],
+            fontSize: '14px',
           },
         },
       },
@@ -120,7 +120,7 @@ export class DashboardSalesBarChartComponent implements OnInit {
         text: 'Count',
         labels: {
           style: {
-            colors: labelColor,
+            colors: ['black'],
             fontSize: '12px',
           },
         },

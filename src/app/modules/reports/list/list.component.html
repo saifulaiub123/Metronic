@@ -13,8 +13,8 @@
           <td>
             <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;"
               class="me-5 text-dark fw-bold fs-5">
-              <option value="A" selected>All</option>
-              <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
+              <option class = "fw-bold mb-1 fs-5" value="A" selected>All</option>
+              <option class = "fw-bold mb-1 fs-5" *ngFor="let mgr of accountManagers" [value]="mgr.text">
                 {{mgr.text}}
               </option>
             </select>
@@ -41,7 +41,7 @@
         <!-- begin::Table head -->
         <thead>
 
-          <tr class="text-dark fw-bolder badge-light-primary" style="font-size: large;">
+          <tr class="text-dark fw-bolder badge-light-primary" style="font-size: medium;">
             <th class="min-w-100px text-hover-primary"(click)="sortTable('quoteID')"style="cursor: pointer;">Quote Id <i class="fa" [ngClass]="sortIcon('quoteID')"></i></th>
             <th class="min-w-100px text-hover-primary"(click)="sortTable('custnmbr')"style="cursor: pointer;">Site Id <i class="fa" [ngClass]="sortIcon('custnmbr')"></i></th>
             <th class="min-w-100px text-hover-primary"(click)="sortTable('custname')"style="cursor: pointer;">Site Name <i class="fa" [ngClass]="sortIcon('custname')"></i></th>
@@ -53,7 +53,7 @@
             <th class="min-w-100px text-hover-primary"(click)="sortTable('quotedOn')"style="cursor: pointer;">Created On <i class="fa" [ngClass]="sortIcon('quotedOn')"></i></th>
             <th class="min-w-100px text-hover-primary"(click)="sortTable('dateStatusChanged')"style="cursor: pointer;">Modified On <i class="fa" [ngClass]="sortIcon('dateStatusChanged')"></i></th>
             <th class="min-w-70px text-hover-primary"(click)="sortTable('age')"style="cursor: pointer;">Age <i class="fa" [ngClass]="sortIcon('age')"></i></th>
-            <th class="min-w-25px text-hover-primary">Edit</th>
+            <th class="min-w-25px">Edit</th>
             
           
             <!-- <th class="min-w-200px text-end rounded-end"></th> -->
@@ -61,7 +61,7 @@
         </thead>
         <!-- end::Table head -->
         <!-- begin::Table body -->
-        <tbody class="text-dark fw-bold mb-1 fs-6">
+        <tbody class="text-dark mb-1 fs-5">
 
           <tr *ngFor="let quotes of quotesList; let i = index;" [ngStyle]="{ 'background-color': isQuoteSelected(quotes) ? 'lightyellow' : 'inherit' }">
             

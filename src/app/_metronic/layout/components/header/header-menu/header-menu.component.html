@@ -4,18 +4,18 @@
       translate="MENU.DASHBOARD"></span></a>
 </div> -->
 <div class="menu-item me-lg-1">
-  <a id="home" class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/dashboard-view"><span class="menu-title">Home</span></a>
+  <a id="home" class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/dashboard-view"><span class="menu-title fs-2 fw-bold text-dark">Home</span></a>
 </div>
 
 <div class="menu-item me-lg-1">
-  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/quotes/list" [queryParams]="{ quoteOwner: empName}"><span class="menu-title">My Quotes</span></a>
+  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/quotes/list" [queryParams]="{ quoteOwner: empName}"><span class="menu-title fs-2 fw-bold text-dark">My Quotes</span></a>
 </div>
 
 
 <div class="menu-item menu-lg-down-accordion me-lg-1 menu-dropdown"
   data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start">
   <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/application-sent')"> 
-    <span class="menu-title">System</span>
+    <span class="menu-title fs-2 fw-bold text-dark">System</span>
     <span class="menu-arrow d-lg-none"></span>
   </span>
   <div class="
@@ -26,7 +26,7 @@
     <a class="menu-item menu-lg-down-accordion me-lg-1 menu-link" 
       data-kt-menu-placement="right-start" routerLinkActive="active"  routerLink="/application-sent"  [queryParams]="{ quoteOwner: empName}">
       <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/application-sent')" ><span class="menu-icon"><i
-            class="bi fs-3 bi-layers"></i></span><span class="menu-title">Automation To Be Sent</span></span>
+            class="bi fs-3 bi-layers"></i></span><span class="menu-title fs-4 text-dark">Automation To Be Sent</span></span>
     </a>
   </div>
 </div>
@@ -56,7 +56,7 @@
 <div class="menu-item menu-lg-down-accordion me-lg-1 menu-dropdown"
   data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start">
   <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/system')">
-    <span class="menu-title">Reports</span>
+    <span class="menu-title fs-2 fw-bold text-dark">Reports</span>
     <span class="menu-arrow d-lg-none"></span>
   </span>
   <div class="
@@ -71,7 +71,7 @@
       [queryParams]="{ Type: 'Waiting to be approved Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
-        <span class="menu-title" data-link="/crafted/widgets">Waiting to be approved Quotes</span>
+        <span class="menu-title fs-4 text-dark" data-link="/crafted/widgets">Waiting to be approved Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
@@ -81,7 +81,7 @@
       [queryParams]="{ Type: 'TM Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
-        <span class="menu-title" data-link="/crafted/widgets">TM Quotes</span>
+        <span class="menu-title fs-4 text-dark" data-link="/crafted/widgets">TM Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
@@ -91,7 +91,7 @@
       [queryParams]="{ Type: 'Battery Installation Quotes',quoteOwner: empName}"
        class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
-        <span class="menu-title" data-link="/crafted/widgets">Battery Installation Quotes</span>
+        <span class="menu-title fs-4 text-dark" data-link="/crafted/widgets">Battery Installation Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
@@ -101,7 +101,7 @@
       [queryParams]="{ Type: 'Critical Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
-        <span class="menu-title" data-link="/crafted/widgets">Critical Quotes</span>
+        <span class="menu-title fs-4 text-dark" data-link="/crafted/widgets">Critical Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
@@ -111,7 +111,7 @@
       [queryParams]="{ Type: 'Expiring Today',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
-        <span class="menu-title" data-link="/crafted/widgets">Expiring Today</span>
+        <span class="menu-title fs-4 text-dark" data-link="/crafted/widgets">Expiring Today</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
@@ -121,7 +121,7 @@
       [queryParams]="{ Type: 'CapAndFans Installation Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
-        <span class="menu-title" data-link="/crafted/widgets">Cap And Fans Installation Quotes</span>
+        <span class="menu-title fs-4 text-dark" data-link="/crafted/widgets">Cap And Fans Installation Quotes</span>
       </a>
     </div>
     <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-placement="right-start">
@@ -131,7 +131,7 @@
       [queryParams]="{ Type: 'To Be Written Quotes',quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
         <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
-        <span class="menu-title" data-link="/crafted/widgets">To Be Written Quotes</span>
+        <span class="menu-title fs-4 text-dark" data-link="/crafted/widgets">To Be Written Quotes</span>
       </a>
     </div>
 
@@ -145,7 +145,7 @@
 <div class="menu-item menu-lg-down-accordion me-lg-1 menu-dropdown"
 data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start">
 <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/system')">
-  <span class="menu-title">Graphs</span>
+  <span class="menu-title fs-2 fw-bold text-dark">Graphs</span>
   <span class="menu-arrow d-lg-none"></span>
 </span>
 <div class="
@@ -159,7 +159,7 @@ routerLinkActive="active menu-here"
       [routerLink]="['/quote-amounts']" [queryParams]="{ quoteOwner: empName}"
       class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/crafted/widgets')">
 <span class="menu-icon"><i class="bi fs-3 bi-layers"></i></span>
-<span class="menu-title" data-link="/crafted/widgets">Quote Amounts</span>
+<span class="menu-title fs-4 text-dark" data-link="/crafted/widgets">Quote Amounts</span>
 </a>
 </div>
 </div>
@@ -169,7 +169,7 @@ routerLinkActive="active menu-here"
 <div class="menu-item menu-lg-down-accordion me-lg-1 menu-dropdown"
   data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start">
   <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/site-maintenance')">
-    <span class="menu-title">Administration</span>
+    <span class="menu-title fs-2 fw-bold text-dark">Administration</span>
     <span class="menu-arrow d-lg-none"></span>
   </span>
   <div class="
@@ -180,7 +180,7 @@ routerLinkActive="active menu-here"
     <a class="menu-item menu-lg-down-accordion me-lg-1 menu-link" 
       data-kt-menu-placement="right-start" routerLinkActive="active"  routerLink="/site-maintenance" [queryParams]="{ quoteOwner: empName}">
       <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/site-maintenance')" ><span class="menu-icon"><i
-            class="bi fs-3 bi-layers"></i></span><span class="menu-title">Site Maintenance</span></span>
+            class="bi fs-3 bi-layers"></i></span><span class="menu-title fs-4 text-dark">Site Maintenance</span></span>
       </a>
   </div>
 </div>

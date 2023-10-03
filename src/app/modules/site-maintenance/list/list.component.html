@@ -6,32 +6,32 @@
       <table>
         <tr>
           <td>
-            <label class="min-w-100px me-5">Account Manager:</label>
+            <label class="min-w-100px me-5 fw-bold mb-1 fs-5">Account Manager:</label>
           </td>
           <td>
-            <label class="min-w-100px">Type:</label>
+            <label class="min-w-100px fw-bold mb-1 fs-5">Type:</label>
           </td>
         </tr>
         <tr>
           <td>
             <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;"
-              class="me-5">
-              <option value="A" selected>All</option>
-              <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
+              class="me-5 text-dark fw-bold fs-5">
+              <option class = "fw-bold mb-1 fs-5" value="A" selected>All</option>
+              <option class = "fw-bold mb-1 fs-5" *ngFor="let mgr of accountManagers" [value]="mgr.text">
                 {{mgr.text}}
               </option>
             </select>
           </td>
           <td>
             <select name="ctl00$PlaceHolderMain$ddlStatus" id="PlaceHolderMain_ddlStatus" formControlName="Type"
-              class="me-5" style="font-size:10pt;width:150px;padding: 4px;">
-              <option value="A">All</option>
-              <option *ngFor="let status of Type" [value]="status.statusCode">{{status.statusDesc}}</option>
+              class="me-5 text-dark fw-bold fs-5" style="font-size:10pt;width:150px;padding: 4px;">
+              <option class = "fw-bold mb-1 fs-5" value="A">All</option>
+              <option class = "fw-bold mb-1 fs-5" *ngFor="let status of Type" [value]="status.statusCode">{{status.statusDesc}}</option>
             </select>
           </td>
           <td>
             <div class="input-group" >
-              <input type="text" class="" placeholder="Search" id="SearchText" (keyup.enter)="search()">
+              <input type="text" class = "fw-bold mb-1 fs-5" placeholder="Search" id="SearchText" (keyup.enter)="search()">
               <div class="input-group-append ">
                 <button class="btn btn-primary btn-sm" type="button" (click)="search()">
                   <i class="fa fa-search"></i>
@@ -69,13 +69,13 @@
         <!-- begin::Table head -->
         <thead>
 
-          <tr class="fw-bolder text-muted bg-light">
-            <th class="min-w-100px"(click)="sortTable('custNmbr')"style="cursor: pointer;">Site Id <i class="fa" [ngClass]="sortIcon('custNmbr')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('custName')"style="cursor: pointer;">Site Name <i class="fa" [ngClass]="sortIcon('custName')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('stopDaysCount')"style="cursor: pointer;">Days <i class="fa" [ngClass]="sortIcon('stopDaysCount')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('reminderType')"style="cursor: pointer;">Type <i class="fa" [ngClass]="sortIcon('reminderType')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('modifiedBy')"style="cursor: pointer;">Modified By <i class="fa" [ngClass]="sortIcon('modifiedBy')"></i></th>
-            <th class="min-w-100px"(click)="sortTable('modifiedDate')"style="cursor: pointer;">Modified On <i class="fa" [ngClass]="sortIcon('modifiedDate')"></i></th>
+          <tr class="text-dark fw-bolder badge-light-primary" style="font-size: medium;">
+            <th class="min-w-100px text-hover-primary"(click)="sortTable('custNmbr')"style="cursor: pointer;">Site Id <i class="fa" [ngClass]="sortIcon('custNmbr')"></i></th>
+            <th class="min-w-100px text-hover-primary"(click)="sortTable('custName')"style="cursor: pointer;">Site Name <i class="fa" [ngClass]="sortIcon('custName')"></i></th>
+            <th class="min-w-100px text-hover-primary"(click)="sortTable('stopDaysCount')"style="cursor: pointer;">Days <i class="fa" [ngClass]="sortIcon('stopDaysCount')"></i></th>
+            <th class="min-w-100px text-hover-primary"(click)="sortTable('reminderType')"style="cursor: pointer;">Type <i class="fa" [ngClass]="sortIcon('reminderType')"></i></th>
+            <th class="min-w-100px text-hover-primary"(click)="sortTable('modifiedBy')"style="cursor: pointer;">Modified By <i class="fa" [ngClass]="sortIcon('modifiedBy')"></i></th>
+            <th class="min-w-100px text-hover-primary"(click)="sortTable('modifiedDate')"style="cursor: pointer;">Modified On <i class="fa" [ngClass]="sortIcon('modifiedDate')"></i></th>
             <th class="min-w-20px">
               Select
               <input
@@ -90,22 +90,22 @@
         </thead>
         <!-- end::Table head -->
         <!-- begin::Table body -->
-        <tbody>
+        <tbody class="text-dark mb-1 fs-5">
 
           <tr *ngFor="let quotes of quotesList; let i = index;" [ngStyle]="{ 'background-color': isQuoteSelected(quotes) ? 'lightyellow' : 'inherit' }">
             <td>
               <span (click)="openQuoteDetailsModal(quotes.custNmbr)"
-                class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">
+                class="">
                 {{quotes.custNmbr}}
               </span>
             </td>
             <td>
 
-              <span class="text-muted fw-bold text-muted d-block fs-7"> {{quotes.custName}}</span>
+              <span class=""> {{quotes.custName}}</span>
             </td>
             <td>
 
-              <span class="badge badge-light-primary fs-7 fw-bold"> {{quotes.stopDaysCount}}</span>
+              <span class=""> {{quotes.stopDaysCount}}</span>
             </td>
 
             <td class="">
@@ -116,7 +116,7 @@
             </td>
 
             <td class="">
-              {{quotes.modifiedDate }}
+              {{quotes.modifiedDate | date:'medium'}}
             </td>
 
             <!-- <td>

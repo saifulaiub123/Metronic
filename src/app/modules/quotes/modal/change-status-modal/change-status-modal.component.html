@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">
-    <h4 class="modal-title">Update Quote Status</h4>
+    <h4 class="modal-title text-dark fw-bold text-dark fs-1">Update Quote Status</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -8,22 +8,22 @@
   <div class="modal-body">
     <div class="card">
       <div class="row mb-6">
-        <label class="col-lg-4 col-form-label fw-bold fs-6">Quote[s] : </label>
+        <label class="col-lg-4 col-form-label fw-bold text-dark fs-3">Quote[s] : </label>
         <div class="col-lg-8">
-            <span>{{selectedQuoteIds | join}}</span>
+            <span class=" text-dark fw-bold text-dark fs-3">{{selectedQuoteIds | join}}</span>
         </div>
     </div>
       <div class="row mb-6">
-        <label class="col-lg-4 col-form-label fw-bold fs-6">New Status :</label>
+        <label class="col-lg-4 col-form-label text-dark fw-bold text-dark fs-3">New Status :</label>
         <div class="col-lg-8">
-            <select class="form-select form-select-solid form-select-lg" name="quoteOwner" [(ngModel)]="selectedStatus">
-              <option value="" selected>Select</option>
-              <option value="VI">Viewed</option>
-              <option value="ID">In Discussion</option>
-              <option value="AC">Accepted</option>
-              <option value="DE">Declined</option>
-              <option value="DR">To Be Sent</option>
-              <option value="CN">Cancelled</option>
+            <select class="form-select form-select-solid form-select-lg text-dark fw-bold text-dark fs-3" name="quoteOwner" [(ngModel)]="selectedStatus">
+              <option class="text-dark fw-bold text-dark fs-3" value="" selected>Select</option>
+              <option class="text-dark fw-bold text-dark fs-3" value="VI">Viewed</option>
+              <option class="text-dark fw-bold text-dark fs-3" value="ID">In Discussion</option>
+              <option class="text-dark fw-bold text-dark fs-3" value="AC">Accepted</option>
+              <option class="text-dark fw-bold text-dark fs-3" value="DE">Declined</option>
+              <option class="text-dark fw-bold text-dark fs-3" value="DR">To Be Sent</option>
+              <option class="text-dark fw-bold text-dark fs-3" value="CN">Cancelled</option>
           </select>
         </div>
     </div>

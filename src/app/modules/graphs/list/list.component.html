@@ -7,15 +7,15 @@
       <table>
         <tr>
           <td>
-            <label class="min-w-100px me-5">Account Manager:</label>
+            <label class="min-w-100px me-5 fw-bold mb-1 fs-5">Account Manager:</label>
           </td>
         </tr>
         <tr>
           <td>
             <select id="quoteAccMgrs" formControlName="AccountManager" style="font-size:10pt;width:150px;padding:4px;"
-              class="me-5">
-              <option value="A" selected>All</option>
-              <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
+              class="me-5 text-dark fw-bold fs-5">
+              <option class = "fw-bold mb-1 fs-5" value="A" selected>All</option>
+              <option class = "fw-bold mb-1 fs-5" *ngFor="let mgr of accountManagers" [value]="mgr.text">
                 {{mgr.text}}
               </option>
             </select>
@@ -26,14 +26,14 @@
       <table>
         <tr>
           <td>
-            <label class="min-w-100px me-5">Date:</label>
+            <label class="min-w-100px me-5 fw-bold mb-1 fs-5">Date:</label>
           </td>
         </tr>
         <tr>
           <td>
             <div class="input-group">
               <!-- Date Picker -->
-              <input type="date" class="form-control" style="font-size:10pt;width:150px;padding:4px;"
+              <input type="date" class="form-control text-dark fw-bold mb-1 fs-5" style="font-size:10pt;width:150px;padding:4px;"
               placeholder="Select a date" id="datepicker" [value]="formattedDate" (keyup.enter)="search()">
             
               <button class="btn btn-primary" style="font-size:10pt;width:75px;padding:4px;" 
@@ -72,13 +72,13 @@
           <tr *ngFor="let quotes of quotesList.quoteAmountSummaries; let i = index;">
             
             <td>
-              <span class="fw-bolder badge badge-light-primary mb-1 fs-6" style="margin-right: 40px;">{{quotes.quoteType}}</span>
+              <span class="fw-bolder badge badge-light-primary mb-1 fs-3" style="margin-right: 40px;">{{quotes.quoteType}}</span>
             </td>
             <td>
-              <span class="fs-7 fw-bold" style="margin-right: 40px;">{{quotes.quoteCount}}</span>
+              <span class="fw-bold fs-3" style="margin-right: 40px;">{{quotes.quoteCount}}</span>
             </td>
             <td>
-              <span class="" style="margin-right: 10px;">{{quotes.quoteAmount | currency: 'USD'}}</span>
+              <span class=" fs-3" style="margin-right: 10px;">{{quotes.quoteAmount | currency: 'USD'}}</span>
             </td>
             
             <!-- <td>
@@ -112,16 +112,16 @@
           <tr *ngFor="let quotes of quotesList.quoteTypeSummaries; let i = index;">
             
             <td>
-              <span class="fw-bolder badge badge-light-primary mb-1 fs-6" style="margin-right: 40px;">{{quotes.quoteType}}</span>
+              <span class="fw-bolder badge badge-light-primary mb-1 fs-3" style="margin-right: 40px;">{{quotes.quoteType}}</span>
             </td>
             <td>
-              <span class="fs-7 fw-bold" style="margin-right: 40px;">{{quotes.quoteCount}}</span>
+              <span class="fs-3 fw-bold" style="margin-right: 40px;">{{quotes.quoteCount}}</span>
             </td>
             <td>
-              <span class="" style="margin-right: 40px;">{{quotes.quoteAmount | currency: 'USD'}}</span>
+              <span class="fs-3" style="margin-right: 40px;">{{quotes.quoteAmount | currency: 'USD'}}</span>
             </td>
             <td>
-              <span class="" style="margin-right: 10px;">{{quotes.quotePercent | percent:'1.2-2'}}</span>
+              <span class="fs-3" style="margin-right: 10px;">{{quotes.quotePercent | percent:'1.2-2'}}</span>
             </td>
             
             <!-- <td>
@@ -151,15 +151,15 @@
         <!-- begin::Table head -->
         <thead>
           <tr class="fw-bolder" style="color: white; background-color: #1aabea;">
-            <th class="min-w-70px" style="padding-left: 5px;">Account Manager</th>
-            <th class="min-w-70px">Sent Quotes</th>
-            <th class="min-w-70px">Amount</th>
-            <th class="min-w-70px">Viewed Quotes</th>
-            <th class="min-w-70px">Amount</th>
-            <th class="min-w-70px">Approved Quotes</th>
-            <th class="min-w-70px">Amount</th>
-            <th class="min-w-70px">Declined Quotes</th>
-            <th class="min-w-70px">Amount</th>
+            <th class="min-w-70px fs-3" style="padding-left: 5px;">Account Manager</th>
+            <th class="min-w-70px fs-3">Sent Quotes</th>
+            <th class="min-w-70px fs-3">Amount</th>
+            <th class="min-w-70px fs-3">Viewed Quotes</th>
+            <th class="min-w-70px fs-3">Amount</th>
+            <th class="min-w-70px fs-3">Approved Quotes</th>
+            <th class="min-w-70px fs-3">Amount</th>
+            <th class="min-w-70px fs-3">Declined Quotes</th>
+            <th class="min-w-70px fs-3">Amount</th>
           </tr>
         </thead>
         
@@ -170,31 +170,31 @@
           <tr *ngFor="let quotes of quotesList.quoteAMSummaries; let i = index;">
             
             <td>
-              <span class="fw-bolder badge badge-light-primary mb-1 fs-6" style="margin-right: 30px;">{{quotes.quoteOwner}}</span>
+              <span class="fw-bolder badge badge-light-primary mb-1 fs-3" style="margin-right: 30px;">{{quotes.quoteOwner}}</span>
             </td>
             <td>
-              <span class=""style="padding-left: 30px;">{{quotes.sentQ}}</span>
+              <span class=" fs-3"style="padding-left: 30px;">{{quotes.sentQ}}</span>
             </td>
             <td>
-              <span class="">{{quotes.sentAmount | currency: 'USD'}}</span>
+              <span class=" fs-3">{{quotes.sentAmount | currency: 'USD'}}</span>
             </td>
             <td>
-              <span class=""style="padding-left: 30px;">{{quotes.viewed}}</span>
+              <span class=" fs-3"style="padding-left: 30px;">{{quotes.viewed}}</span>
             </td>
             <td>
-              <span class="">{{quotes.viewedAmount | currency: 'USD'}}</span>
+              <span class=" fs-3">{{quotes.viewedAmount | currency: 'USD'}}</span>
             </td>
             <td>
-              <span class="" style="padding-left: 30px;">{{quotes.approved}}</span>
+              <span class=" fs-3" style="padding-left: 30px;">{{quotes.approved}}</span>
             </td>
             <td>
-              <span class="">{{quotes.approvedAmount | currency: 'USD'}}</span>
+              <span class=" fs-3">{{quotes.approvedAmount | currency: 'USD'}}</span>
             </td>
             <td>
-              <span class=""style="padding-left: 30px;">{{quotes.declined}}</span>
+              <span class=" fs-3"style="padding-left: 30px;">{{quotes.declined}}</span>
             </td>
             <td>
-              <span class="">{{quotes.declinedAmount | currency: 'USD'}}</span>
+              <span class=" fs-3">{{quotes.declinedAmount | currency: 'USD'}}</span>
             </td>
             
             <!-- <td>

@@ -67,7 +67,7 @@
 </div> -->
 <!--end::Theme mode-->
 <div class="app-navbar-item" [ngClass]="itemClass" *ngIf="user$ | async as _user">
-  <span style="color: white">Hello {{_user.empName}}</span>
+  <span class="fw-bold fs-2" style="color: white">Hello {{_user.empName}}</span>
 </div>
 <!--begin::User menu-->
 <div class="app-navbar-item" [ngClass]="itemClass">

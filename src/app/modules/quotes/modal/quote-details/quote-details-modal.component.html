@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">
-    <h4 class="modal-title">Activity log for Quote Id: {{quoteId}}</h4>
+    <h4 class="modal-title text-dark fw-bold text-dark fs-2">Activity log for Quote Id: {{quoteId}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -21,13 +21,13 @@
           <!-- begin::Title -->
           <div class="flex-grow-1 me-2">
             <span>
-              <a href="#" class="fw-bolder text-gray-800 text-hover-primary fs-6">
+              <a href="#" class="fw-bolder text-gray-800 text-hover-primary text-dark fw-bold text-dark fs-3">
                 {{quote.status}}
               </a>
-              <span style="text-align: right;"> ({{quote.changedBY}})</span>
+              <span class= "text-dark fw-bold text-dark fs-4" style="text-align: right;"> ({{quote.changedBY}})</span>
             </span>
 
-            <span class="text-muted fw-bold d-block">{{quote.comments}}</span>
+            <span class="fw-bold d-block text-dark fw-bold text-dark fs-4">{{quote.comments}}</span>
           </div>
           <!-- end::Title -->
           <!-- begin::Lable -->

@@ -10,35 +10,35 @@
 
 
   <div class="mb-10" *ngIf="showDepartments">
-    <label class="form-label fw-bold">Department</label>
+    <label class="form-label fw-bold text-darker mb-1 fs-5">Department</label>
 
     <div>
       <select formControlName="Department"
-        class="form-select form-select-solid"
+      class="form-select form-select-solid fw-bold text-darker text-darker"
         data-kt-select2="true"
         data-placeholder="Select option"
         data-allow-clear="true"
         (change)="changeDepartment()"
       >
-        <option selected value="A">All</option>
-        <option value="M">AM</option>
-        <option value="S">Sales</option>
+        <option class = "form-label fw-bold text-darker mb-1 fs-5" selected value="A">All</option>
+        <option class = "form-label fw-bold text-darker mb-1 fs-5" value="M">AM</option>
+        <option class = "form-label fw-bold text-darker mb-1 fs-5" value="S">Sales</option>
       </select>
     </div>
   </div>
 
   <div class="mb-10" *ngIf="showManagers">
-    <label class="form-label fw-bold">Account Manager</label>
+    <label class="form-label fw-bold text-darker mb-1 fs-5">Account Manager</label>
     <div>
       <select formControlName="AccountManager"
-        class="form-select form-select-solid"
+      class="form-select form-select-solid fw-bold text-darker text-darker"
         data-kt-select2="true"
         data-placeholder="Select option"
         data-allow-clear="true"
         (change)="changeAccountManager()"
       >
-      <option value="A">All</option>
-      <option *ngFor="let mgr of accountManagers" [value]="mgr.text">
+      <option class="form-label fw-bold text-darker mb-1 fs-5" value="A">All</option>
+      <option class="form-label fw-bold text-darker mb-1 fs-5" *ngFor="let mgr of accountManagers" [value]="mgr.text">
         {{mgr.text}}
       </option>
       </select>
@@ -46,20 +46,20 @@
   </div>
 
   <div class="mb-10" *ngIf="showDateRanges">
-    <label class="form-label fw-bold">Date Range</label>
+    <label class="form-label fw-bold text-darker mb-1 fs-4">Date Range</label>
     <div>
       <select formControlName="DateRange"
-        class="form-select form-select-solid"
+        class="form-select form-select-solid fw-bold text-darker text-darker"
         data-kt-select2="true"
         data-placeholder="Select option"
         data-allow-clear="true"
         (change)="changeDateRange()"
       >
-        <option selected value="W">Current Week</option>
-        <option value="M">Current Month</option>
-        <option value="Q">Current Quarter</option>
-        <option value="CY">Current Year</option>
-        <option value="PY">Previous Year</option>
+        <option class="form-label fw-bold text-darker mb-1 fs-5" selected value="W">Current Week</option>
+        <option class="form-label fw-bold text-darker mb-1 fs-5" value="M">Current Month</option>
+        <option class="form-label fw-bold text-darker mb-1 fs-5" value="Q">Current Quarter</option>
+        <option class="form-label fw-bold text-darker mb-1 fs-5" value="CY">Current Year</option>
+        <option class="form-label fw-bold text-darker mb-1 fs-5" value="PY">Previous Year</option>
       </select>
     </div>
   </div>

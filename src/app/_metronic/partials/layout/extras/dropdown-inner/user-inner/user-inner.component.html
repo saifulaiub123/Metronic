@@ -6,7 +6,7 @@
       </div> -->
 
       <div class="d-flex flex-column">
-        <div class="fw-bolder d-flex align-items-center fs-5">
+        <div class="fw-bolder d-flex align-items-center fs-4">
           {{ _user.empName }}
           <!-- <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"
             >Pro</span -->
@@ -21,12 +21,12 @@
   
 
   <div class="menu-item px-5 my-1">
-    <a routerLink="auth/change-password" class="menu-link px-5">
+    <a routerLink="auth/change-password" class="menu-link text-dark cursor-pointer fw-bold text-darker fs-4">
       Change Password
     </a>
   </div>
 
   <div class="menu-item px-5">
-    <a (click)="logout()" class="menu-link px-5 cursor-pointer"> Sign Out </a>
+    <a (click)="logout()" class="menu-link px-5 text-dark cursor-pointer fw-bold fs-4"> Sign Out </a>
   </div>
 </ng-container>
