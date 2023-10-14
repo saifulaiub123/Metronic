@@ -31,7 +31,7 @@ export class DashboardSalesComponent implements OnInit {
       this.empLevel = data.empLevel;
       this.empName = data.empName;
     });
-    this.loadData();
+    // this.loadData();s
     this.subscribeSharedServiceData();
     //setTimeout(() => {
     //  this.showDelayedContent = true;
@@ -49,23 +49,15 @@ export class DashboardSalesComponent implements OnInit {
       }
      });
      this.filterSharedService.selectedtoBeWritten$.subscribe((data : any) => {
-      if(data !== 0)
+      if(data !== -1)
       {
         this.toBeWritten = data;
         this.loadData();
-        this.filterSharedService.resetDashboardData();
+        this.filterSharedService.resettoBeWrittenData()
+        ;
       }
      });
-     const link8 = document.getElementById('r8');
-      // Add more variables for additional links if needed
-  
-      if (link8) {
-        link8.addEventListener('click', () => {
-          setTimeout(() => {
-            location.reload(); // Reload the current page after a brief delay
-          }, 100); // Reload the current page when Link 7 is clicked
-        });
-      }
+     
   }
 
   loadData()

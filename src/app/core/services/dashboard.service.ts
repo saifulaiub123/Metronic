@@ -16,7 +16,8 @@ export class DashboardService {
     'Access-Control-Allow-Origin': '*'
   });
   //API : string = 'http://www.testquoteapi.com/api';
-  API : string = 'https://localhost:5001/api';
+  //API : string = 'https://localhost:5001/api';
+  API : string = 'http://10.0.1.129:5001/api';
 
   getDashboardData(filtersObj : any)
   {

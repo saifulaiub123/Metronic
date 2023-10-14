@@ -86,6 +86,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     {
       this.hasError = true;
       this.errorMessage = 'Password not matched';
+      alert(this.errorMessage);
       return;
     }
     const currentUser = this._authService.currentUserValue;
@@ -100,8 +101,14 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
           this.hasError = true;
           this.errorMessage = "Password update failed";
         }
+        
     }, error => {
           console.log(error.status);
+          if(error.status == 400)
+          {
+          this.errorMessage = "Password not matched";
+          alert("Wrong password");
+          }
     });
     this.unsubscribe.push(loginSubscr);
   }

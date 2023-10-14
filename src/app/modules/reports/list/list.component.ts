@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { QuoteDetailsModalComponent } from '../modal/quote-details/quote-details.component';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter, pairwise, startWith } from 'rxjs/operators'
+import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 
 interface Quote {
   [key: string]: string;
@@ -93,7 +94,8 @@ export class ListComponent implements OnInit {
     private fb: FormBuilder,
     private modalService: NgbModal,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private filterDashboardService: DashboardFilterSharedService
     ) {
 
       router.events.subscribe((event) => {
@@ -105,6 +107,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.filterDashboardService.setHomePage(false);
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         let pageReloading = !this.router.navigated;

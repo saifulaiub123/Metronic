@@ -19,14 +19,14 @@ export class DashboardFilterSharedService {
 
 
 
-  private toBeWritten$ = new BehaviorSubject<number>(0);
+  private toBeWritten$ = new BehaviorSubject<number>(-1);
   selectedtoBeWritten$ = this.toBeWritten$.asObservable();
   settoBeWrittenData(data: any) {
     this.toBeWritten$.next(data);
   }
   resettoBeWrittenData()
   {
-    this.toBeWritten$.next(0);
+    this.toBeWritten$.next(-1);
   }
 
 
@@ -79,7 +79,7 @@ export class DashboardFilterSharedService {
     this.toBeSentTable$.next([]);
   }
 
-  private isHome$ = new BehaviorSubject<any>(false);
+  private isHome$ = new BehaviorSubject<any>(null);
   isHomePage$ = this.isHome$.asObservable();
 
   setHomePage(isHome: boolean) {

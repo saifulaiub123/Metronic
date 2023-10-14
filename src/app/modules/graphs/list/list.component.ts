@@ -8,6 +8,7 @@ import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular
 import { filter, pairwise, startWith } from 'rxjs/operators'
 import { DatePipe } from '@angular/common';
 import { toInteger } from 'lodash';
+import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 
 
 
@@ -37,7 +38,8 @@ export class ListComponent implements OnInit {
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private filterDashboardService: DashboardFilterSharedService
     ) {
 
       router.events.subscribe((event) => {
@@ -59,6 +61,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.filterDashboardService.setHomePage(false);
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         let pageReloading = !this.router.navigated;
