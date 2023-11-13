@@ -39,7 +39,7 @@ export class ChangeStatusModalComponent implements OnInit {
         
         });
         this.activeModal.close(true);
-        window.location.reload();
+        //window.location.reload();
       }
     } catch (error) {
       this.activeModal.close(false);

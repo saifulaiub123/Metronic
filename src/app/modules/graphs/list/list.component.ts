@@ -125,7 +125,7 @@ export class ListComponent implements OnInit {
     this.quotesService.getQuoteAccountManagers('A').subscribe((data: any)  => {
       this.accountManagers = data;
       const searchIndex = data.find((x: { text: string; }) => x.text.trim() == this.quoteOwner);
-      if(searchIndex === undefined)
+      if(searchIndex === undefined || JSON.parse(localStorage.getItem("userData")!)["empLevel"] === 1)
       {
         this.quotefilterForm.controls['AccountManager'].setValue('A');
       }

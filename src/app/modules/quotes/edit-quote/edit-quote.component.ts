@@ -22,7 +22,7 @@ export class EditQuoteComponent implements OnInit {
     customerNumber : [{value: '', disabled: true}],
     customerName : [{value: '', disabled: true}],
     quoteReason: [{value: '', disabled: true}],
-    quoteAmount : [{value: '', disabled: true}],
+    quoteAmount : [''],
     quoteDate : new FormControl({ value: '', disabled: true }),
     quoteExpiryDate: new FormControl({ value: '', disabled: true }),
     contactName : [''],
@@ -76,11 +76,15 @@ export class EditQuoteComponent implements OnInit {
       //this.quoteDetail = data;
       if (data)
       {
+        const formattedQuoteAmount = parseFloat(data.quoteAmount).toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'USD' // Change the currency code as needed
+        });
         this.quoteForm.setValue({
           customerNumber : data.custNmbr,
           customerName : data.custName,
           quoteReason: data.problemCode,
-          quoteAmount : data.quoteAmount,
+          quoteAmount : formattedQuoteAmount,
           quoteDate : new Date(data.quotedOn).toDateString(),
           quoteExpiryDate: new Date(data.quotedOn).toDateString(),
           contactName : data.contactName,
@@ -91,6 +95,7 @@ export class EditQuoteComponent implements OnInit {
           quoteStatus : data.status,
           quotePriority : data.quotePriority.trim()
         });
+        this.quoteForm.get('quoteAmount')?.disable();
       }
 
     })

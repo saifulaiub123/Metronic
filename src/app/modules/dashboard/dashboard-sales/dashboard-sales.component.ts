@@ -17,6 +17,8 @@ export class DashboardSalesComponent implements OnInit {
   empLevel: number = 0;
   empName: string = '';
   subscriptionDashboardFilter$: Subscription;
+  subscriptionFilter$: Subscription;
+  filters : any;
   //showDelayedContent = false;
 
 
@@ -46,6 +48,13 @@ export class DashboardSalesComponent implements OnInit {
         this.data = data;
         this.loadData();
         this.filterSharedService.resetDashboardData();
+      }
+     });
+     this.subscriptionFilter$ = this.filterSharedService.selectedDashboardFilter$.subscribe((filters : any) => {
+      if(!_.isEmpty(filters))
+      {
+        this.filters = filters;
+        this.filterSharedService.resetDashboardFilters();
       }
      });
      this.filterSharedService.selectedtoBeWritten$.subscribe((data : any) => {

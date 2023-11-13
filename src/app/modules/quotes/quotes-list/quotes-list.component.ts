@@ -171,6 +171,10 @@ export class QuotesListComponent implements OnInit {
         this.quoteOwner = params.get('quoteOwner');
         this.quotefilterForm.controls['AccountManager'].setValue(params.get('quoteOwner'));
       }
+      if(params.has('statusType'))
+      {
+        this.quotefilterForm.controls['Statustype'].setValue(params.get('statusType'));
+      }
     }
 
   );
@@ -286,11 +290,13 @@ export class QuotesListComponent implements OnInit {
     this.quotesService.getQuoteAccountManagers('A').subscribe((data : any)  => {
     this.accountManagers = data;
     const searchIndex = data.find((x: { text: string; }) => x.text.trim() == this.quoteOwner);
-    if(searchIndex === undefined)
+    if(searchIndex === undefined || JSON.parse(localStorage.getItem("userData")!)["empName"] === this.quoteOwner)
     {
+      console.log(JSON.parse(localStorage.getItem("userData")!)["username"])
       this.quotefilterForm.controls['AccountManager'].setValue('A');
     }
     else{
+      console.log(localStorage.getItem("userData"))
       this.quotefilterForm.controls['AccountManager'].setValue(this.quoteOwner);
     }
     this.LoadQuotes();
@@ -332,8 +338,13 @@ export class QuotesListComponent implements OnInit {
     const modalRef = this.modalService.open(ChangeStatusModalComponent,{ fullscreen : "lg", centered: true});
     modalRef.componentInstance.quoteId = this.selectedQuotes;
     modalRef.componentInstance.selectedQuoteIds = this.selectedQuotes;
-
-
+    modalRef.result.then(res=>{
+      if(res)
+      {
+        this.LoadQuotes()
+        this.selectedQuotes = [];
+      }
+    })
   }
 
   rowSelect(quote: any)
