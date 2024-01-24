@@ -108,7 +108,7 @@ export class ListComponent implements OnInit {
   selectAllRows(event: any): void {
     if (event.target.checked) {
       // Select all quotes
-      this.selectedQuotes = this.quotesList.map(quote => quote.quoteID);
+      this.selectedQuotes = this.quotesList.filter(quote => quote.quoteStatus !== 'Email Missing').map(quote => quote.quoteID);
     } else {
       // Deselect all quotes
       this.selectedQuotes = [];
@@ -267,7 +267,7 @@ export class ListComponent implements OnInit {
         return 'red';
       // Add more cases for other status if needed
       default:
-        return 'black'; // Default color when the status doesn't match any case
+        return '#730202'; // Default color when the status doesn't match any case
     }
   }
 

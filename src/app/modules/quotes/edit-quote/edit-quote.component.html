@@ -88,11 +88,12 @@
                     <label class="col-lg-4 col-form-label text-dark fw-bold text-dark fs-4">Quote Status:	</label>
                     <div class="col-lg-8 fv-row">
                         <select formControlName="quoteStatus" class="form-select form-select-solid form-select-lg text-dark fw-bold text-dark fs-4"  >
-                            <option class=" text-dark fw-bold text-dark fs-4" value="SE">Sent</option>
+                            <option class=" text-dark fw-bold text-dark fs-4" value="SE">Email Sent</option>
                             <option class=" text-dark fw-bold text-dark fs-4" value="VI">Viewed</option>
                             <option class=" text-dark fw-bold text-dark fs-4" value="ID">In Discussion</option>
                             <option class=" text-dark fw-bold text-dark fs-4" value="AC">Accepted</option>
                             <option class=" text-dark fw-bold text-dark fs-4" value="DE">Declined</option>
+                            <option class="text-dark fw-bold text-dark fs-3" value="DR">Email To Be Sent</option>
                             <option class=" text-dark fw-bold text-dark fs-4" value="CN">Cancelled</option>
 
                         </select>
@@ -135,6 +136,10 @@
                             placeholder="Company name" name="company" [value]="quoteDetail.notes" /> -->
                     </div>
                 </div>
+            </div>
+            <div class="text-center">
+                <h4 class="align-items-center" id="error-msg" style="color: brown;"*ngIf="showErrorMsg">Access denied to change the Status to {{status}}. Please submit a ticket</h4>
+                <h4 class="align-items-center" id="error-msg1" style="color: brown;"*ngIf="showErrorMsg1">All fields must be non-empty. Please enter some value.</h4>
             </div>
             <div class="card-footer d-flex justify-content-end py-6 px-9">
                 <button type="button" class="btn btn-primary" (click)="update()">

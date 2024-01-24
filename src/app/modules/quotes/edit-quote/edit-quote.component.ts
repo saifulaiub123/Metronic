@@ -4,6 +4,9 @@ import { QuotesService } from 'src/app/core/services/quotes.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { QuoteSharedService } from '../quote-shared.service';
 import { AuthService } from '../../auth';
+import { DashboardService } from 'src/app/core/services/dashboard.service';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-edit-quote',
@@ -15,6 +18,11 @@ export class EditQuoteComponent implements OnInit {
 
   quoteId : string = "";
   accountManagers: any;
+  custNmbr : string = "";
+  status : string = "";
+  isValid: boolean = true;
+  showErrorMsg: boolean = false;
+  showErrorMsg1: boolean = false;
 
   empName: string = "";
 
@@ -24,6 +32,7 @@ export class EditQuoteComponent implements OnInit {
     quoteReason: [{value: '', disabled: true}],
     quoteAmount : [''],
     quoteDate : new FormControl({ value: '', disabled: true }),
+    quoteCreatedDate: new FormControl({ value: '', disabled: true }),
     quoteExpiryDate: new FormControl({ value: '', disabled: true }),
     contactName : [''],
     contactEmail : [''],
@@ -38,7 +47,9 @@ export class EditQuoteComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private quoteSharedService: QuoteSharedService,
-    private auth: AuthService
+    private auth: AuthService,
+    private dashboardService: DashboardService,
+    private location: Location
     ) {
     this.route.params.subscribe(param => {
       if(param['quoteId'] != null)
@@ -80,13 +91,15 @@ export class EditQuoteComponent implements OnInit {
           style: 'currency',
           currency: 'USD' // Change the currency code as needed
         });
+        this.custNmbr = data.custNmbr
         this.quoteForm.setValue({
           customerNumber : data.custNmbr,
           customerName : data.custName,
           quoteReason: data.problemCode,
           quoteAmount : formattedQuoteAmount,
           quoteDate : new Date(data.quotedOn).toDateString(),
-          quoteExpiryDate: new Date(data.quotedOn).toDateString(),
+          quoteCreatedDate : new Date(data.createdOn).toDateString(),
+          quoteExpiryDate: new Date(data.quoteExpDate).toDateString(),
           contactName : data.contactName,
           contactEmail : data.contactEmail,
           purchaseReq: data.purchaseReq ? 1 : 0,
@@ -105,13 +118,63 @@ export class EditQuoteComponent implements OnInit {
     this.quoteSharedService.setIsFromEdit(true);
     this.router.navigate(['quotes/list']);
   }
-  update()
+  async update()
   {
+    this.showErrorMsg1 = false;
     let quote = this.quoteForm.value;
-    this.quoteService.updateQuote(this.quoteId,quote,this.empName).subscribe(res=> {
+    if (quote.contactEmail === ""){
+      quote.contactEmail = " "
+    }
+    if (quote.contactName === ""){
+      quote.contactName = " "
+    }
+    if (quote.Notes === ""){
+      quote.Notes = " "
+    }
+    if(JSON.parse(localStorage.getItem("userData")!)["empLevel"] === 1){
+      this.quoteService.updateQuote(this.quoteId,quote,this.empName).subscribe(res=> {
+      })
+      alert('Quote Updated successfully');
+      this.router.navigate(['quotes/list']);
+      
+    }
+    else{
+      await(this.validatechange());
+      const isAnyFieldEmpty = Object.values(this.quoteForm.value).some(value => value === '' || value === null);
 
-    })
-    this.router.navigate(['quotes/list']);
+      if (isAnyFieldEmpty) {
+        this.showErrorMsg1 = true;
+        return;
+      }
+      if(this.isValid){
+        this.quoteService.updateQuote(this.quoteId,quote,this.empName).subscribe(res=> {
+        })
+        alert('Quote Updated successfully');
+        this.router.navigate(['quotes/list']);
+        
+      }
+      else{
+        this.showErrorMsg = true;
+        this.isValid = true;
+      }
+    }
+  }
+
+  async validatechange(){
+    try {
+      let quote = this.quoteForm.value;
+      if (quote.quoteStatus === 'SE' || quote.quoteStatus === 'VI') {
+        this.status = quote.quoteStatus==='SE'?'Sent':'Viewed';
+        if(this.custNmbr){
+          const response = await this.dashboardService.validateUpdateQuoteStatus(this.custNmbr, this.empName).toPromise();
+          if (response === 0) {
+              this.isValid = false;
+          }
+        }
+      }
+  } catch (error) {
+      console.error('Error in validatechange:', error);
+  }
   }
 
 }

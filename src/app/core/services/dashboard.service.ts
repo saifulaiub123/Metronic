@@ -15,9 +15,9 @@ export class DashboardService {
   private headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*'
   });
-  //API : string = 'http://www.testquoteapi.com/api';
   //API : string = 'https://localhost:5001/api';
   API : string = 'http://10.0.1.129:5001/api';
+  //API : string = 'http://10.0.0.127:5001/api';//PROD
 
   getDashboardData(filtersObj : any)
   {
@@ -43,9 +43,12 @@ export class DashboardService {
   {
     return this.http.get<RecentActivities[]>(`${this.API}/quotes/GetQuoteDashBoardRecentActivityLog/${quoteOwner}`,{ headers : this.headers });
   }
-
   getToBeSentQuotesData(filtersObj : any)
   {
     return this.http.get<ToBeSentQuotes[]>(`${this.API}/quotes/GetQuoteDashboardToBeSentQuotes/${filtersObj.accountManager}`,{ headers : this.headers });
+  }
+  validateUpdateQuoteStatus(custNmbr : string, user : string)
+  {
+    return this.http.get(`${this.API}/quotes/ValidateUpdateQuoteStatus/${custNmbr}/${user}`,{ headers : this.headers });
   }
 }

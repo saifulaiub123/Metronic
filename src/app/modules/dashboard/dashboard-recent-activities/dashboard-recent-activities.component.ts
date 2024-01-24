@@ -20,6 +20,7 @@ export class DashboardRecentActivitiesComponent implements OnInit {
   }
   accountManagers: any[] = [];
   recentActivities: RecentActivities[];
+  validateUpdateQuoteStatus : any
   // recentActivities : RecentActivities[] = [
   //   {
   //     "quoteID": 571873,
@@ -118,9 +119,17 @@ export class DashboardRecentActivitiesComponent implements OnInit {
             db : any = new Date(b.date);
         return db - da;
     });
-      this.recentActivities = _.take(this.recentActivities,10);
+
+      this.recentActivities = _.take(this.recentActivities,100);
+      console.log(this.recentActivities)
 
     })
+
+    this.dashboardService.validateUpdateQuoteStatus('aa','Christopher Frid').subscribe((res) => {
+      this.validateUpdateQuoteStatus = res
+      console.log(this.validateUpdateQuoteStatus)
+    })
+
   }
 }
 

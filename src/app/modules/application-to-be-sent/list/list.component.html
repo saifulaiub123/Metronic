@@ -135,7 +135,7 @@
               {{quotes.quotedOn | date : 'medium'}}
             </td>
             <td class="">
-              {{quotes.quoteAmount  }}
+              {{quotes.quoteAmount}}
             </td>
             <td class="">
               {{quotes.age}}
@@ -149,6 +149,7 @@
               style="border:solid; border-color: lightblue; cursor: pointer;"
               type="checkbox"
               [checked]="selectedQuotes.includes(quotes.quoteID)"
+              [disabled]= "quotes.quoteStatus === 'Email Missing'"
               (click)="rowSelect(quotes)"/>
             </td>
 

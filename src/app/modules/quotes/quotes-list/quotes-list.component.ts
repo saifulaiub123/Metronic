@@ -40,6 +40,7 @@ export class QuotesListComponent implements OnInit {
   chartData : QuoteChartDetails[];
   fiscalYears : Array<number> = [];
   selectedQuotes: string[] = [];
+  selectedSiteIds: string[] = [];
   fromEditPage: boolean = false;
   quotefilterForm = this.fb.group({
     Department : ['A'],
@@ -52,6 +53,7 @@ export class QuotesListComponent implements OnInit {
     InitialLoad : false
   });
   paginationObj  : any = null;//= {pageNumber : 1 ,pageSize : 10, totalRecordsCount : 680 };
+  empLevel: number = 0;
   empName: string = '';
 
   months : any[] = [
@@ -114,14 +116,17 @@ export class QuotesListComponent implements OnInit {
     if (event.target.checked) {
       // Select all quotes
       this.selectedQuotes = this.quotesList.map(quote => quote.quoteID);
+      this.selectedSiteIds = this.quotesList.map(quote => quote.custNmbr);
     } else {
       // Deselect all quotes
       this.selectedQuotes = [];
+      this.selectedSiteIds = [];
     }
   }
 
   isQuoteSelected(quote: Quote): boolean {
     return this.selectedQuotes.includes(quote.quoteID);
+    return this.selectedSiteIds.includes(quote.custNmbr);
   }
 
   // ... Other component code ...
@@ -160,6 +165,7 @@ export class QuotesListComponent implements OnInit {
     this.auth.currentUserSubject.subscribe(data=>
     {
       this.empName = data.empName;
+      this.empLevel = data.empLevel;
     });
     this.route.queryParamMap.subscribe((params) => {
       if(params.has('status'))
@@ -290,7 +296,8 @@ export class QuotesListComponent implements OnInit {
     this.quotesService.getQuoteAccountManagers('A').subscribe((data : any)  => {
     this.accountManagers = data;
     const searchIndex = data.find((x: { text: string; }) => x.text.trim() == this.quoteOwner);
-    if(searchIndex === undefined || JSON.parse(localStorage.getItem("userData")!)["empName"] === this.quoteOwner)
+    //if(searchIndex === undefined || JSON.parse(localStorage.getItem("userData")!)["empName"] === this.quoteOwner)
+    if(searchIndex === undefined)
     {
       console.log(JSON.parse(localStorage.getItem("userData")!)["username"])
       this.quotefilterForm.controls['AccountManager'].setValue('A');
@@ -337,12 +344,17 @@ export class QuotesListComponent implements OnInit {
   openChangeStatusModal(){
     const modalRef = this.modalService.open(ChangeStatusModalComponent,{ fullscreen : "lg", centered: true});
     modalRef.componentInstance.quoteId = this.selectedQuotes;
+    console.log(this.selectedQuotes)
+    console.log(this.selectedSiteIds)
     modalRef.componentInstance.selectedQuoteIds = this.selectedQuotes;
+    
+    modalRef.componentInstance.selectedSiteIds = this.selectedSiteIds;
     modalRef.result.then(res=>{
       if(res)
       {
         this.LoadQuotes()
         this.selectedQuotes = [];
+        this.selectedSiteIds = [];
       }
     })
   }
@@ -351,10 +363,15 @@ export class QuotesListComponent implements OnInit {
   {
     if(this.selectedQuotes.includes(quote.quoteID))
     {
+      console.log(quote)
       this.selectedQuotes.splice(this.selectedQuotes.indexOf(quote.quoteID),1);
+      this.selectedSiteIds.splice(this.selectedSiteIds.indexOf(quote.custNmbr),1);
+      console.log(this.selectedQuotes)
+      console.log(this.selectedSiteIds)
     }
     else{
       this.selectedQuotes.push(quote.quoteID);
+      this.selectedSiteIds.push(quote.custNmbr);
     }
   }
   importQuotes()

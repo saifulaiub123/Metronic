@@ -1,23 +1,19 @@
 <div class="card-body p-0">
   <!-- begin::Header -->
-  <div class="px-9 pt-7 card-rounded h-275px w-100" [ngClass]="'bg-' + color">
+  <div class="px-9 pt-7 card-rounded h-325px w-100" [ngClass]="'bg-' + color">
     <!-- begin::Heading -->
-    <div class="d-flex flex-stack">
-      <h3 class="m-0 text-white fw-bolder fs-3">Accepted Quotes Total</h3>
-      <br>
-      <span class="fs-6 text-light-800  fw-bolder fs-2" style="font-size: 48px !important;">{{salesData[4].countStatus}}</span>
-        
-
-      <div class="ms-1">
-      </div>
+    <div class="d-flex flex-stack text-center flex-column text-blue">
+      <h1 class="text-white fw-bolder" style="font-size: xx-large">Accepted Quotes Total</h1>
     </div>
+    <div class="d-flex flex-stack text-center flex-column">      
+      <span class="text-light-800  fw-bolder" style="font-size: 48px !important; text-align: center;">{{salesData[4].countStatus}}</span> 
+    </div>
+
     <!-- end::Heading -->
     <!-- begin::Balance -->
     <div class="d-flex text-center flex-column text-white pt-8" *ngIf="empLevel === 1">
-      <span class="fw-bold fs-7">Balance</span>
-      <span class="fw-bolder fs-2x pt-1">
-        <span>${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
-      </span>
+      <span class="fw-bold fs-1">Balance</span>
+      <span class="fw-bolder fs-1 pt-1" style="color: black;">${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
     </div>
     <!-- end::Balance -->
   </div>
@@ -29,6 +25,9 @@
     <div class="row g-0" data-container="body" data-toggle="tooltip" data-placement="top" title="">
       <!-- begin::Col -->
       <div class="col bg-light-warning px-6 py-8 rounded-2 me-7 mb-7">
+        <a id="r8" [routerLink]="['/reports']"
+          [queryParams]="{ Type: 'To Be Written Quotes', quoteOwner: filters.accountManager }"
+          [routerLinkActive]="'active menu-here'" class="text-warning fw-bold fs-3">
         <span
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-warning d-block my-2"
@@ -40,19 +39,22 @@
           <br>
           <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[0].countStatus}}</span>
         </div>
+      </a>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
       <div class="col bg-light-primary px-6 py-8 rounded-2 mb-7">
+        <a href="#/quotes/list?status=DR&quoteOwner={{filters.accountManager}}" class="text-primary fw-bold fs-3">
         <span
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
         ></span>
-        <a href="#/quotes/list?status=DR&quoteOwner={{filters.accountManager}}" class="text-primary fw-bold fs-4">{{salesData[1].statusDesc}}</a>
+        <a href="#/quotes/list?status=DR&quoteOwner={{filters.accountManager}}" class="text-primary fw-bold fs-3">{{salesData[1].statusDesc}}</a>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[1].countStatus}}</span>
         <br>
-        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-4" *ngIf="empLevel === 1">${{salesData[1].quoteAmount | number : '1.2-2'}}</span>
+        <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3" *ngIf="empLevel === 1">${{salesData[1].quoteAmount | number : '1.2-2'}}</span>
+        </a>
       </div>
       <!-- end::Col -->
     </div>
@@ -61,28 +63,32 @@
     <div class="row g-0">
       <!-- begin::Col -->
       <div class="col bg-light-danger px-6 py-8 rounded-2 me-7 mb-7">
+        <a href="#/quotes/list?status=SE&quoteOwner={{filters.accountManager}}" class="text-danger fw-bold fs-3">
         <span
           [inlineSVG]="'.../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-danger d-block my-2"
         ></span>
-        <a href="#/quotes/list?status=SE&quoteOwner={{filters.accountManager}}" class="text-danger fw-bold fs-3 mt-2">{{salesData[2].statusDesc}}</a>
+        <a href="#/quotes/list?status=SE&quoteOwner={{filters.accountManager}}" class="text-danger fw-bold fs-3">{{salesData[2].statusDesc}}</a>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[2].countStatus}}</span>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3" *ngIf="empLevel === 1">${{salesData[2].quoteAmount | number : '1.2-2'}}</span>
+      </a>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
       <div class="col bg-light-success px-6 py-8 rounded-2 me-7 mb-7">
+        <a href="#/quotes/list?status=ID&quoteOwner={{filters.accountManager}}" class="text-success fw-bold fs-3">
         <span
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-success d-block my-2"
         ></span>
-        <a href="#/quotes/list?status=ID&quoteOwner={{filters.accountManager}}" class="text-success fw-bold fs-3 mt-2">{{salesData[3].statusDesc}}</a>
+        <a href="#/quotes/list?status=ID&quoteOwner={{filters.accountManager}}" class="text-success fw-bold fs-3">{{salesData[3].statusDesc}}</a>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[3].countStatus}}</span>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3" *ngIf="empLevel === 1">${{salesData[3].quoteAmount | number : '1.2-2'}}</span>
+        </a>
       </div>
       <!-- end::Col -->
     </div>
@@ -90,28 +96,32 @@
     <div class="row g-0">
       <!-- begin::Col -->
       <div class="col bg-light-primary px-6 py-8 rounded-2 me-7 mb-7">
+        <a href="#/quotes/list?status=AC&quoteOwner={{filters.accountManager}}" class="text-primary fw-bold fs-3">
         <span
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
         ></span>
-        <a href="#/quotes/list?status=AC&quoteOwner={{filters.accountManager}}" class="text-primary fw-bold fs-3 mt-2">{{salesData[4].statusDesc}}</a>
+        <a href="#/quotes/list?status=AC&quoteOwner={{filters.accountManager}}" class="text-primary fw-bold fs-3">{{salesData[4].statusDesc}}</a>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[4].countStatus}}</span>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3" *ngIf="empLevel === 1">${{salesData[4].quoteAmount | number : '1.2-2'}}</span>
+        </a>
       </div>
       <!-- end::Col -->
       <!-- begin::Col -->
       <div class="col bg-light-info px-6 py-8 rounded-2 me-7 mb-7">
+        <a href="#/quotes/list?status=CN&quoteOwner={{filters.accountManager}}&statusType=1" class="text-danger fw-bold fs-3">
         <span
           [inlineSVG]="'../../../../assets/media/icons/duotune/general/gen032.svg'"
           class="svg-icon svg-icon-3x svg-icon-info d-block my-2"
         ></span>
-        <a href="#/quotes/list?status=CN&quoteOwner={{filters.accountManager}}&statusType=1" class="text-danger fw-bold fs-3 mt-2">{{salesData[5].statusDesc}}</a>
+        <a href="#/quotes/list?status=CN&quoteOwner={{filters.accountManager}}&statusType=1" class="text-danger fw-bold fs-3">{{salesData[5].statusDesc}}</a>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-1" style="font-size: 48px !important;">{{salesData[5].countStatus}}</span>
         <br>
         <span class="fs-6 text-gray-800 text-hover-primary fw-bolder fs-3"  *ngIf="empLevel === 1">${{salesData[5].quoteAmount | number : '1.2-2'}}</span>
+        </a>
       </div>
       <!-- end::Col -->
     </div>

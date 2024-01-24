@@ -45,7 +45,7 @@ export class FilterDropdownComponent implements OnInit {
 
     this.dashboardService.getAccountManagers(dept).subscribe((data: any)  => {
       this.accountManagers = data;
-      const searchIndex = data.find((x: { text: string; }) => x.text.trim() == userData.empName);
+      const searchIndex = data.find((x: { text: string; }) => x.text.trim() === userData.empName.trim());
       if(searchIndex === undefined || loadDefault || JSON.parse(localStorage.getItem("userData")!)["empLevel"] === 1)
       {
         this.quotefilterForm.patchValue({
@@ -54,7 +54,7 @@ export class FilterDropdownComponent implements OnInit {
       }
       else{
         this.quotefilterForm.patchValue({
-          AccountManager: userData.empName
+          AccountManager: userData.empName.trim()
         });
       }
       localStorage.setItem("AccountManagers", JSON.stringify(this.accountManagers));

@@ -15,9 +15,9 @@ const API_USERS_URL = `${environment.apiUrl}/users`;
 })
 export class AuthHTTPService {
 
-  //API : string = 'http://www.testquoteapi.com/api';
   //API : string = 'https://localhost:5001/api';
   API : string = 'http://10.0.1.129:5001/api';
+  //API : string = 'http://10.0.0.127:5001/api';
 
   constructor(private http: HttpClient) {}
 

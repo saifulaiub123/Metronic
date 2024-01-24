@@ -28,7 +28,7 @@
 </div>
 <!-- end::Header-->
 <!-- begin::Body-->
-<div class="card-body pt-5">
+<div class="card-body pt-5" style=" height: 300px; overflow: auto;">
   <!-- begin::Timeline-->
   <div class="timeline-label">
     <!-- begin::Item-->
@@ -45,7 +45,7 @@
       <br class="fw-mormal timeline-content text-muted ps-3">
       <div style="padding-left: 10px;">
          {{data.quoteID}}, {{data.quoteOwner}}<br>
-        Quote status changed on <i class="fas fa-clock"></i> {{data.date | date: 'hh:mm a'}}
+        Quote status changed to {{data.statusChanged}} on <i class="fas fa-clock"></i> {{data.date | date: 'hh:mm a'}}
       </div>
       <!-- end::Text-->
     </div>
