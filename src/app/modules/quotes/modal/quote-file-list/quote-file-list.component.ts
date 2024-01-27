@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import * as saveAs from 'file-saver';
 import { DashboardService } from 'src/app/core/services/dashboard.service';
 import { QuotesService } from 'src/app/core/services/quotes.service';
 import { AuthService } from 'src/app/modules/auth';
@@ -40,7 +41,8 @@ export class QuoteFileListComponent implements OnInit {
 
   Download(id: any)
   {
-    this.quoteService.downloadFile(this.selectedQuoteId,id).subscribe(res=>{
+    this.quoteService.downloadFile(this.selectedQuoteId,id).subscribe((response: any)=>{
+      saveAs(response);
     })
   }
 
