@@ -9,8 +9,8 @@ export class QuotesService {
 
   constructor(private http : HttpClient) { }
 
-  //API : string = 'https://localhost:5001/api';
-  API : string = 'http://10.0.1.129:5001/api';
+  API : string = 'https://localhost:5001/api';
+  //API : string = 'http://10.0.1.129:5001/api';
   //API : string = 'http://10.0.0.127:5001/api';
   private headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*'
