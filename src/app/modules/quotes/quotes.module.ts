@@ -14,6 +14,7 @@ import { WidgetsModule } from 'src/app/_metronic/partials';
 import { QuoteDetailsModalComponent } from './modal/quote-details/quote-details.component';
 import { ChangeStatusModalComponent } from './modal/change-status-modal/change-status-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QuoteFileListComponent } from './modal/quote-file-list/quote-file-list.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     QuoteComponent,
     EditQuoteComponent,
     QuoteDetailsModalComponent,
-    ChangeStatusModalComponent
+    ChangeStatusModalComponent,
+    QuoteFileListComponent
   ],
   imports: [
     CommonModule,

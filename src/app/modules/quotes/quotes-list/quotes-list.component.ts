@@ -10,6 +10,7 @@ import { filter, pairwise, startWith } from 'rxjs/operators'
 import { QuoteSharedService } from '../quote-shared.service';
 import { DashboardFilterSharedService } from 'src/app/core/services/shared-service/dashboard-filter-shared.service';
 import { AuthService } from '../../auth';
+import { QuoteFileListComponent } from '../modal/quote-file-list/quote-file-list.component';
 
 interface Quote {
   [key:string]: string;
@@ -347,7 +348,7 @@ export class QuotesListComponent implements OnInit {
     console.log(this.selectedQuotes)
     console.log(this.selectedSiteIds)
     modalRef.componentInstance.selectedQuoteIds = this.selectedQuotes;
-    
+
     modalRef.componentInstance.selectedSiteIds = this.selectedSiteIds;
     modalRef.result.then(res=>{
       if(res)
@@ -358,7 +359,17 @@ export class QuotesListComponent implements OnInit {
       }
     })
   }
+  openGetFilesModal(quoteId: any)
+  {
+    const modalRef = this.modalService.open(QuoteFileListComponent,{ fullscreen : "lg", centered: true});
+    modalRef.componentInstance.selectedQuoteId = quoteId;
+    modalRef.result.then(res=>{
+      if(res)
+      {
 
+      }
+    })
+  }
   rowSelect(quote: any)
   {
     if(this.selectedQuotes.includes(quote.quoteID))
@@ -377,7 +388,7 @@ export class QuotesListComponent implements OnInit {
   importQuotes()
   {
     this.quotesService.importQuotes(this.empName).subscribe(res=> {
-        
+
     });
 
   }

@@ -69,7 +69,14 @@ export class QuotesService {
   {
     return this.http.get(`${this.API}/quotes/GetStatus`,{ headers : this.headers});
   }
-
+  getFiles(quoteId: any)
+  {
+    return this.http.get(`${this.API}/quotes/Files/${quoteId}`,{ headers : this.headers});
+  }
+  downloadFile(quoteId: any, id: any)
+  {
+    return this.http.get(`${this.API}/quotes/Files/download/${quoteId}/${id}`,{ headers : this.headers});
+  }
   getQuoteYearChartDetails()
   {
     return this.http.get<QuoteChartDetails[]>(`${this.API}/quotes/GetQuoteChartDetails`,{ headers : this.headers});
