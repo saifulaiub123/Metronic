@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { QuoteChartDetails } from 'src/app/_metronic/partials/content/widgets/charts/charts-custom-widget/charts-custom-widget.component';
 
 @Injectable({
@@ -75,7 +76,8 @@ export class QuotesService {
   }
   downloadFile(quoteId: any, id: any)
   {
-    return this.http.get(`${this.API}/quotes/Files/download/${quoteId}/${id}`,{ headers : this.headers});
+    // return this.http.get(`${this.API}/quotes/Files/download/${quoteId}/${id}`,{ headers : this.headers});
+    this.downloadGet(`${this.API}/quotes/Files/download/${quoteId}/${id}`);
   }
   getQuoteYearChartDetails()
   {
@@ -107,6 +109,39 @@ export class QuotesService {
   {
     return this.http.put(`${this.API}/quotes/ImportQuotes/${quoteOwner}`,{});
   }
+  downloadGet(api: string) : Promise<Blob>{
+    return new Promise((resolve, reject) => {
+        this.http.get<Blob>(api, {responseType: 'blob' as 'json', observe: 'response'})
+        .pipe(
+            map(x => {
+
+              // if(x.status === 202 && message){
+              //   this.modalService.messageBox("Message", message);
+              //   return;
+              // }
+                let blob = x.body!;
+                var contentDisposition = x.headers.get('Content-Disposition')!;
+                var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
+
+
+                    var objectUrl = window.URL.createObjectURL(blob);
+                    var link = document.createElement('a');
+                    link.setAttribute('download', filename);
+                    link.setAttribute('href', objectUrl);
+                    link.click();
+
+                return x.body
+            })
+        )
+        .subscribe(res=>{
+
+        });
+    });
+  }
+
+
+
+
 
 }
 
