@@ -121,12 +121,12 @@ export class QuotesService {
               // }
                 let blob = x.body!;
                 var contentDisposition = x.headers.get('Content-Disposition')!;
-                var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
+                // var filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
 
 
                     var objectUrl = window.URL.createObjectURL(blob);
                     var link = document.createElement('a');
-                    link.setAttribute('download', filename);
+                    link.setAttribute('download', 'filename');
                     link.setAttribute('href', objectUrl);
                     link.click();
 
