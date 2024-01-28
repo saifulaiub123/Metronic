@@ -41,9 +41,7 @@ export class QuoteFileListComponent implements OnInit {
 
   Download(id: any)
   {
-    this.quoteService.downloadFile(this.selectedQuoteId,id).subscribe((response: any)=>{
-      saveAs(response);
-    })
+    this.quoteService.downloadFile(this.selectedQuoteId,id);
   }
 
 }
