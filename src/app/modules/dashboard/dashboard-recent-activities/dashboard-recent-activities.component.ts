@@ -115,8 +115,8 @@ export class DashboardRecentActivitiesComponent implements OnInit {
   {
     this.dashboardService.getRecentActivitiesData(this.filter.accountManager).subscribe((res) => {
       this.recentActivities = res.sort((a, b) => {
-        let da : any = new Date(a.date),
-            db : any = new Date(b.date);
+        let da : any = new Date(a.date2),
+            db : any = new Date(b.date2);
         return db - da;
     });
 
@@ -131,5 +131,32 @@ export class DashboardRecentActivitiesComponent implements OnInit {
     })
 
   }
+
+  containsAny(str: string, substrings: string[]): boolean {
+    for (const substring of substrings) {
+        if (str.includes(substring)) {
+            return true;
+        }
+    }
+    return false;
+}
+splitMessage(message: string): string[] {
+  const substrings = ['Sent', 'SE', 'Viewed', 'VI', 'In Discussion', 'ID', 'Accepted', 'AC', 'Declined', 'DE', 'To Be Sent', 'DR', 'Cancelled', 'CN'];
+  let parts: string[] = [message];
+  
+  substrings.forEach(substring => {
+      const temp: string[] = [];
+      parts.forEach(part => {
+          const splitPart = part.split(substring);
+          temp.push(...splitPart.slice(0, -1), ...splitPart.slice(-1).filter(Boolean), substring);
+      });
+      parts = temp;
+  });
+  
+  return parts.filter(Boolean);
+}
+
+
+
 }
 

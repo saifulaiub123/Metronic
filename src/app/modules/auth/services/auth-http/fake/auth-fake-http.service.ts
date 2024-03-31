@@ -15,8 +15,8 @@ const API_USERS_URL = `${environment.apiUrl}/users`;
 })
 export class AuthHTTPService {
 
-  API : string = 'https://localhost:5001/api';
-  //API : string = 'http://10.0.1.129:5001/api';
+  //API : string = 'https://localhost:5001/api';
+  API : string = 'http://10.0.1.129:5001/api';
   //API : string = 'http://10.0.0.127:5001/api';
 
   constructor(private http: HttpClient) {}
@@ -32,7 +32,7 @@ export class AuthHTTPService {
   //     map((result: UserModel[]) => {
   //       if (result.length <= 0) {
   //         return notFoundError;
-  //       }
+//       }
 
   //       const user = result.find((u) => {
   //         return (

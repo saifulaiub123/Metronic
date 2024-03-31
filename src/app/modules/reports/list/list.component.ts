@@ -140,7 +140,7 @@ export class ListComponent implements OnInit {
 
 
     this.quotesService.getReports(quotesRequestBody).subscribe((data: any)  => {
-      this.quotesList = data && data.length > 0 ? data.slice(0,100) : [];
+      this.quotesList = data && data.length > 0 ? data : [];
       // this.paginationObj = data.paginationObj;
 
     })

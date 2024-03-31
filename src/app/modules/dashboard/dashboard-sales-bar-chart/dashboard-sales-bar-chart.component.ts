@@ -59,12 +59,35 @@ export class DashboardSalesBarChartComponent implements OnInit {
     const counts = this.data.map((element) => element['countStatus']);
     const empLevel = this.empLevel;
     const seriesName = empLevel == 1 ? 'Amount' : 'Count';
+
+    const xaxisLabelColors: { [key: string]: string } = {
+      'Sent': '#E8A90E',
+      'Viewed': '#008ed6',
+      'In Discussion': '#cc00cc',
+      'Accepted': '#00b300',
+      'Declined': '#e60000',
+      'To Be Sent': '#958C02',
+      'Cancelled': '#730202'
+    };
+    const seriesColors = [
+      '#E8A90E',
+      '#008ed6',
+      '#cc00cc',
+      '#00b300',
+      '#e60000',
+      '#958C02',
+      '#730202'
+    ];
+    
+
+    //const seriesColors = categories.map(category => xaxisLabelColors[category] || 'black');
+
     return {
       
       series: [
         {
           name: seriesName,
-          data: counts,
+          data: counts
         },
       ],
       chart: {
@@ -86,7 +109,7 @@ export class DashboardSalesBarChartComponent implements OnInit {
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: '30%',
+          columnWidth: '50%',
           borderRadius: 5,
         },
       },
@@ -110,8 +133,7 @@ export class DashboardSalesBarChartComponent implements OnInit {
           show: false,
         },
         labels: {
-          style: {
-            colors: ['black'],
+          style: {// Assign colors based on the category
             fontSize: '14px',
           },
         },

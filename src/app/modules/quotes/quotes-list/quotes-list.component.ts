@@ -251,11 +251,16 @@ export class QuotesListComponent implements OnInit {
 
     //quotesRequestBody.paginationObj = {PageNumber : 1, PageSize : 10};
     quotesRequestBody['InitialLoad'] = initialLoad;
-    this.quotesService.getGrid(quotesRequestBody).subscribe((data: any)  => {
-      this.quotesList = data && data.results.length > 0 ? data.results : [];
-      this.paginationObj = data.paginationObj;
-
-    })
+    let quoteId = this.quotefilterForm.value.QuoteID;
+    if(quoteId !== null && quoteId !== ''){
+      this.SearchQuotes();
+    }
+    else{
+      this.quotesService.getGrid(quotesRequestBody).subscribe((data: any)  => {
+        this.quotesList = data && data.results.length > 0 ? data.results : [];
+        this.paginationObj = data.paginationObj;
+      })
+    }
   }
 
   public onFilterChanges()
@@ -278,10 +283,13 @@ export class QuotesListComponent implements OnInit {
   public SearchQuotes()
   {
     let quoteId = this.quotefilterForm.value.QuoteID;
-    this.paginationObj.pageNumber = 1
+    //this.paginationObj.pageNumber = 1
+    if(this.paginationObj['PageNumber'] == undefined){
+      this.paginationObj['PageNumber'] = 1;
+    }
     if(quoteId !== null && quoteId !== '')
     {
-      this.quotesService.searchedQuoteGrid(quoteId,this.paginationObj.pageNumber).subscribe((data: any)=>{
+      this.quotesService.searchedQuoteGrid(quoteId,this.paginationObj['PageNumber']).subscribe((data: any)=>{
         this.quotesList = data && data.results.length > 0 ? data.results : [];
         this.paginationObj = data.paginationObj;
       })

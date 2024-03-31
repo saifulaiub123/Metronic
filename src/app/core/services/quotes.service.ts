@@ -10,8 +10,8 @@ export class QuotesService {
 
   constructor(private http : HttpClient) { }
 
-  API : string = 'https://localhost:5001/api';
-  //API : string = 'http://10.0.1.129:5001/api';
+  //API : string = 'https://localhost:5001/api';
+  API : string = 'http://10.0.1.129:5001/api';
   //API : string = 'http://10.0.0.127:5001/api';
   private headers = new HttpHeaders({
     'Access-Control-Allow-Origin': '*'
@@ -74,10 +74,10 @@ export class QuotesService {
   {
     return this.http.get(`${this.API}/quotes/Files/${quoteId}`,{ headers : this.headers});
   }
-  downloadFile(quoteId: any, id: any)
+  downloadFile(quoteId: any, id: any, fileName:string)
   {
     // return this.http.get(`${this.API}/quotes/Files/download/${quoteId}/${id}`,{ headers : this.headers});
-    this.downloadGet(`${this.API}/quotes/Files/download/${quoteId}/${id}`);
+    this.downloadGet(`${this.API}/quotes/Files/download/${quoteId}/${id}`,fileName);
   }
   getQuoteYearChartDetails()
   {
@@ -109,7 +109,7 @@ export class QuotesService {
   {
     return this.http.put(`${this.API}/quotes/ImportQuotes/${quoteOwner}`,{});
   }
-  downloadGet(api: string) : Promise<Blob>{
+  downloadGet(api: string,fileName: string) : Promise<Blob>{
     return new Promise((resolve, reject) => {
         this.http.get<Blob>(api, {responseType: 'blob' as 'json', observe: 'response'})
         .pipe(
@@ -126,7 +126,7 @@ export class QuotesService {
 
                     var objectUrl = window.URL.createObjectURL(blob);
                     var link = document.createElement('a');
-                    link.setAttribute('download', 'filename');
+                    link.setAttribute('download', fileName);
                     link.setAttribute('href', objectUrl);
                     link.click();
 

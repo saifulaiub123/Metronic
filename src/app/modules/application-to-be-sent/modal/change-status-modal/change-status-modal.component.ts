@@ -31,8 +31,8 @@ export class ChangeStatusModalComponent implements OnInit {
       this.quoteService.updateAppToBeSentStatus(this.selectedQuoteIds.join(','),this.empName).subscribe(res=> {
         
       })
+      alert('Status Updated successfully');
       this.activeModal.close(true);
-      window.location.reload();
     } catch (error) {
       this.activeModal.close(false);
     }

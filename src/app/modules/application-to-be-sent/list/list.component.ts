@@ -271,6 +271,15 @@ export class ListComponent implements OnInit {
     }
   }
 
+  validateEmails(emails: string[]): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression for email validation
+    for (const email of emails) {
+      if (!emailRegex.test(email)) {
+        return false; // If any email is invalid, return false
+      }
+    }
+    return true; // If all emails are valid, return true
+  }
 
 
 }

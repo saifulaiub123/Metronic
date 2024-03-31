@@ -149,7 +149,7 @@
               style="border:solid; border-color: lightblue; cursor: pointer;"
               type="checkbox"
               [checked]="selectedQuotes.includes(quotes.quoteID)"
-              [disabled]= "quotes.quoteStatus === 'Email Missing'"
+              [disabled]= "quotes.quoteStatus === 'Email Missing' || !validateEmails(splitString(quotes.email))"
               (click)="rowSelect(quotes)"/>
             </td>
 

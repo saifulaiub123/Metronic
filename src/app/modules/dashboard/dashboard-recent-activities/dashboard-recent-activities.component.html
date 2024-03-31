@@ -34,7 +34,7 @@
     <!-- begin::Item-->
     <div class="timeline-item" *ngFor="let data of recentActivities">
       <!-- begin::Label-->
-      <div class="timeline-label fw-bolder text-gray-800 fs-6"style="width: 64px;">{{data.date | date}}</div>
+      <div class="timeline-label fw-bolder text-gray-800 fs-6"style="width: 64px;">{{data.date2 | date}}</div>
       <!-- end::Label-->
       <!-- begin::Badge-->
       <div class="timeline-badge" >
@@ -44,9 +44,78 @@
       <!-- begin::Text-->
       <br class="fw-mormal timeline-content text-muted ps-3">
       <div style="padding-left: 10px;">
+        <ng-container *ngIf="containsAny(data.message, ['sent', 'Sent', 'SE', 'Viewed', 'VI', 'In Discussion', 'ID', 'Accepted', 'AC', 'Declined', 'DE', 'To Be Sent', 'DR', 'Cancelled', 'CN']); else elseBlock">
+          
+          <span *ngIf="data.message.includes('Sent')">{{ data.message.split('Sent')[0] }}</span>
+          <span *ngIf="data.message.includes('Sent')" class = "colored-text" style="color: #E8A90E; ">Sent</span>
+          <span *ngIf="data.message.includes('Sent')">{{ data.message.split('Sent')[1] }}</span>
+
+          <span *ngIf="data.message.includes('sent')">{{ data.message.split('sent')[0] }}</span>
+          <span *ngIf="data.message.includes('sent')" class = "colored-text" style="color: #E8A90E; ">sent</span>
+          <span *ngIf="data.message.includes('sent')">{{ data.message.split('sent')[1] }}</span>
+          
+          <span *ngIf="data.message.includes('SE')">{{ data.message.split('SE')[0] }}</span>
+          <span *ngIf="data.message.includes('SE')" class = "colored-text" style="color: #E8A90E;">SE</span>
+          <span *ngIf="data.message.includes('SE')">{{ data.message.split('SE')[1] }}</span>
+          
+          <span *ngIf="data.message.includes('Viewed')">{{ data.message.split('Viewed')[0] }}</span>
+          <span *ngIf="data.message.includes('Viewed')" class = "colored-text" style="color: #008ed6;">Viewed</span>
+          <span *ngIf="data.message.includes('Viewed')">{{ data.message.split('Viewed')[1] }}</span>
+    
+          <span *ngIf="data.message.includes('VI')">{{ data.message.split('VI')[0] }}</span>
+          <span *ngIf="data.message.includes('VI')" class = "colored-text" style="color: #008ed6;">VI</span>
+          <span *ngIf="data.message.includes('VI')">{{ data.message.split('VI')[1] }}</span>
+
+          <span *ngIf="data.message.includes('In Discussion')">{{ data.message.split('In Discussion')[0] }}</span>
+          <span *ngIf="data.message.includes('In Discussion')" class = "colored-text" style="color: #cc00cc;">In Discussion</span>
+          <span *ngIf="data.message.includes('In Discussion')">{{ data.message.split('In Discussion')[1] }}</span>
+          
+          <span *ngIf="data.message.includes('ID')">{{ data.message.split('ID')[0] }}</span>
+          <span *ngIf="data.message.includes('ID')" class = "colored-text" style="color: #cc00cc;">ID</span>
+          <span *ngIf="data.message.includes('ID')">{{ data.message.split('ID')[1] }}</span>
+    
+          <span *ngIf="data.message.includes('Accepted')">{{ data.message.split('Accepted')[0] }}</span>
+          <span *ngIf="data.message.includes('Accepted')" class = "colored-text" style="color: #00b300;">Accepted</span>
+          <span *ngIf="data.message.includes('Accepted')">{{ data.message.split('Accepted')[1] }}</span>
+          
+          <span *ngIf="data.message.includes('AC')">{{ data.message.split('AC')[0] }}</span>
+          <span *ngIf="data.message.includes('AC')" class = "colored-text" style="color: #00b300;">AC</span>
+          <span *ngIf="data.message.includes('AC')">{{ data.message.split('AC')[1] }}</span>
+    
+          <span *ngIf="data.message.includes('Declined')">{{ data.message.split('Declined')[0] }}</span>
+          <span *ngIf="data.message.includes('Declined')" class = "colored-text" style="color: #e60000;">Declined</span>
+          <span *ngIf="data.message.includes('Declined')">{{ data.message.split('Declined')[1] }}</span>
+    
+          <span *ngIf="data.message.includes('DE')">{{ data.message.split('DE')[0] }}</span>
+          <span *ngIf="data.message.includes('DE')" class = "colored-text" style="color: #e60000;">DE</span>
+          <span *ngIf="data.message.includes('DE')">{{ data.message.split('DE')[1] }}</span>
+    
+          <span *ngIf="data.message.includes('To Be Sent')">{{ data.message.split('To Be Sent')[0] }}</span>
+          <span *ngIf="data.message.includes('To Be Sent')" class = "colored-text" style="color: #958C02;">To Be Sent</span>
+          <span *ngIf="data.message.includes('To Be Sent')">{{ data.message.split('To Be Sent')[1] }}</span>
+
+          <span *ngIf="data.message.includes('DR')">{{ data.message.split('DR')[0] }}</span>
+          <span *ngIf="data.message.includes('DR')" class = "colored-text" style="color: #958C02;">DR</span>
+          <span *ngIf="data.message.includes('DR')">{{ data.message.split('DR')[1] }}</span>
+    
+          <span *ngIf="data.message.includes('Cancelled')">{{ data.message.split('Cancelled')[0] }}</span>
+          <span *ngIf="data.message.includes('Cancelled')" class = "colored-text" style="color: #730202;">Cancelled</span>
+          <span *ngIf="data.message.includes('Cancelled')">{{ data.message.split('Cancelled')[1] }}</span>
+    
+          <span *ngIf="data.message.includes('CN')">{{ data.message.split('CN')[0] }}</span>
+          <span *ngIf="data.message.includes('CN')" class = "colored-text" style="color: #730202;">CN</span>
+          <span *ngIf="data.message.includes('CN')">{{ data.message.split('CNz')[1] }}</span>
+    
+        </ng-container>
+        <ng-template #elseBlock>
+            <span>{{ data.message }}</span>
+        </ng-template>
+    </div>
+    
+      <!-- <div style="padding-left: 10px;">
          {{data.quoteID}}, {{data.quoteOwner}}<br>
-        Quote status changed to {{data.statusChanged}} on <i class="fas fa-clock"></i> {{data.date | date: 'hh:mm a'}}
-      </div>
+        Quote status changed to {{data.statusChanged}} on <i class="fas fa-clock"></i> {{data.date2 | date: 'hh:mm a'}}
+      </div> -->
       <!-- end::Text-->
     </div>
     <!-- end::Item-->

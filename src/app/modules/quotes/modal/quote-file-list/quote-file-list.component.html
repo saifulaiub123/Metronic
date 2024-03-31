@@ -1,50 +1,43 @@
-<div>
+<div class="modal-dialog modal-dialog-scrollable modal-xl"> <!-- Add classes for scrollable and large modal -->
+  <div class="modal-content">
   <div class="modal-header">
-    <h4 class="modal-title text-dark fw-bold text-dark fs-1">Update Quote Status</h4>
+    <h4 class="modal-title text-dark fw-bold text-dark fs-1">Files Associated</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <div class="card">
-      <div class="card" style="min-width: 90vw;">
-        <div class="card-body border-0 pt-5">
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    <label class="min-w-100px me-5 fw-bold mb-1 fs-5"> Quote ID:</label>
-                  </th>
-                  <th>
-                    <label class="min-w-100px me-5 fw-bold mb-1 fs-5">File name:</label>
-                  </th>
-                  <th>
-                    <label class="min-w-100px me-5 fw-bold mb-1 fs-5">Size:</label>
-                  </th>
-                  <th>
-                    <label class="min-w-100px me-5 fw-bold mb-1 fs-5">Action</label>
-                  </th>
-                </tr>
-              </thead>
+    <div class="card mb-6">
+      <div class="card-body border-0 pt-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                <label class="min-w-100px me-5 fw-bold mb-1 fs-3"> Quote ID</label>
+              </th>
+              <th>
+                <label class="min-w-100px me-5 fw-bold mb-1 fs-3">File name</label>
+              </th>
+              <th>
+                <label class="min-w-100px me-5 fw-bold mb-1 fs-3">Action</label>
+              </th>
+            </tr>
+          </thead>
 
-              <tr *ngFor="let file of fileDetails">
-                <td>
-                  <span class=" text-dark fw-bold text-dark fs-3">{{selectedQuoteId}}</span>
-                </td>
-                <td>
-                  <span class=" text-dark fw-bold text-dark fs-3">{{file.fileName | join}}</span>
-                </td>
-                <td>
-                  <span class=" text-dark fw-bold text-dark fs-3">{{file.fileSize | join}}</span>
-                </td>
-                <td>
-                  <button class="btn btn-primary btn-sm" type="button" (click)="Download(file.id)">
-                    Download
-                  </button>
-                </td>
-              </tr>
-            </table>
-          </div>
+          <tr *ngFor="let file of fileDetails">
+            <td>
+              <span class="text-dark fw-bold text-dark fs-3">{{ selectedQuoteId }}</span>
+            </td>
+            <td>
+              <span class="text-dark fw-bold text-dark fs-3">{{ file.fileName }}</span>
+            </td>
+            <td>
+              <button class="btn btn-primary btn-sm" type="button" (click)="Download(file.id, file.fileName)">
+                Download
+              </button>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
@@ -52,4 +45,4 @@
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Cross click')">Close</button>
   </div>
 </div>
-
+</div>

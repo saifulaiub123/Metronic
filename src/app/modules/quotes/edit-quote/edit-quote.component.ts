@@ -23,6 +23,7 @@ export class EditQuoteComponent implements OnInit {
   isValid: boolean = true;
   showErrorMsg: boolean = false;
   showErrorMsg1: boolean = false;
+  initialStatus: string = "";
 
   empName: string = "";
 
@@ -92,6 +93,7 @@ export class EditQuoteComponent implements OnInit {
           currency: 'USD' // Change the currency code as needed
         });
         this.custNmbr = data.custNmbr
+        this.initialStatus = data.status
         this.quoteForm.setValue({
           customerNumber : data.custNmbr,
           customerName : data.custName,
@@ -100,8 +102,8 @@ export class EditQuoteComponent implements OnInit {
           quoteDate : new Date(data.quotedOn).toDateString(),
           quoteCreatedDate : new Date(data.createdOn).toDateString(),
           quoteExpiryDate: new Date(data.quoteExpDate).toDateString(),
-          contactName : data.contactName,
-          contactEmail : data.contactEmail,
+          contactName : data.contactName.trim(),
+          contactEmail : data.contactEmail.trim(),
           purchaseReq: data.purchaseReq ? 1 : 0,
           Notes : data.notes.trim(),
           quoteOwner : data.quoteOwner.trim(),
@@ -120,6 +122,19 @@ export class EditQuoteComponent implements OnInit {
   }
   async update()
   {
+    const formValue = this.quoteForm.value; // Renamed the variable to avoid conflicts
+
+    // Check if Notes field is not null or undefined before encoding
+    if (formValue.Notes !== null && formValue.Notes !== undefined) {
+      formValue.Notes = encodeURIComponent(formValue.Notes.trim());
+    }
+    if (formValue.contactName !== null && formValue.contactName !== undefined) {
+      formValue.contactName = encodeURIComponent(formValue.contactName.trim());
+    }
+    if (formValue.contactEmail !== null && formValue.contactEmail !== undefined) {
+      formValue.contactEmail = encodeURIComponent(formValue.contactEmail.trim());
+    }
+
     this.showErrorMsg1 = false;
     let quote = this.quoteForm.value;
     if (quote.contactEmail === ""){
@@ -163,12 +178,14 @@ export class EditQuoteComponent implements OnInit {
   async validatechange(){
     try {
       let quote = this.quoteForm.value;
-      if (quote.quoteStatus === 'SE' || quote.quoteStatus === 'VI') {
-        this.status = quote.quoteStatus==='SE'?'Sent':'Viewed';
-        if(this.custNmbr){
-          const response = await this.dashboardService.validateUpdateQuoteStatus(this.custNmbr, this.empName).toPromise();
-          if (response === 0) {
+      if(this.initialStatus !== quote.quoteStatus){
+        if (quote.quoteStatus === 'SE' || quote.quoteStatus === 'VI') {
+          this.status = quote.quoteStatus==='SE'?'Sent':'Viewed';
+          if(this.custNmbr){
+            const response = await this.dashboardService.validateUpdateQuoteStatus(this.custNmbr, this.empName).toPromise();
+            if (response === 0) {
               this.isValid = false;
+            }
           }
         }
       }

@@ -39,9 +39,9 @@ export class QuoteFileListComponent implements OnInit {
     })
   }
 
-  Download(id: any)
+  Download(id: any, fileName: string)
   {
-    this.quoteService.downloadFile(this.selectedQuoteId,id);
+    this.quoteService.downloadFile(this.selectedQuoteId,id,fileName);
   }
 
 }
